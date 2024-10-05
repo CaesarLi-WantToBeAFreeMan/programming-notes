@@ -1,0 +1,60 @@
+Date:    October 5, 2024
+Title:   lesson1: Text
+Author:  Caesar James LEE
+Teacher: Web Dev Simplified
+
+I.    headings
+   markdown                               HTML
+   # Head 1                               <h1>Head 1</h1>
+   ## Head 2                              <h2>Head 2</h2>
+   # Head 3 {#idName}                     <h3 id = "idName">Head 3</h3>
+                  ({#idName} only allowed in extended markdown)
+   ## Head 4                              <h4>Head 4</h4>
+   # Head 5                               <h5>Head 5</h1>
+   ## Head 6                              <h6>Head 6</h2>
+II.   Paragraphs
+   markdown                                                    HTML
+   This is a                                                   <p>This is a paragraph</p>
+   paragraph
+
+   new paragraoh if two                                        <p>new paragraph if two or more new lines
+   or more new lines are                                       are used</p>
+   used
+III.  line breaks
+   two spaces                                                  <p>two spaces<br>
+   at end of line will make a line                             at end of line will make a line break automatically
+   break automatically as well                                 as well</p>
+IV.   links
+   [text](url)                                                 <a href = "url">text</a>
+   [text](/other-page)                                         <a href = "/other-page">text</a>
+   [text](#idName)                                             <a href = "#idName">text</a>
+   <url>text                                                   <a href = "url">text</a>
+                        (<url>text only allowed in extended markdown)
+V.    horizontal rule
+   you can use new lines                                       <p>you can use new lines<hr></p>
+   ---
+   three or more asterisks                                     <p>three or more asterisks<hr></p>
+   *****
+   three or more underscores
+   ___                                                         <p>three or more underscores<hr></p>
+VI.   bold
+   **surround text with two asterisks**                        <p><b>surround text with two asterisks</b></p>
+   __with two underscores also OK__                            <p><b>with two underscores also OK</b></p>
+VII.  italics
+   *surround text with two asterisks*                          <p><i>surround text with two asterisks</i></p>
+   _surround text with two asterisks_                          <p><i>surround text with two underscores</i></p>
+VIII. italics and bold
+   ***surround text with three asterisks***                    <p><b><i>surround text with three asterisks</i></b></p>
+   ___surround text with three underscores___                  <p><b><i>surround text with three underscores</i></b></p>
+   __*surround text with two underscores and an asterisk*__     <p><b><i>surround text with two underscores and an asterisk</i></b></p>
+IX.   strikethrough(extended)
+   surround with two ~~tildes~~                             <p>surround with two <del>tildes</del></p>
+X.    highlight(extended)
+   surround with two ==equal sign==                         <p>surround with two <mark>equal sign</mark></p>
+XI.   subscript(extended)
+   H~2~O                                                    <p>H<sub>2</sub>O</p>
+XII.  superscript(extended)
+   x^2^                                                     <p>x<sup>2</sup></p>
+XIII. emoji(extended)
+   :emojiName:
+   This is a smile face :smile:                             <p>This is a smile face &#128522;

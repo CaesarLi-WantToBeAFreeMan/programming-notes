@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>D:\ProgramData\Eclipse\java&apos;s workspace\lesson069_Executable\Caesar&apos;s First JAR.jar</jar>
+  <outfile>D:\ProgramData\Eclipse\java&apos;s workspace\lesson069_Executable\Caesar&apos;s First Executable Application.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>D:\ProgramData\Eclipse\java&apos;s workspace\lesson069_Executable\icon\test.ico</icon>
+  <jre>
+    <path>D:\Program Files\Java\jdk-22</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion></minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>

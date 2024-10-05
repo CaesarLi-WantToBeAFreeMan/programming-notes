@@ -1,0 +1,77 @@
+Date:    October 5, 2024
+Title:   lesson 2: Elements
+Author:  Caesar James LEE
+Teather: Web Dev Simplified
+
+   markdown                                                 HTML
+I. block quote
+   > This is a quote                                        <blockquote>This is a quote
+   >                                                           <blockquote>Nested quote</blockquote>
+   >> Nested quote                                          </blockquote>
+II.   ordered list
+   1. first ordered list item                               <ol>
+   2. second ordered list item                                 <li>first ordered list item</li>
+      1. first nested ordered list item                        <li>second ordered list item</li>
+      1. numbers don't matter                                  <ol>
+                                                                  <li>first nested ordered list item</li>
+                                                                  <li>numbers don't matter</li>
+                                                               </ol>
+                                                            </ol>
+III.  unordered list
+   * can use asterisks                                   <ul>
+   + can use plus signs as well                             <li>can use asterisks</li>
+   - can also use dashes                                    <li>can use plus signs as well</li>
+                                                            <li>can also use dashes</li>
+                                                         </ul>
+IV.   images
+   ![alternative text](url)                              <img src = "url" alt = "alternativa text">
+   ![alternative text](/image location)                  <img src = "/image location" alt = "alternative text">
+V. checklist(extended)
+   - [ ] must include a space                            <form action = "url">
+   - [x] completed                                          <input type = "checkbox" name = "option1">
+                                                               <label for = "option1">must include a space</label>
+                                                            <br>
+                                                            <input type = "checkbox" name = "option2" checked>
+                                                               <label for = "option2">completed</label>
+                                                         </form>
+VI.   tables(extended)
+   | name   | age |                                      <table>
+   | ------ | --- |                                         <tr>
+   | Caesar | 18  |                                            <th>name</th>
+   | James  | 43  |                                            <th>age</th>
+                                                            </tr>
+   | left   | center | right  |                             <tr>
+   | -----: | :----: | :----- |                                <td>Caesar</td>
+   | Caesar | Caesar | Caesar |                                <td>18</td>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>James</td>
+                                                               <td>18</td>
+                                                            </tr>
+                                                         </table>
+
+                                                         <table>
+                                                            <tr>
+                                                               <th>left</th>
+                                                               <th style = "text-align: center;">center</th>
+                                                               <th style = "text-align: right;">right</th>
+                                                            </tr>
+                                                            <tr>
+                                                               <td>Caesar</td>
+                                                               <td style = "text-align: center;">Caesar</td>
+                                                               <td style = "text-align: right;">Caesar</td>
+                                                            </tr>
+                                                         </table>
+VII.  code
+   i. inline code
+      `std::cout << "Hello World!" << std::endl;`        <code>std::cout << "Hello World!" << std::endl</code>
+   ii.   code block(extended)
+      ```                                                <pre>
+         #include <iostream>                                <code>
+         int main(){                                           #include <iostram>
+            std::cout << "Hello World!" << std::endl;             int main(){
+            return 0;                                                std::cout << "Hello World!" << std::endl;
+         }                                                           return 0;
+      ```                                                         }
+                                                            </code>
+                                                         </pre>
