@@ -1,0 +1,15 @@
+Title:   Lesson13: Default Constraint
+Date:    August 29, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. default constraint:
+   when inserting a new row if we don't specify a value for a column,
+   by default, we can add some values that we set
+2. syntax:
+   i. create: 
+      CREATE TABLE tableName(columnName variable default defaultValue...);
+   ii. set default:
+      ALTER TABLE tableName ALTER columnName SET DEFAULT defaultValue;
+3. insert data:
+   INSERT INTO tableName(otherColumnNames) VALUES(otherColumnValues);

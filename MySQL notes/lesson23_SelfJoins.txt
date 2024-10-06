@@ -1,0 +1,39 @@
+Title:            Lesson23: Self Joins
+Date:             September 3, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. self join
+   join another copy of a table to itself
+   used to compare rows of the same table
+   help to display a hierarchy (層次結構) of data
+II. syntax
+   SELECT *
+      FROM products AS alias
+      INNER JOIN tableName AS alias1
+      ON alias.columnName = alias.columnName1
+   in other words, you need to give a table two aliases to use it
+   ex.   I've a table named products:
+            id|name    |referenceID
+            1 |Hotdog  |NULL
+            2 |Burger  |NULL
+            3 |Barbeque|NULL
+            4 |Coffee  |2
+            5 |Soda    |1
+         SELECT *
+            FROM products AS drinks
+            INNER JOIN products AS food
+            ON drinks.referenceID = food.id;
+            result:
+               id|name  |referenceID|id|name  |referenceID
+               3 |Coffee|2          |2 |Burger|NULL
+               4 |Soda  |1          |1 |Hotdog|NULL
+         or just print some parts of it
+         SELECT drinks.id, drinks.name AS "drink name", food.name AS "food name"
+            FROM products AS drinks
+            INNER JOIN products AS food
+            ON drinks.referenceID = food.id;
+            result:
+               id|drink name|food name
+               3 |Coffee    |Burger
+               4 |Soda      |Hotdog

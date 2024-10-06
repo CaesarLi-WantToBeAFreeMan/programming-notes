@@ -1,0 +1,21 @@
+Title:         Lesson06: Expressions
+Date:          August 29, 2024
+Author:        Caesar James LEE
+Teacher:       Bro Code
+AI Assistant:  CLOSEAI chatGPT
+
+1. arithmetic expressions
+   addition, subtraction, multiplication, division and modulus like C++ and Java
+2. comparison expressions
+   like C++ and Java except equality and not equal
+      i. equality:      =        (rather than ==)
+      ii. not equal:    <> or !=
+3. logical expressions
+      and, or and not like C++ and Java
+      plus, MySQL has two new key word: "between ... and ..." and "in(values)"
+      between and
+         ex.   SELECT 6 BETWEEN 5 AND 7 AS result;
+                  result:  1
+      in
+         ex.   SELECT 3 IN(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) AS result;
+                  result:  1

@@ -1,0 +1,18 @@
+Title:            Lesson28: Rollup
+Date:             September 4, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. rollup (匯總)
+   extension of the GROUP BY clause
+   produces another row and shows the GRAND TOTAL(super-aggregate value)
+II. syntax
+   SELECT ... GROUP BY ... WITH ROLLUP;
+   ex.   SELECT SUM(price), date
+         FROM boughtProducts
+         GROUP BY date WITH ROLLUP;
+      result:
+         SUM(price)|date
+         25.97     |2024-09-01
+         956.96    |2024-09-03
+         982.93    |NULL

@@ -1,0 +1,12 @@
+Title:   Lesson10: Unique Constraint
+Date:    August 29, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. unique constraint:
+      ensures that all values in a column are all different
+2. syntax:
+      i. create a table:
+         CREATE TABLE tableName(columnName variable unique...);
+      ii. add constraint:
+         ALTER TABLE tableName ADD constraint UNIQUE(columnName);

@@ -1,0 +1,19 @@
+Title:            Lesson24: Views
+Date:             September 3, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. Views
+   a virtual table based on the result-set of an SQL statement
+   the fields in a view are fields from one or more real tables in the database
+   they're not real tables, but can be interacted with as if they were
+II. syntax
+   i. create
+      CREATE VIEW viewName AS SELECT columnName... FROM tableName;
+      ex.   CREATE VIEW friendsView AS SELECT firstName, lastName FROM friends;
+   ii. SELECT
+      like a normal table
+   iii. delete
+      DROP VIEW viewTableName;
+   iv. update
+      it will update as well when you update its original table

@@ -1,0 +1,35 @@
+Title:            Lesson19: Wild Cards
+Date:             September 2, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. while card characters:
+   used to substitute (替代) one or more characters in a string
+   % _
+   % means any character(s)
+   _ means one random character
+   ex.   I've a table named friends:
+      id|firstName|lastName|age|gender    |favoriteThingToDoWithMe
+      1 |Taylor   |Swift   |21 |female    |sing
+      2 |Namewee  |Huang   |21 |male      |demonstration
+      3 |Caesar   |Lee     |21 |non-binary|cosplay
+   i. select all rows starting with C
+      SELECT * FROM friends
+      WHERE firstName LIKE "C%";
+         result:
+            id|firstName|lastName|age|gender    |favoriteThingToDoWithMe
+            3 |Caesar   |Lee     |21 |non-binary|cosplay
+   ii. select all rows ending with ee
+      SELECT * FROM friends
+      WHERE lastName LIKE "%ee";
+         result:
+            id|firstName|lastName|age|gender    |favoriteThingToDoWithMe
+            3 |Caesar   |Lee     |21 |non-binary|cosplay
+   iii. select all rows that contain "%_l%" in gender column
+      any character(s) and a random character and letter l and any character(s)
+      SELECT * FROM friends
+      WHERE gender LIKE "%_l%";
+         result:
+            id|firstName|lastName|age|gender    |favoriteThingToDoWithMe
+            1 |Taylor   |Swift   |21 |female    |sing
+            2 |Namewee  |Huang   |21 |male      |demonstration

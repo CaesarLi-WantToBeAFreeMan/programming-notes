@@ -1,0 +1,47 @@
+Title:   Lesson17: Joins
+Date:    August 31, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. joins
+   a clause (子句) that is used to combine rows from two or more tables
+   based on related column between them   ex. foreign keys
+ex.      there are two tables:
+         I. users:
+               userID|userName|firstOrderID
+                  1  |caesar  |1
+                  2  |james   |null
+                  3  |lee     |1
+                  4  |alex    |2
+         II. orders:
+               orderID|itemName|price
+                  1   |hotdog  |1.99
+                  2   |burger  |2.99
+                  3   |pizza   |9.99
+2. inner
+   join all data that contained by both left table and right table.
+   after type the code:
+      SELECT * FROM users INNER FROM JOIN orders ON user.firstOrderID = orders.orderID;
+         userID|userName|firstOrderID|orderID|itemName|price
+         1     |caesar  |1           |1      |hotdog  |1.99
+         3     |lee     |1           |1      |hotdog  |1.99
+         4     |alex    |2           |2      |burger  |2.99
+3. left
+   join all data that conrained by left
+   it will show null when right table doesn't contain it
+   after type the code:
+      SELECT * FROM users LEFT FROM JOIN orders ON user.firstOrderID = orders.orderID;
+      userID|userName|firstOrderID|orderID|itemName|price
+      1     |caesar  |1           |1      |hotdog  |1.99
+      2     |james   |null        |null   |null    |null
+      3     |lee     |1           |1      |hotdog  |1.99
+      4     |alex    |2           |2      |burger  |2.99
+4. join all data that conrained by right
+   it will show null when left table doesn't contain it
+   after type the code:
+      SELECT * FROM users RIGHT FROM JOIN orders ON user.firstOrderID = orders.orderID;
+      userID|userName|firstOrderID|orderID|itemName|price
+      1     |caesar  |1           |1      |hotdog  |1.99
+      3     |lee     |1           |1      |hotdog  |1.99
+      4     |alex    |2           |2      |burger  |2.99
+      null  |null    |null        |3      |pizza   |9.99

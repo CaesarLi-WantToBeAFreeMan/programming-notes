@@ -1,0 +1,12 @@
+Title:   Lesson11: Not Null Constraint
+Date:    August 29, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. not null constraint:
+      cann't update data of a column to null
+2. syntax:
+      i. create a table:
+         CREATE TABLE tableName(columnName variable not null...);
+      ii. modify:
+         ALTER TABLE tableName MODIFY columnName variable NOT NULL;

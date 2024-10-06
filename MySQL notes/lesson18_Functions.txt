@@ -1,0 +1,253 @@
+Title:            Lesson18: Functions
+Date:             August 31, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+AI Assistant:     CloseAI chatGPT
+Search Engine:    Google
+
+1. functions
+      conceptions like C++, Python, JavaScipt, Java
+      syntax is different
+2. common used build-in functions:
+   I. string functions:
+      i.    CONCAT(substrings)
+               concatenate (連接) two or more strings
+      ii.   SUBSTRING(string, startPosition, endPosition)
+               notes: the position of the first character isn't 0
+               1  2  3  4  5  6
+               -6 -5 -4 -3 -2 -1
+               c  a  e  s  a  r
+               notes: result contains the endPositionth character
+               extract a substring [startPosition, endPosition] from a string
+      iii.  LENGTH(string)
+               return the length of the string
+      iv.   LOWER(string)
+               convert the string to lowercase
+      v.    UPPER(string)
+               convert the string to uppercase
+      vi.   REPLACE(string, oldString, newString)
+               replace occurences of a substring within a string
+      vii.  TRIM(string)
+               remove leading and trailing spaces from a string
+      viii. LPAD(string, length, fillString)
+               pad the left side of a string with another string
+               in other words, fill some times of fillString at the left side when the length of new string is length
+      ix.   RPAD(string, length fillString)
+               pad the right side of a string with another string
+               like lpad(), but at the right side
+      x.    INSTR(string, foundString)
+               return the position of the first occurrence of a substring
+   II. numeric functions:
+      i. ABS(int)
+         return the absolute value of a number
+      ii. CEIL(int)
+         return the smallest integer greater than or equal to a number
+      iii. FLOOR(int)
+         return the largest integer less than or equal to a number
+      iv. ROUND(int, int precision)
+         round a number to a specified number of decimal places
+      v. POWER(base, exponent)
+         return a number raised to the power of another number
+      vi. SQRT(int)
+         return the square root of a number
+      vii. MOD(dividend, divisor)
+         return the remainder of a division operation
+      viii. RAND()
+         return a random floating-point value between 0 and 1 (0, 1)
+      ix. SIGN(int)
+         return the sign of a number
+         condition of return values:
+            if(number > 0)
+               return 1;
+            else if(number == 0)
+               return 0;
+            else
+               return -1;
+      x. COUNT(column)
+         return a number how many rows what the column contains,
+         and ignore null row
+   III. date and time functions:
+      i. NOW()
+      ii. CURRENT_DATE() || CURDATE()
+      iii. CURRENT_TIME() || CURTIME()
+      iv. DATE(expression)
+         extract the date part of a date or datetime expression
+      v. TIME(expression)
+         extract the time part of a time or datetime expression
+      vi. YEAR(expression)
+         extract the year from a date
+      vii. MONTH(expression)
+         extract the month from a date
+      viii. DAY(expression)
+         extract the day from a date
+      ix. DATEDIFF(newerDate, olderDate)
+         return the difference in days between two dates
+         newerDate - olderDate
+      x. ADDDATE(expression, interval number unit)       unit: year, month, day, hour, minute, second
+         || ADDDATE(expression, dayNumber)
+         add a specified number of units or days to a date
+      xi. SUBDATE(expression, interval number unit)
+         || SUBDATE(expression, dayNumber)
+         subtract a specified number of units or days from a date
+   IV. aggregate (聚合) functions:
+      i. COUNT(expression)
+         return the number of rows that match a specified condition
+            ex. SELECT COUNT(firstOrderID = 1) FROM users;
+            print how many rows have a "firstOrderID" of 1
+      ii. SUM(expression)
+         return the sum of a numeric column
+            ex. SELECT SUM(userID) FROM users;
+            print the sum of all userID rows
+      iii. AVG(expression)
+         return the average value of a numeric column
+            ex. SELECT AVG(userID) FROM users;
+            print the average of all userID rows
+      iv. MIN(expression)
+         return the minimum value in a column
+            ex. SELECT MIN(userID) FROM users;
+            print the minimum value of userID
+      v. MAX(expression)
+         return the maximum value in a column
+            ex. SELECT MAX(userID) FROM users;
+            print the maximum value of userID
+      vi. GROUP_CONCAT(expression)
+         return a concatenated string of grouped values
+            ex. I've a table orders:
+               orderID|customerID|product
+               1      |1         |apple
+               2      |1         |banana
+               3      |2         |orange
+               4      |2         |mango
+               5      |1         |pineapple
+                  with the code: SELECT customerID, GROUP_CONCAT(product) AS products FROM orders GROUP BY customerID;
+                  the result:
+                  customerID|products
+                  1         |apple,banana,pineapple
+                  2         |orange,mango
+   V. control flow functions:
+      i. IF(condition, trueExpression, falseExpression)
+         return a value based on a condition
+            like ?: statement
+            ex. SELECT IF(orderID = 1, "it's apple", "it's not apple") FROM orders;
+      ii. IFNULL(notNullExpression, NullExpression)
+         return a value if the expression is null
+            ex. SELECT IFNULL(item, "this is not a fruit") FROM orders;
+               it will return item itself if item isn't a null,
+               otherwise, it will return "this is not a fruit"
+      iii. NULLIF(expression, expression1)
+         return null if two expressions are equal,
+         otherwise, return expression
+         ex.   SELECT NULLIF(25, 25);        result: null
+               SELECT NULLIF(12, 21);        result: 12
+      iv. CASE...END...
+         a conditional expression that allows complex conditions
+         ex1.  SELECT
+                  CASE
+                     WHEN 5 > 3 THEN "five is greater than three"
+                     WHEN 5 < 3 THEN "five is less than three"
+                     ELSE "five IF equal TO three"
+                  end as result;
+               print result: "five is greater than three"
+            like:
+               if(5 > 3)                                                #if 5 > 3: in Python
+                  std::cout << "five is greater than three";         //C++
+                  System.out.print("five is greater than three");    //Java
+                  consolo.log("five is greater than three");         //JavaScript
+                  print("five is greater than three", end = "");     #Python
+               else if(5 < 3)                                           #elif 5 < 3: in Python
+                  std::cout << "five is less than three";            //C++
+                  System.out.print("five is less than three");       //Java
+                  consolo.log("five is less than three");            //JavaScript
+                  print("five if less than three", end = "");        #Python
+               else                                                     #else: in Python
+                  std::cout << "five is equal to three";            //C++
+                  System.out.print("five is equal to three");       //Java
+                  consolo.log("five is equal to three");            //JavaScript
+                  print("five is equal to three", end = "");        #Python
+         ex2.  SELECT orderID,
+                  CASE
+                     WHEN orderID % 2 = 1 THEN "the orderID is an odd"
+                     ELSE "the orderID is an even"
+                  END AS orderIDProperties
+               FROM orders;
+            like:
+               for(orderID : orders){                                   #for orderID in orders: in Python
+                                                                        //for(let orderID of orders) in JavaScript
+                                                                        //ignore the data type of orderID now
+                  if(orderID % 2)                                    //orderID % 2 == 1 in Java
+                                                                     #if orderID % 2: in Python
+                     std::cout << "the orderID is an odd";           //C++
+                     System.out.print("the orderID is an odd");      //Java
+                     consolo.log("the orderID is an odd");           //JavaScript
+                     print("the orderID is an odd", end = "");       #Python
+                  else                                               #else: in Python
+                     std::cout << "the orderID is an even";           //C++
+                     System.out.print("the orderID is an even");      //Java
+                     consolo.log("the orderID is an even");           //JavaScript
+                     print("the orderID is an even", end = "");       #Python
+               }
+   VI. bit functions:
+      i. BIT_AND(deccimalNumber)
+         return the bitwise AND of all bits in a group
+      ii. BIT_OR(decimalNumber)
+         return the bitwise OR of all bits in a group
+      iii. BIT_XOR(decimalNumber)
+         return the bitwise XOR of all bits in a group
+      ps. you can use operators as well: &(bitwise AND), |(bitwise OR), ^(bitwise XOR), >>(right shift), <<(left shift), ~(bitwise inversion)
+   VII. JSON functions
+      i. JSON_EXTRACT()
+         extract data from a JSON document
+         ps. you can use a shorthand operator "->" for json_extract()
+            ex.   CREATE TABLE users(
+                     id INT PRIMARY KEY AUTO_INCREMENT,
+                     user_data JSON
+                  );
+                  INSERT INTO users(user_data) VALUES('{name": "Caesar", "age": 18}');
+                  SELECT JSON_EXTRACT(user_data, "$.name") AS name FROM users;
+                  //or SELECT user_data -> "$.name" AS name FROM users;
+                     result:  Caesar
+      ii. JSON_ARRAY(values...)
+         create a JSON array
+            ex.   SELECT JSON_ARRAY("Caesar", 18) AS user_data;
+                     result:  ["Caesar", 18]
+      iii. JSON_OBJECT(json)
+         create a JSON object
+            ex.   SELECT JSON_OBJECT(
+                     "name", json_array("Caesar", "Alex", "Jack"),
+                     "age", json_array(21, 21, 21)
+                  );
+                     result:  {"age": [21, 21, 21], "name": ["Caesar", "Alex", "Jack"]}
+      iv. JSON_CONTAINS(json, value)
+         check if a JSON document contains a specific value
+            ex.   SELECT JSON_CONTAINS('{"name": "Caesae", "age": 18}', '{"name": "Caesar"}') AS result;
+                     result:  1              //means true
+   VIII. information functions:
+      i. DATABASE()
+         return the name of the current database
+      ii. USER()
+         return the current MySQL user
+      iii. VERSION()
+         return the MySQL server version
+   IX. other functions:
+      i. COALESCE()                 //[ˌkoǝˈlɛs]
+         return the first non-null value in the list
+            ex.   I've a table named orders:
+                        comment
+                        null
+                        null
+                        it's not a type of fruit
+                  select COALESCE(comment) FROM orders;
+                     result:  null
+                              null
+                              it's not a type of fruit
+      ii. CAST(value as datatype)
+         convert a value from one data type to another
+            ex.   SELECT CAST("123" as decimal(5, 2)) AS result;
+                     result:  123.00
+      iii. CONVERT(value, datatype)
+            || CONVERT(value using charsetName)
+         similar to CAST()
+            ex.   SELECT CONVERT("123", decimal(5, 2)) as result;
+                     result:  123.00
+                  SELECT CONVERT("hello world" using utf8) as result;
+                     result:  hello world

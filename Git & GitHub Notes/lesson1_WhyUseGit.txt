@@ -1,0 +1,21 @@
+Title:   Lesson1_Why Use Git
+Date:    September 6, 2024
+Teacher: Net Ninja
+Author:  Caesar James LEE
+
+I. git
+   I. a distributed (分散式) version control system
+   means:
+      i. a system that records changes to our files over time
+      ii. we can recally specific versions of those files at any given time
+      iii. many people can easily collaborate (共同工作) on a project and have their own version of project files on their computer
+   II. pros of git
+      i. store revisions in a project history in just one directory
+      ii. rewind (轉回) to any revision in the project I wanted to
+      iii. work on nre features without messing up (搞亂) the main codebase
+      iv. esdily collaborate with other programmers
+   III. github
+      i. online service that hosts our projects
+      ii. share our code with other developers
+      iii. developers can download the projects and work on them
+      iv. they can re-upload their edits and merge them with the main codebase

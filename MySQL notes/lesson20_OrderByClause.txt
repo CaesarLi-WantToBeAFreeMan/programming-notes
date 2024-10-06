@@ -1,0 +1,22 @@
+Title:            Lesson20: Order By Clause
+Date:             September 2, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. default
+   is sorted by ID in ascending order
+II. ordered by a column based on string in alphabetical order
+   eg.   name
+      ex. SELECT * FROM friends ORDER BY firstName;
+III. descending order      DESC
+   SELECT * FROM friends ORDER BY columnName DESC;    //from the last one to the first one
+                                                      //eg. from z to a for string
+                                                      //    from the latest to earliest date or time
+                                                      //    from the biggest to the smallest number
+IV. ascending order        ASC;                       //default
+   SELECT * FROM friends ORDER BY columnName ASC;     //from the first one to the last one
+V. multiple order rules
+   SELECT * FROM friends ORDER BY firstName, lastName, age;
+   ordered by firstName first, then by lastName when they're the same, and finally by age
+      and you can type asc || desc at the end as well
+         ex. SELECT * FROM friends ORDER BY firstName ASC, lastName ASC, age DESC;

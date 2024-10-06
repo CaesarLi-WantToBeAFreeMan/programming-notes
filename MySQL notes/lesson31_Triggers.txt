@@ -1,0 +1,69 @@
+Title:            Lesson31: Triggers
+Date:             September 5, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. trigger (觸發器)
+   when an event happends, do something
+   ex.   INSERT, UPDATE, DELETE
+   check data, handles errors, auditing (審核) tables
+II. syntax
+   i. creation
+      CREATE TRIGGER triggerName
+      BEFORE EVENTNAME ON tableName             //EVENTNAME can be UPDATE, INSERT, DELETE
+      FOR EACH ROW
+      changedStatement;                         //using NEW keyword to distinct new and old
+                                                //NEW for BEFORE, OLD for AFTER
+      exI.   I've a table named salespersons
+         id|firstName|lastName|hourlyPay|salary
+         1 |Caesar   |LEE     |NULL     |NULL
+         2 |Alex     |CHANGE  |NULL     |NULL
+         CREATE TRIGGER calculateSalaryBeforeUpdate
+         BEFORE UPDATE ON salespersons
+         FOR EACH ROW
+         SET NEW.salary = NEW.hourlyPay * 2080;            //8 * 5 * 52 = 2,080
+            then, I update the hourlyPay column rows:
+               UPDATE salespersons
+               SET hourlyPay = 13.00
+               WHERE id = 1;
+                  result:
+                     id|firstName|lastName|hourlyPay|salary
+                     1 |Caesar   |LEE     |13.00    |27040.00
+                     2 |Alex     |CHANGE  |NULL     |NULL
+               UPDATE salespersons
+               SET hourlyPay = 89.64
+               WHERE id = 2;
+                  result:
+                     id|firstName|lastName|hourlyPay|salary
+                     1 |Caesar   |LEE     |13.00    |27040.00
+                     2 |Alex     |CHANGE  |89.64    |186451.20
+      exII. calculate salary automatically when I insert rows:
+         CREATE TRIGGER calculateSalaryBeforeInsert
+         BEFORE INSERT ON salespersons
+         FOR EACH ROW
+         SET NEW.salary = NEW.hourlyPay * 2080;
+         INSERT INTO salespersons(firstName, lastName, hourlyPay)
+         VALUES("Jay", "CHOU", 21.00);
+         result:
+                     id|firstName|lastName|hourlyPay|salary
+                     1 |Caesar   |LEE     |13.00    |27040.00
+                     2 |Alex     |CHANGE  |89.64    |186451.20
+                     3 |Jay      |CHOU    |21.00    |43680.00
+      exIII. I've a table named cost
+         total
+         INSERT INTO cost
+         SELECT SUM(salary)
+         FROM salespersons;
+         result:
+            total
+            257171.20
+         CREATE TRIGGER calculateSalaryAfterDelete
+         AFTER DELETE ON salespersons
+         FOR EACH ROW
+         SET total = total - OLD.salary;
+         then, I delete id = 2 row from salespersons
+         result:
+            total
+            70720.00
+   ii. show
+      SHOW TRIGGERS              //show all triggers

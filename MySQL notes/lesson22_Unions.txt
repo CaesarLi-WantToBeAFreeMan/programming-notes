@@ -1,0 +1,37 @@
+Title:            Lesson22: Unions
+Date:             September 3, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. union
+   combine the results of two or more select statements
+II. syntax
+   select statement union select statement1...;
+   ps.   the number of columns between tables must be SAME
+      ex.   I've two tables: income and expenses:
+         income:
+            id|item         |amount
+            1 |wage         |12000.00
+            2 |scholarship  |5000.00
+            3 |bonus        |89.64
+         expenses:
+            id|item         |amount
+            1 |dayly payment|3000.00
+            2 |rent         |1200.00
+            3 |tax          |120.35
+         select * from income union select * from expense;
+            result:
+            id|item         |amount
+            1 |wage         |12000.00
+            2 |scholarship  |5000.00
+            3 |bonus        |89.64
+            1 |dayly payment|3000.00
+            2 |rent         |1200.00
+            3 |tax          |120.35
+      ps. you can calculate blance:
+         SELECT (SELECT SUM(amount) FROM income) - (SELECT SUM(amount) FROM expenses) AS blance;
+III. diference between union and union all
+   i. UNION
+      just print the same value once
+   ii. UNION ALL
+      print all the same value

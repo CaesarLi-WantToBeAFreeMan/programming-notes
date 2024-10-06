@@ -1,0 +1,24 @@
+Title:   Lesson16: Foreign Key
+Date:    August 30, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. foreign key:
+   using a foreign key we can establish a link between two tables
+   foreign key constraint is defined on the child table
+   you cann't     I. update or delete a parent row that is used as a foreign key by other table
+                  II. insert a foreign key what parent table doesn't exist
+   ex.   I have two tables: users and orders.
+         a user can have one or more orders,
+         and a user can don't have one order(null)
+         but an order can't be done by more than one users
+            SQL:
+               ALTER TABLE users ADD CONSTRAINT FOREIGN KEY(oneOrderID) REFERENCES orders(orderID);
+2. syntax:
+   i. create a table
+      CREATE TABLE chlidTableName(FOREIGN KEY(chlidTableColumnName) REFERENCES parentTableName(parentTableColumnName));
+   ii. create a foreign key
+      ALTER TABLE chlidTableName ADD CONSTRAINT {foreignKeyName} FOREIGN KEY(chlidTableColumnName) REFERENCES parentTableName(parentTableColumnName)
+      {not necessary type}      
+   iii. delete
+      ALTER TABLE tableName DROP FOREIGN KEY foreignKeyName;

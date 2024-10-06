@@ -1,0 +1,19 @@
+Title:   Lesson08: Autocommit, Commit, Rollback
+Date:    August 29, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. transaction:
+      is a sequential (連續) group of statements, queries (查詢) or operations
+      in other words, it likes a collection of some statements
+2. autocommit:
+      by default autocommit is set to on
+      every executed statement was saved automatically
+      in other words, MySQL will set every statement as a transaction
+3. set autocommit to off:
+      SET AUTOCOMMIT = 0;
+4. commit:
+      set all statements from last commit to this as a transaction
+5. rollback:
+      it'll back to last transaction state
+      in other words, it likes undo but not just last one statement

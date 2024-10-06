@@ -1,0 +1,50 @@
+Title:            Lesson30: Stored Procedure
+Date:             September 5, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. stored procedure (程式)
+   is prepared SQL code that you can save
+   great if there's a query that you write often
+   like define a function that you call often
+II. syntax
+   i. definition
+      DELIMITER charcter                              //tell MySQL which character means end
+      CREATE PROCEDURE procedureName()                                     //void
+      CREATE PROCEDURE procedureName(IN parameterName parameterType...)    //having at least one parameter
+      BEGIN
+         write code here
+      END character
+      exI.  select all unique customer names who were served by a salesperson
+         DELIMITER @                      //tell the MySQL which character means end
+         CREATE PROCEDURE getSalespersonIDNCustomerName()
+         BEGIN
+         SELECT DISTINCT   counter.salespersonID AS "salesperson ID",
+                           CONCAT(customers.firstName, " ", customers.lastName) AS customer
+         FROM counter
+         INNER JOIN customers ON counter.productID = customers.productID
+         ORDER BY CONCAT(customers.firstName, " ", customers.lastName);
+         END@
+         DELIMITER ;                      //tell the MySQL rollback to default, semicolon (;)
+      exII. select all columns that with id = customerID
+         DELIMITER @
+         CREATE PROCEDURE getAllCounterColumnsWhen(IN customerID INT)
+         BEGIN
+            SELECT *
+            FROM counter
+            WHERE id = customerID;
+         END@
+         DELIMITER ;
+      exIII. select all rows with firstName = fN AND lastName = lN
+         DELIMITER @
+         CREATE PROCEDURE getAllCustomerRowsWhen(IN fN VARCHAR(30), IN lN VARCHAR(30))
+         BEGIN
+            SELECT *
+            FROM customers
+            WHERE firstName = fN AND lastName = lN;
+         END@
+         DELIMITER ;
+   ii. invocation
+      CALL procedureName(argument)
+   iii. deletion
+      DROP PROCEDURE procedureName;

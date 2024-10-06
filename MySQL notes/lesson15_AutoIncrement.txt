@@ -1,0 +1,15 @@
+Title:   Lesson15: Auto Increment
+Date:    August 30, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. auto increment (遞增):
+   can be applied to a column that is set as a key whenever we insert a new row,
+   our primary key can be populated automatically then each subsequent row is auto incremented
+2. syntax:
+   i. create
+      CREATE TABLE tableName(columnName variable AUTO_INCREMENT...);
+3. insert
+   INSERT INTO tableName(otherColumnName) VALUES(otherColumnValue);
+4. set a default auto increment number
+   ALTER TABLE tableName AUTO_INCREMENT = number;

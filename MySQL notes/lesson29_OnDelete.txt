@@ -1,0 +1,59 @@
+Title:            Lesson29: On Delete
+Date:             September 4, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. on delete
+   i. ON DELETE SET NULL
+      when a foreign key is deleted, replace foreign key with NULL
+   ii. ON DELETE CASCADE
+      when a foreign key is deleted, delete row
+II. others
+   i. SET foreign_key_checks = 0;
+      MySQL will never check foreign key
+      useful to delete a row with a foreign key
+III. syntax
+   i. create a foreign key
+      ALTER TABLE tableName
+      ADD CONSTRAINT foreignKeyName
+      FOREIGN KEY(columnName) REFERENCES otherTableName(columnName)
+      ON DELETE ...;
+      ps.   THE FOREIGN KEY COLUMN IN THE REFERENCED TABLE MUST BE INDEXED
+         ex.   ALTER TABLE counter
+               ADD INDEX indexProductID(productID);
+      ex.   I've two tables named customers and counter;
+         customers:
+            id|firstName|lastName|productID|productName        |price
+            1 |Caesar   |LEE     |1        |steak              |5.99
+            2 |Caesar   |LEE     |2        |apple              |1.99
+            3 |Caesar   |LEE     |3        |peanut             |3.99
+            4 |Caesar   |LEE     |4        |pineapple          |3.99
+            5 |Caesar   |LEE     |5        |coconut            |5.99
+            6 |Caesar   |LEE     |6        |chocolate          |9.99
+            7 |Caesar   |LEE     |7        |chocolate ice crame|19.99
+            8 |Alex     |Chang   |1        |steak              |5.99
+            9 |Alex     |Chang   |6        |chocolate          |5.99
+         counter:
+           id|salespersonID|productID
+           1|8964          |1
+           2|8964          |2
+           3|8964          |3
+           4|8964          |4
+           5|8964          |5
+           6|8964          |6
+           7|8964          |7
+           8|8964          |1
+           9|8964          |6
+         ALTER TABLE customers
+         ADD CONSTRAINT foreignKEYCustomers
+         FOREIGN KEY(productID) REFERENCES counter(productID)
+         ON DELETE (SET NULL)|(CASCADE);
+         ps.   you need to add a new index of productID for the table what you want to reference
+               for this, it's counter
+         then when I delete some rows, like:
+            DELETE FROM counter
+            WHERE productID = 1;
+         (1, 8964, 1) and (8, 8964, 1) rows of counter
+         and (1, "Caesar", "LEE", 1, "steak", 5.99) and (8, "Alex", "Chang", 1, "steak", 5.99)
+         were changed
+         deleted or productID was setted to NULL

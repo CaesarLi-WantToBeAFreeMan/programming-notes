@@ -1,0 +1,17 @@
+Title:   Lesson02: Create, Drop, Set Read Only
+Date:    August 28, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. create a database:
+      CREATE DATABASE databaseName;
+2. SQL likes C++ and Java, we need add ; at the end to representative this statement is end
+3. sys is the internal database that MySQL uses
+4. set a database as default schema (模式):
+      USE databaseName;
+5. delete a database:
+      dROP DATABASE databaseName;
+6. set a database as a read only database:
+      ALTER DATABASE databaseName READ ONLY = 1;
+7. set a data base as not read only mode:
+      ALTER DATABASE databaseName READ ONLY = 0;

@@ -1,0 +1,29 @@
+Title:   Lesson01: Intro
+Date:    August 28, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. SQL (Structured Query Language)
+2. SQL is used to create, retrieve (取回), update and delete data from a database
+3. Two types of a database: relational and non-relational
+   i. relational database
+      likes a table
+      every row representative a piece of data
+      every column representative a name of the data
+   ii. non-relational database
+      likes a JSON
+      you can organize any format of data
+4. SQL: relational      NOSQL (Not Only SQL): non-relational
+5. DBMS (DataBase Management System):
+      a software for us to write SQL statements.
+      ex. MySQL, Microsoft SQL Server, Oracle, PostgreSQL, etc.
+6. differences of MySQL, PostgreSQL, Microsoft SQL Server
+                                       MySQL                     PostgreSQL                  Microsoft SQL Server
+   how to query fields        |  SELECT field1, field2   |  SELECT field1, field2      |  SELECT [field1], [field2]
+   how to use aliases         |  SELECT field1 AS f1     |  SELECT field1 AS f1        |  SELECT field1 = f1
+   which quotes are ok        |     field = 'correct'    |  field = 'correct'          |  field = 'correct'
+                              |  or field = "correct"    |                             |
+   is case sensitivity        |  no                      |  yes                        |  yes
+   how to create data fields  |     CURDATE()            |     CURRECT_DATE()          |  GETDATE()
+                              |  or CURTIME()            |  or CURRECT_TIME()          |  DATEPART()
+                              |  or EXTRACT()            |  or EXTRACT()               |

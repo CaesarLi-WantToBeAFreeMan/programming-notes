@@ -1,0 +1,40 @@
+Title:   Lesson03: Create A Table
+Date:    August 28, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. variables
+      i.    INT
+                  likes int in both C++ and Java
+      ii.   VARCHAR(maximum_characters)                     format:     "text"
+                  likes char [maximum_characters + 1] in both C++ and Java
+      iii.  DECIMAL(maximum_digit, decimal_digit)
+                  like 12.21, the maximum_digit is 4, and the decimal_digit is 2
+      iv.   DATE                                            format:     "YYYY-MM-DD"
+                                                            ex.         "2024-08-28"
+      v.    TIME                                            format:     "HH:MM:SS"
+                                                            ex.         "13:14:15"
+2. create a table
+      CREATE TABLE tableName(
+            FirstColumnName variableType,
+            SecondColumnName variableType,
+            ...
+      );
+3. select all data from a table
+      SELECT * FROM tableName;
+4. rename a table
+      RENAME TABLE tableName TO newTableName;
+5. delete a table
+      DROP TABLE tableName;
+6. add a new column
+      ALTER TABLE tableName ADD newColumnName variable;
+7. rename a column
+      ALTER TABLE tableName RENAME COLUMN originalColumnName TO newColumnName;
+8. reset variable of a column
+      ALTER TABLE tableName MODIFY COLUMN columnName newVariable;
+9. move a column after another column
+      ALTER TABLE tableName MODIFY columnName variable AFTER otherColumnName;
+10. move a column to the first column position
+      ALTER TABLE tableName MODIFY columnName variable FIRST;
+11. delete a column
+      ALTER TABLE tableName DROP column columnName;

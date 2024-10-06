@@ -1,0 +1,17 @@
+Title:            Lesson21: Limit Clause
+Date:             September 3, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. limit clause
+   is used to limit the number of records
+   useful if you are working with a lot of data
+   can be used to display a large data on pages (pagination)
+II. syntax
+   i. limit number
+      print [1, number] rows
+         ex. SELECT * FROM friends ORDER BY firstName, lastName, age DESC LIMIT 3;
+   ii. limit offset (偏移量), number
+      print [1 + offset, 1 + offset + number] rows
+         ex.   I want to print [50, 60] rows
+                  SELECT * FROM friends LIMIT 50, 10;

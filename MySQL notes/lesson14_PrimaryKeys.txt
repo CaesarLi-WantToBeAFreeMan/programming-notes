@@ -1,0 +1,14 @@
+Title:   Lesson14: Primary Key
+Date:    August 30, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. primary key:
+   can be applied to a column where each value in that column must both be unique and not null
+   in other words:   primary key = unique constraint + not null constraint
+   and you can only add a SINGLE primary key in a table
+2. syntax:
+   i. create:
+      CREATE TABLE tableName(columnName variable primary key...);
+   ii. add constraint:
+      ALTER TABLE tableName ADD CONSTRAINT PRIMARY KEY(columnName);

@@ -1,0 +1,16 @@
+Title:   Lesson12: Check Constraint
+Date:    August 29, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. check constraint:
+   is used to limit what values can be places in a column
+   in other words,   you cann't insert data that break the check rule
+                     you cann't add a check rule when your table has data that break it
+2. add a check constraint syntax:
+   i. create:
+      CREATE TABLE tableName(columns, CONSTRAINT checkName CHECK(logical expression));
+   ii. add constraint:
+      ALTER TABLE tableName ADD CONSTRAINT checkName CHECK(logical espressiion);
+3. delete a check constraint syntax:
+   i. ALTER TABLE tableName DROP CHECK checkName;

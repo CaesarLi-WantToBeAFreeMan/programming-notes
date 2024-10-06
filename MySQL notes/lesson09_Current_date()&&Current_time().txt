@@ -1,0 +1,29 @@
+Title:   Lesson09: Current_date() && Cureent_time()
+Date:    August 29, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. CURRENT_DATE()
+      returns current date
+2. CURRENT_TIME()
+      returns current time
+3. NOW()
+      returns current date and time
+4. variable date:
+      format:  YYYY-MM-DD
+      ex.      2024-08-29
+5. variable time:
+      format:  HH:MM:SS
+      ex.      01:02:03
+               13:14:15
+6. variable datetime:
+      format:  YYYY-MM-DD HH:MM:SS
+      ex.      2024-08-29 22:36:12
+7. addition of date variable:
+      means date + number days
+8. subtraction of date variable:
+      means date - number days
+9. addition of time or datetime variable:
+      means time or datetime + number seconds
+10. subtraction of time or datetime variable:
+      means time or datetime - number seconds

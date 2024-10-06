@@ -1,0 +1,15 @@
+Title:   Lesson07: Update and Delete Data From A Table
+Date:    August 29, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. update a column value
+      UPDATE tableName SET columnName = columnNameValue
+      WHERE expression;
+2. update multiple column values
+      UPDATE tableName SET columnName = columnNameValue, columnName1 = columnNameValue1...
+      WHERE expression;
+3. delete data
+      DELETE FROM tableName
+      WHERE expression;
+4. if you don't add a where expression at the end, which means the scope is the whole table

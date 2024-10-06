@@ -1,0 +1,11 @@
+Title:   Lesson04: Insert Rows Into A Table
+Date:    August 29, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. insert a single row of all columns into a table 
+      INSERT INTO tableName VALUES(firstColumnValue, secondColumnValue...);
+2. insert a single row of specific columns into a table
+      INSERT INTO tableName(columnName, columnName1...) VALUES (columnNameValue, columnName1Value...);
+3. insert multiple rows of all columns into a table
+      INSERT INTO tableName VALUES(...), (...)...;

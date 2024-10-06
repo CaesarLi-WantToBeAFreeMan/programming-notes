@@ -1,0 +1,16 @@
+Title:   Lesson05: Select Data From A Table
+Date:    August 29, 2024
+Author:  Caesar James LEE
+Teacher: Bro Code
+
+1. select all data from a table
+      SELECT * FROM tableName;
+         * representative all like Java
+2. select specific columns from a table
+      SELECT columnName, columnName1... FROM tableName;
+3. select all columns of a specific row from a table
+      SELECT * FROM tableName WHERE columnName = columnNameValue;
+4. select specific columns of a specific row from a table
+      SELECT columnName, columnName1... FROM tableName WHERE specificColumnName = specificColumnNameValue;
+5. select some columns that follow an expression from a table
+      SELECT columnName, columnName1... FROM tableName WHERE expression;

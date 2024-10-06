@@ -1,0 +1,51 @@
+Title:            Lesson25: Indexes
+Date:             September 4, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+AI Assistant:     CloseAI chatGPT
+
+I. indexes
+   binary tree data structure
+   used to find values within a specific column more quickly
+   MySQL normally searches sequentially through a column
+   the longer the column, the more expensive the operation is
+   update takes more time, select takes less time
+II. show an index of a table
+   SHOW INDEXES FROM tableName collation of a table
+   it will show   Table, Non_unique, Key_name, Seq_in_index, Column_name, Collation,
+                  Cardinality, Sub_part, Packed, Null, Index_type, Comment, Index_comment,
+                  Visible, Expression
+      Table:      name of the table
+      Non_unique: indicate (表明) whether the index allows duplicate (重複) values
+      Key_name:   name of the index
+      Seq_in_index:  the sequence number of the column within the index
+                     indicate the order in which columns are used in the index
+                     in other words, priority of indexes
+      Column_name:   name of the column that is indexed
+                     eg. id,  etc.
+      Collation (整理): indicate how the column is sorted in the index
+                        A means ascending order
+                        D means decending order
+                        NULL means not applicable or irrelevant
+      Cardinality (基數):  an estimate of the number of unique values in the index
+                           higher cardinality means more unique values
+                           in other words, number of unique values
+      Sub_part:            number of characters indexed for a column if  it's a prefix index
+                           NULL means the index is not a prefix index
+      Packed:              indicate whether the index is stored in a compressed (壓縮) format
+      Null:                indicate whether the column can contain NULL values
+                           YES means can contain
+                           NO means cannot contain
+      Index_type:          type of index used
+                           common values: BTREE, FULLTEXT, HASH
+      Comment:             any additional information about the index
+      Index_comment:       any comment provided when the index was created
+      Visible:             indicate whether the index is visible to the optimizer
+      Expression:          expression used  in functional indexes if applicable
+III. syntax
+   i. create
+      CREATE INDEX indexName on tableName(columnName...);
+         ps.   the first columnName what you typed has the highest priority, and in decending order
+               the fewer Seq_in_index number, the higher the index priority
+   ii. delete
+      ALTER TABLE tableName DROP INDEX indexName;

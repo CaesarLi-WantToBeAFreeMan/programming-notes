@@ -1,0 +1,48 @@
+Title:            Lesson27: Group By
+Date:             September 4, 2024
+Author:           Caesar James LEE
+Teacher:          Bro Code
+
+I. group by
+   aggregate (聚集) all rows by a specific column
+   often used with aggregate functions
+   ex.   SUM(), MAX(), MIN(), AVG(), COUNT()
+II. syntax:
+   i. group by a specific column
+      SELECT ... FROM tableName GROUP BY ...;
+      ex.   I've a table named boughtProducts:
+         id|name                    |price |date
+         1 |peanut                  |9.99  |2024-09-01
+         2 |coconut                 |9.99  |2024-09-01
+         3 |steak                   |5.99  |2024-09-01
+         4 |rice                    |12.99 |2024-09-03
+         5 |apple                   |3.99  |2024-09-03
+         6 |Microsoft Surface Pro 11|899.99|2024-09-03
+         7 |Apple iPods             |39.99 |2024-09-03
+         SELECT SUM(price) AS "total price", date
+         FROM boughtProducts
+         GROUP BY date;
+            result:
+               total price|date
+               25.97      |2024-09-01
+               956.96     |2024-09-03
+   ii. group by a specific column and follow a rule
+      SELECT ... FROM tableName GROUP BY ... HAVING functionName;
+      || SELECT ... FROM tableName WHERE ... GROUP BY ...;
+      
+      ex1. print number of rows that are greather than 10.00
+         SELECT COUNT(price) AS "number of bought products", date
+         FROM boughtProducts
+         WHERE price > 10.00
+         GROUP BY date;
+            result:
+               number of bought products|date
+               3                        |2024-09-03
+      ex2.  print number of rows and the number is greater than three
+         SELECT COUNT(id) AS "number of bought products", date
+         FROM boughtProducts
+         GROUP BY date
+         HAVING COUNT(id) > 3;
+            result:
+               number of bought products|date
+               4                        |2024-09-03
