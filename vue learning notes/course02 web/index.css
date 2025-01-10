@@ -1,0 +1,11 @@
+*{
+    background-color: black;
+    color: white;
+}
+
+#app{
+    background-color: red;
+    border: 1px solid yellow;
+    border-radius: 50px;
+    color: cyan;
+}

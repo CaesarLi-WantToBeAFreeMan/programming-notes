@@ -1,0 +1,19 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue Course 02 Website</title>
+        <link rel="stylesheet" href="index.css">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    </head>
+
+    <body>
+        <div id = "app">
+            <h1>number: {{number}}</h1>
+            <button v-on:click = "number++">Increase(+)</button>
+            <button v-on:click = "number--">Decrease(-)</button>
+        </div>
+
+        <script src="index.js"></script>
+    </body>
+</html>
