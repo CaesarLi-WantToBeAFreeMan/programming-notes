@@ -1,17 +1,78 @@
-<html lang="en">
+<html lang = "en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
         <title>Vue Course 02 Website</title>
-        <link rel="stylesheet" href="index.css">
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <link rel = "stylesheet" href = "index.css">
+        <script src = "https://unpkg.com/vue@3/dist/vue.global.js"></script>
     </head>
 
     <body>
         <div id = "app">
-            <h1>number: {{number}}</h1>
-            <button v-on:click = "number++">Increase(+)</button>
-            <button v-on:click = "number--">Decrease(-)</button>
+            <h1>title: {{title}}</h1>
+            <p>please click the change title button</p>
+            <button @click = "changeTitle('Vue')">change title</button>
+            <hr>
+            <div>
+                <h1 v-bind:style = "{fontSize: size + 'px'}">test text</h1>
+                <button @click = "increaseFont">increase font size</button>
+                <button @click = "decreaseFont">decrease font size</button>
+            </div>
+            <hr>
+            <div>
+                <input type = "text" v-model = "text">
+                <p>you typed: {{text}}</p>
+            </div>
+            <hr>
+            <div>
+                <p>Do you like apples</p>
+                <button @click = "degree = 'like'">like</button>
+                <button @click = "degree = 'so so'">so so</button>
+                <button @click = "degree = 'hate'">hate</button>
+                <p v-if = "degree == 'like'">You Like Apples</p>
+                <p v-else-if = "degree == 'so so'">You Don't Mind Apples</p>
+                <p v-else-if = "degree == 'hate'">You Hate Apples</p>
+                <p v-else>Please select a button</p>
+            </div>
+            <hr>
+            <div>
+                <p>Caesar's known fruits</p>
+                <ul>
+                    <li v-for = "fruit in fruits">{{fruit}}</li>
+                    <li v-for = "(fruit, index) in fruits">{{index}}->{{fruit}}</li>
+                </ul>
+            </div>
+            <hr>
+            <div>
+                <p>please toggle the button to show/hide the text</p>
+                <button @click = "toggleButton">{{toggleMessage}}</button>
+                <p v-show = "toggleStatus">something</p>
+            </div>
+            <hr>
+            <div>
+                <p v-text = "helloText"></p>
+                <button @click = "helloText = 'Hello Caesar'">change text</button>
+            </div>
+            <hr>
+            <div>
+                <p v-once>letter: {{letter}}</p>
+                <p>letter: {{letter}}</p>
+                <button @click = "nextLetter">next letter</button>
+            </div>
+            <hr>
+            <div>
+                <p id = "hello-caesar" v-cloak>{{helloCaesar}}</p>
+            </div>
+            <hr>
+            <div>
+                <p v-pre>my age: {{age}}<br>v-pre version</p>
+                <p>my age: {{age}}<br>no v-pre version</p>
+            </div>
+            <hr>
+            <div>
+                <div class = "html-containers">{{htmlContent}}</div>
+                <div v-html = "htmlContent" class = "html-container"></div>
+            </div>
         </div>
 
         <script src="index.js"></script>
