@@ -73,6 +73,12 @@
                 <div class = "html-containers">{{htmlContent}}</div>
                 <div v-html = "htmlContent" class = "html-container"></div>
             </div>
+            <hr>
+            <div>
+                <p>Do you like Tesla Cybertruck</p>
+                <button @click = "isLikeTeslaCybertruck = !isLikeTeslaCybertruck">{{LikeOrHateTeslaCyberTruckButton}}</button>
+                <p>{{LikeOrHateTeslaCyberTruckMessage}}</p>
+            </div>
         </div>
 
         <script src="index.js"></script>

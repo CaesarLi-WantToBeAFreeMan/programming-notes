@@ -63,6 +63,36 @@
                 }
             })
         ```
+3. `computed` properties
+    * It's used to do something automatically when a dependency changes
+    * `computed` property operates when a data changed, while `method` operates when an event happens
+    * `computed properties` are used the same way we use data properties, but they are dynamic
+    * example:
+        ```html
+            <!--show a message when a user change a variable value by clicking a button-->
+            <div>
+                <p>Do you like Tesla Cybertruck</p>
+                <button @click = "isLikeTeslaCybertruck = !isLikeTeslaCybertruck">{{LikeOrHateTeslaCyberTruckButton}}</button>
+                <p>{{LikeOrHateTeslaCyberTruckMessage}}</p>
+            </div>
+        ```
+        ```javascript
+            const app = Vue.createApp({
+                data(){
+                    return{
+                        isLikeTeslaCybertruck: true
+                    };
+                },
+                computed:{
+                    LikeOrHateTeslaCyberTruckButton(){
+                        return this.isLikeTeslaCybertruck ? "hate" : "like";
+                    },
+                    LikeOrHateTeslaCyberTruckMessage(){
+                        return this.isLikeTeslaCybertruck ? "you like tesla cybertruck" : "you hate tesla cybertruck";
+                    }
+                }
+            });
+        ```
 ## `mount(container)` method
 * An application instance won't render anything until its `mount()` method is called
 * the `container` argument can either be an actual DOM element or a selector string
@@ -253,60 +283,60 @@
         * The mouse moves out of an element
     9. `onwheel`
         * The mouse wheel rolls over an element
-    
+
     ***KEYBOARD EVENTS***
 
-    1. `onkeydown` || `onkeypress` (`@keydown` || `@keypress`)
+    10. `onkeydown` || `onkeypress` (`@keydown` || `@keypress`)
         * A keyboard key is pressed
-    2. `onkeyup`
+    11. `onkeyup`
         * A keyboard key is released
-    
+
     ***TOUCH EVENTS***
 
-    1. `ontouchstart` (`@touchstart`)
+    12. `ontouchstart` (`@touchstart`)
         * A finger is placed on a touch screen
-    2. `ontouchend` (`@touchend`)
+    13. `ontouchend` (`@touchend`)
         * A finger is removed from a touch screen
-    3. `ontouchmove` (`@touchmove`)
+    14. `ontouchmove` (`@touchmove`)
         * A finger is dragged across the screen
-    4. `ontouchcancel` (`@touchcancel`)
+    15. `ontouchcancel` (`@touchcancel`)
         * A touch is interrupted
-    
+
     ***FOCUS EVENTS***
-    
-    1. `onfocus` (`@focus`)
+
+    16. `onfocus` (`@focus`)
         * An element gets focus
-    2. `onblur` (`@blur`)
+    17. `onblur` (`@blur`)
         * An element loses focus
-    3. `onfocusin` (`@focusin`)
+    18. `onfocusin` (`@focusin`)
         * An element is about to get focus
-    4. `onfocusout` (`@focusout`)
+    19. `onfocusout` (`@focusout`)
         * An element is about to lose focus
 
     ***DRAG EVENTS***
 
-    1. `ondragstart` (`@dragstart`)
+    20. `ondragstart` (`@dragstart`)
         * A user starts to drag an element
-    2. `ondragend` (`@dragend`)
+    21. `ondragend` (`@dragend`)
         * A user has finished dragging an element
-    3. `ondragenter` (`@dragenter`)
+    22. `ondragenter` (`@dragenter`)
         * A dragged element enters the drop target
-    4. `ondragover` (`@dragover`)
+    23. `ondragover` (`@dragover`)
         * A dragged element is over the drop target
-    5. `ondragleave` (`@dragleave`)
+    24. `ondragleave` (`@dragleave`)
         * A dragged element leaves the drop target
-    6. `ondrag` (`@drag`)
+    25. `ondrag` (`@drag`)
         * An element is being dragged
-    7. `ondrop` (`@drop`)
+    26. `ondrop` (`@drop`)
         * A dragged element is dropped on the target
 
     ***CLIPBOARD EVENTS***
 
-    1. `oncut` (`@cut`)
+    27. `oncut` (`@cut`)
         * A user cuts the content of an element
-    2. `oncopy` (`@copy`)
+    28. `oncopy` (`@copy`)
         * A user copies the content of an element
-    3. `onpaste` (`@paste`)
+    29. `onpaste` (`@paste`)
         * A user pastes content into an element
 * syntax:
     1. using a small amount of code

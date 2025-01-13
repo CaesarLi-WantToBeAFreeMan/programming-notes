@@ -36,7 +36,8 @@ setTimeout(() =>{
                             <li>third item</li>
                         </ul>
                     </div>
-                `
+                `,
+                isLikeTeslaCybertruck: true
             };
         },
         methods:{
@@ -59,6 +60,14 @@ setTimeout(() =>{
                     this.letter = String.fromCharCode(this.letter.charCodeAt(0) + 1);
                 else
                     this.letter = 'a';
+            }
+        },
+        computed:{
+            LikeOrHateTeslaCyberTruckButton(){
+                return this.isLikeTeslaCybertruck ? "hate" : "like";
+            },
+            LikeOrHateTeslaCyberTruckMessage(){
+                return this.isLikeTeslaCybertruck ? "you like tesla cybertruck" : "you hate tesla cybertruck";
             }
         }
     });
