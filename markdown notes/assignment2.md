@@ -37,7 +37,7 @@ tabls:
 These are `hello world` programs of various programming languages
 
 C++
-   ```
+   ```c++
       #include <iostream>
 
       int main(){
@@ -47,12 +47,12 @@ C++
    ```
 
 JavaScript
-   ```
+   ```javascript
       console.log("Hello World!\n");
    ```
 
 Java
-   ```
+   ```java
       public class Main(){
          public static void main(String args[]){
             System.out.println("Hello World!");
@@ -61,6 +61,6 @@ Java
    ```
 
 Python
-   ```
+   ```python
       print("Hello World!")
    ```
