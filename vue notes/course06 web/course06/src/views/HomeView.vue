@@ -8,6 +8,7 @@
     <p>you can select below buttons to view a specific component</p>
     <button @click = "activeComponent = 'hello'">hello</button>
     <button @click = "activeComponent = 'world'">world</button>
+    <p>which one figure do you favor</p>
     <KeepAlive include = "World">
         <component :is = "activeComponent"></component>
     </KeepAlive>

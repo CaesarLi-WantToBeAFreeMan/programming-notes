@@ -159,10 +159,117 @@
     * `<router-link>` links `<a>` tag
     * `to` likes `href` attribute, specifies the path to which the link should navigate
     * `<router-view/>` is a placeholder where the matched component of the current route will be rendered
+    * And you can pass `name` property to `to` attribute, because **you may change the `path` property** for some reasons
     * syntax
         ```html
             <router-link to = "/home">home</router-link>
-            <router-link to = "/link1">link1</router-link>
+            <router-link :to = "{name = 'link1'}">link1</router-link>
             <router-view/>
         ```
-3. 
+3. Then you can navigate to these websites
+## route parameter
+* It allows you to define dynamic segments (paragraphs) in a url, which can be used to pass data to a route
+* It's a part of the url that is dynamic and can vary
+* It's defined by a colon (`:`) followed by the parameter name in the route text
+* **You cannot pass `props` when pushing to a new `route`**
+* syntax
+    1. Go to `router/index.js` and change it
+        ```javascript
+            import ComponentName from "../views/name/ComponentName.vue";
+            const routes = [
+                //...
+                {
+                    path: "/name/:parameterName",
+                    name: "componentName",
+                    compoenent: "ComponentName"
+                }
+            ];
+        ```
+    2. Go to your parent view and pass the id to your child view
+        ```html
+            <h1>Title</h1>
+            <p>pass an id to your child component</p>
+            <router-link :to = "{name: 'childComponentName', params: {id: 0}}">
+                parameter: 0
+            </router-link>
+        ```
+    3. Go to your child view and use the parameter
+        ```html
+            <p>this id: {{id}}</p>
+        ```
+        ```javascript
+            export default{
+                name: "childComponentName",
+                data(){
+                    return{
+                        id: this.$route.params.id
+                    };
+                }
+            };
+        ```
+* And we can pass parameters as props
+* syntax
+    * `router/index.vue`
+        ```javascript
+            import ComponentName from "../views/name/ComponentName.vue";
+            const routes = [
+                //...
+                {
+                    path: "/name/:parameterName",
+                    name: "componentName",
+                    compoenent: "ComponentName"
+                }
+            ];
+        ```
+    * your child view
+        ```html
+            <p>this id: {{id}}</p>
+        ```
+        ```javascript
+            export default{
+                name: "childComponentName",
+                props: ["id"]
+            };
+        ```
+## redirect
+* We can redirect some specific old or wrong paths to a new path
+* **You cannot directly pass dynamic parameters in a `redirect` path**
+* syntax
+    * Go to `router/index.js` and change it
+    ```javascript
+        const routes = [
+            //...
+            {
+                path: "/oldName",
+                redirect: "/newName"
+            }
+        ];
+    ```
+## catchAll
+* If a user enter a wrong path, we can turn to 404 (not found) page
+* syntax
+    * Go to `router/index.js` and change it
+    ```javascript
+        const routes = [
+            //...
+            {
+                path: "/:catchAll(.*)",
+                name: "notFound",
+                component: () => import("../views/NotFound.vue")
+            }
+        ];
+    ```
+## `this.$router.go(number)`
+* Calls the browser's history API, and forwards or backs to forward or back page(s)
+* syntax
+    ```html
+        <button @click = "this.$router.go(-1)">back</button>
+        <button @click = "this.$router.go(1)">forward</button>
+    ```
+## `this.$router.push()`
+* Calls the browser's history API, and push a specific path into the queue
+* We can pass a path `/home` or a name `{name: 'home'}` as a parameter
+* syntax
+    ```html
+        <button @click = "this.$router.push({name: 'home'})">go home</button>
+    ```
