@@ -1,0 +1,28 @@
+body{
+    background-color: black;
+    color: white;
+}
+
+.title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    font-weight: 900;
+    text-decoration: 1px dashed cyan underline;
+    text-align: center;
+    color: cyan;
+    margin: 5px 10px;
+    padding: 10px 20px;
+}
+
+.pink-grid{
+    background-color: pink;
+    color: white;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    margin: 10px auto;
+    padding: 5px 10px;
+    width: 90%;
+}

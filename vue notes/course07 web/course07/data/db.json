@@ -1,0 +1,32 @@
+{
+  "employees": [
+    {
+      "id": 0,
+      "name": "Caesar James LEE",
+      "age": 18,
+      "skill": "programming",
+      "position": "junior developer"
+    },
+    {
+      "id": 1,
+      "name": "Taylor SWIFT",
+      "age": 34,
+      "skill": "singing & dancing",
+      "position": "professional singer"
+    },
+    {
+      "id": 2,
+      "name": "James JACKSON",
+      "age": 19,
+      "skill": "designing",
+      "position": "UI designer"
+    },
+    {
+      "id": 3,
+      "name": "Jack JAMES",
+      "age": 20,
+      "skill": "programming",
+      "position": "front-end engineer"
+    }
+  ]
+}
