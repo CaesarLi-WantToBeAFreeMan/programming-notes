@@ -65,20 +65,30 @@
 1. create
     ```javascript
         fetch("http://localhost:3000/employees", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({
-                                            //property: this.newProperty
-                                            })
-                }).then(response => response.json())
-                    .then(data => {
-                                    //a feedback for data
-                                    })
-                    .catch(error => {
-                                    //catch error
-                                    });
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(/*array that holds a;; of properties*/)
+        }).then(response => response.json())
+            .then(data => /*a feedback for data*/)
+            .catch(error => /*catch error*/);
     ```
 2. read
     * It's fetch data
 3. update
+    ```javascript
+        fetch(`http://localhost:3000/employees/${this.employee.id}`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(/*array that holds all of properties*/)
+        }).then(response => response.json())
+            .then(() => /*a feedback for data*/)
+            .catch(error => /*catch error*/);
+    ```
 4. delete
+    ```javascript
+        fetch(`http://localhost:3000/employees/${this.id}`, {
+            method: "DELETE"
+        }).then(response => response.json())
+            .then(() => /*a feedback for data*/)
+            .catch(error => /*catch error*/);
+    ```

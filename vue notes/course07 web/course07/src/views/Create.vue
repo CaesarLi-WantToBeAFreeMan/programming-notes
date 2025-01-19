@@ -47,7 +47,7 @@
             fetch("http://localhost:3000/employees").then(response => response.json())
                                                     .then(data => {
                                                         if(data.length > 0)
-                                                            this.newID = data [data.length - 1].id + 1;
+                                                            this.newID = Number(data [data.length - 1].id) + 1;
                                                     })
                                                     .catch(error => alert(error));
         },

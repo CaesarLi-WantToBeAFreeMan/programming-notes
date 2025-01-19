@@ -135,8 +135,10 @@
 * syntax:
 ```javascript
     <script>
+        import ComponentName from "path";
         export default{
             name: "componentName",
+            components: {/*components*/};
             data(){
                 return{
                     //variables
@@ -147,8 +149,10 @@
             },
             computed:{
                 //computed properties
+            },
+            watch:{
+                //watch properties
             }
-            //...
         }
     <script>
 ```

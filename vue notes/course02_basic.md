@@ -106,6 +106,58 @@
     });
     app.mount("#app");
 ```
+## Options API
+* It's a structured way to define a component
+* It includes `data`, `methods`, `computed`, `watch`, `props` and `lifecycle hooks`
+    1. `data`
+        * A function that returns an object that holds the component's reactive state
+        * You can difine variables that will be used in your component's template or logic
+        * syntax
+            ```javascript
+                data(){
+                    return{
+                        name: "Caesar"
+                    }
+                }
+            ```
+    2. `methods`
+        * An object that contains methods that can be called in the component
+        * These methods typically handle events or interactions within the component
+        * syntax
+            ```javascript
+                methods:{
+                    say(string){
+                        alert(string);
+                    }
+                }
+            ```
+    3. `computed`
+        * An object contains properties that depend on reactive state
+        * Recalculates automatically when the state changes
+        * syntax
+            ```javascript
+                computed:{
+                    name(){
+                        this.name = this.name.toUpperCase();
+                    }
+                }
+            ```
+    4. `watch`
+        * It's used to observe changes to specific reactive properties and perform actions when those properties change
+        * syntax
+            ```javascript
+                watch:{
+                    id(newID){
+                        this.name = this.persons.find(person => person.id === newID).name;
+                    }
+                }
+            ```
+    5. `props`
+        * It's used to pass data from a parent component to a child component
+        * talk later
+    6. `lifecycle hook`
+        * Handles events during the component lifecycle
+        * talk later
 ## directive
 * `directive` is a special token that apply reactive behavior to elements in the DOM
 * `Vue` has nine directives:
@@ -286,57 +338,57 @@
 
     ***KEYBOARD EVENTS***
 
-    10. `onkeydown` || `onkeypress` (`@keydown` || `@keypress`)
+    1. `onkeydown` || `onkeypress` (`@keydown` || `@keypress`)
         * A keyboard key is pressed
-    11. `onkeyup`
+    2. `onkeyup`
         * A keyboard key is released
 
     ***TOUCH EVENTS***
 
-    12. `ontouchstart` (`@touchstart`)
+    1. `ontouchstart` (`@touchstart`)
         * A finger is placed on a touch screen
-    13. `ontouchend` (`@touchend`)
+    2. `ontouchend` (`@touchend`)
         * A finger is removed from a touch screen
-    14. `ontouchmove` (`@touchmove`)
+    3. `ontouchmove` (`@touchmove`)
         * A finger is dragged across the screen
-    15. `ontouchcancel` (`@touchcancel`)
+    4. `ontouchcancel` (`@touchcancel`)
         * A touch is interrupted
 
     ***FOCUS EVENTS***
 
-    16. `onfocus` (`@focus`)
+    1. `onfocus` (`@focus`)
         * An element gets focus
-    17. `onblur` (`@blur`)
+    2. `onblur` (`@blur`)
         * An element loses focus
-    18. `onfocusin` (`@focusin`)
+    3. `onfocusin` (`@focusin`)
         * An element is about to get focus
-    19. `onfocusout` (`@focusout`)
+    4. `onfocusout` (`@focusout`)
         * An element is about to lose focus
 
     ***DRAG EVENTS***
 
-    20. `ondragstart` (`@dragstart`)
+    1. `ondragstart` (`@dragstart`)
         * A user starts to drag an element
-    21. `ondragend` (`@dragend`)
+    2. `ondragend` (`@dragend`)
         * A user has finished dragging an element
-    22. `ondragenter` (`@dragenter`)
+    3. `ondragenter` (`@dragenter`)
         * A dragged element enters the drop target
-    23. `ondragover` (`@dragover`)
+    4. `ondragover` (`@dragover`)
         * A dragged element is over the drop target
-    24. `ondragleave` (`@dragleave`)
+    5. `ondragleave` (`@dragleave`)
         * A dragged element leaves the drop target
-    25. `ondrag` (`@drag`)
+    6. `ondrag` (`@drag`)
         * An element is being dragged
-    26. `ondrop` (`@drop`)
+    7. `ondrop` (`@drop`)
         * A dragged element is dropped on the target
 
     ***CLIPBOARD EVENTS***
 
-    27. `oncut` (`@cut`)
+    1. `oncut` (`@cut`)
         * A user cuts the content of an element
-    28. `oncopy` (`@copy`)
+    2. `oncopy` (`@copy`)
         * A user copies the content of an element
-    29. `onpaste` (`@paste`)
+    3. `onpaste` (`@paste`)
         * A user pastes content into an element
 * syntax:
     1. using a small amount of code

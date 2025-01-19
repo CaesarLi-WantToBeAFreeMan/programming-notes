@@ -1,0 +1,12 @@
+{
+    "articles": [
+        {
+            "title": "title1",
+            "paragraph": "paragraph1"
+        },
+        {
+            "title": "title2",
+            "paragraph": "paragraph2"
+        }
+    ]
+}

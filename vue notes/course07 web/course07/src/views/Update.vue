@@ -5,7 +5,7 @@
             <legend class = "title">Reassign an employee</legend>
             <div id = "id-container">
                 <label for = "id">ID: </label>
-                <select name = "id" v-model = "id">
+                <select id = "id" v-model = "id">
                     <option v-for = "employee in employees" :key = "employee.id"
                             :value = "employee.id">{{employee.id}}</option>
                 </select>
@@ -90,18 +90,16 @@
                     return;
                 }
                 fetch(`http://localhost:3000/employees/${this.employee.id}`, {
-                    method: "PATCH",
+                    method: "PUT",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(this.employee)
-                }).then(response => {response.json();})
+                }).then(response => response.json())
                     .then(() => {
-                                console.log(this.employee);
                                 alert("this employee information has been updated");
                                 window.location.reload();
                                 })
                     .catch(error => {
                                     alert(error);
-                                    console.log(error);
                                     alert("failed to update this employee information");
                                     });
             }
