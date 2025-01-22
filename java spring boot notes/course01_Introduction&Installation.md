@@ -1,4 +1,4 @@
-# Title: Course 01: Introduction
+# Title: Course 01: Introduction & Installation
 # Date: Janurary 20, 2025
 # Author: Caesar James LEE
 ## requirements
@@ -149,57 +149,3 @@
 * Verification
     1. open `cmd` or `Powershell` on `Windows`, or `terminal` on `MacOS` and `Linux`
     2. type `docker --version`
-## `spring initializer`
-* We need a [`spring initializer`](https://start.spring.io/) to generate a spring boot project
-* metadata meanings
-    1. `Group`
-        * Is a unique identifier for your project, typically following the **reverse domain name** notation convention
-        * If your domain name is `triblec.com`, and group name should be `com.triblec`
-        * Repreents the group or organization that is responsible for the project and is used to organize your project in repositories or artifact repositories
-    2. `Artifact`
-        * Is the name of your project or application, typically **in lowercase** and reflects the name of the generated artifact
-        * Uniquely identifies the build output (`.jar` file) and is part of the project's dependency coordinates
-        * Combination of `group` and `artifact` uniquely identifies your project in a repository
-        * For `maven`, it's the value of the `<artifactId>` element in `pom.xml`
-    3. `Name`
-        * Is a human-readable for your project
-        * It's often used in the UI or CLI tools to display the project's name
-        * For `maven`, it's the value of `<name>`element in `pom.xml`
-    4. `Description`
-        * Is a brief explanation of what your project does
-        * For `maven`, it's the value of the `<description>` element in `pom.xml`
-    5. `Package name`
-        * Is the base package name for your java classes
-        * Defines the root java package structure in your project
-        * By default, this package structure is used for organizing your java classes, configurations, and services in the project
-        * Corresponds to the base package structure under the `src/main/java` directory
-    6. example
-        1. `Group`: `com.example`
-        2. `Artifact`: `springboot-demo`
-        3. `Name`: `Spring Boot Demo`
-        4. `Description`: `A demo Spring Boot application for learning purposes`
-        5. `Package Name`: `com.example.springbootdemo`
-        6. structures
-            ```bash
-                springboot-demo/
-                ├── src/
-                │   └── main/
-                │       └── java/
-                │           └── com/
-                │               └── example/
-                │                   └── springbootdemo/
-                │                       ├── SpringbootDemoApplication.java
-                ├── pom.xml
-                ├── README.md
-                └── application.properties
-            ```
-        7. Adds dependencies
-            * `Spring Web`
-                * Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.
-            * `Spring Boot DevTools`
-                * Provides fast application restarts, LiveReload, and configurations for enhanced development experience.
-        8. Clicks `GENERATE` button to download a `.zip` file
-        9. Extracts it and opens it on an IDE
-        10. Runs project
-            1. Clicks `run` button
-            2. Opens `terminal` in this reponsitory and type `./mvnw spring-boot:run`
