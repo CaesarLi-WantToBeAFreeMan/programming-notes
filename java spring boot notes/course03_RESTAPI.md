@@ -1,5 +1,5 @@
 # Title: Course 03: REST API
-# Date: Janurary 22, 2025
+# Date: January 22, 2025
 # Author: Caesar James LEE
 ## `Model View Controller (MVC)`
 1. `model`
@@ -24,7 +24,6 @@
     4. `reusability`
         * Models and controllers can often be reused indifferent parts of the application or across different application
 ## return `Hello World!` when type `/hello`
-* We need add a controller
 * code
     ```java
         package com.caesar.springboot_demo.person;
@@ -46,7 +45,6 @@
         }
     ```
 ## return an ArrayList when type `/persons/read`
-* we need add a repository and a controller as well
 * code
     * `PersonRepository.java`
     ```java
@@ -108,7 +106,6 @@
         }
     ```
 ## return a Person when type `/persons/read/{id}`
-* we need add two methods, and two annotations as well
 * code
     * `PersonRepository.java`
         ```java
@@ -145,5 +142,272 @@
                 Person findById(@PathVariable Integer id){//bind the id from the URL path to the method parameter
                     return personRepository.findById(id);
                 }
+            }
+        ```
+## throw a 404 not found error when type an non-existent id
+* code
+    * `PersonRepository.java`
+        ```java
+            //...
+            import java.util.Optional;//import optional
+
+            @Repository
+            public class PersonRepository{
+                //...
+                Optional <Person> findById(Integer id){//return an optional data type
+                    return persons.stream()
+                            .filter(person -> person.id() == id)
+                            .findFirst();
+                }
+            }
+        ```
+    * `PersonController.java`
+        ```java
+            //...
+            import java.util.Optional;
+
+            @RestController
+            @RequestMapping("/person/read")
+            public class PersonController{
+                //...
+                @GetMapping("/{id}")
+                Person findById(@PathVariable Integer id){
+                    Optional <Person> person =  personRepository.findById(id);//declare a local optional variable
+                    if(person.isEmpty())//if the given id doesn't exist
+                        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Person Not Found");//throw a 404 not found error
+                    return person.get();//else return the person
+                }
+            }
+        ```
+## create data
+* code
+    * `PersonRepository.java`
+        ```java
+            //...
+            @Repository
+            public class PersonRepository{
+                //...
+                void create(Person person){
+                    persons.add(person);
+                }
+            }
+        ```
+    * `PersonController.java`
+        ```java
+            //...
+            import org.springframework.web.bind.annotation.*;//import @RestController, @RequestMapping, @GetMapping, @PostMapping, etc
+            @RestController
+            @RequestMapping("/person")
+            public class PersonController{
+                @PostMapping("/create")
+                void create(@RequestBody Person person){
+                    personRepository.create(person);
+                }
+            }
+        ```
+## throw a 201 created error when create existent data
+* code
+    * `PersonController.java`
+        ```java
+            //...
+            import org.springframework.http.HttpStatus;
+            import org.springframework.web.bind.annotation.*;
+            @RestController
+            @RequestMapping("/person")
+            public class PersonController{
+                //...
+                @ResponseStatus(HttpStatus.CREATED)
+                @PostMapping("/create")
+                void create(@RequestBody Person person){
+                    personRepository.create(person);
+                }
+            }
+        ```
+## update data
+* code
+    * `PersonRepository.java`
+        ```java
+            //...
+            @Repository
+            public class PersonRepository{
+                //...
+                //update
+                void update(Person person, Integer id){
+                    Optional <Person> existingPerson = this.findById(id);
+                    if(existingPerson.isPresent())
+                        persons.set(persons.indexOf(existingPerson.get()), person);
+                }
+            }
+        ```
+    * `PersonController.java`
+        ```java
+            import org.springframework.http.HttpStatus;
+            import org.springframework.web.bind.annotation.*;
+            @RestController
+            @RequestMapping("/person")
+            public class PersonController{
+                //...
+                //put
+                @ResponseStatus(HttpStatus.NO_CONTENT)//no content to send
+                @PutMapping("/update/{id}")
+                void update(@RequestBody Person person, @PathVariable Integer id){
+                    personRepository.update(person, id);
+                }
+            }
+        ```
+## delete data
+* code
+    * `PersonRepository.java`
+        ```java
+            //...
+            @Repository
+            public class PersonRepository{
+                //...
+                 //delete
+                void delete(Integer id){
+                    persons.removeIf(person -> person.id().equals(id));
+                }
+            }
+        ```
+    * `PersonController.java`
+        ```java
+            import org.springframework.http.HttpStatus;
+            import org.springframework.web.bind.annotation.*;
+            @RestController
+            @RequestMapping("/person")
+            public class PersonController{
+                //...
+                //delete
+                @ResponseStatus(HttpStatus.NO_CONTENT)
+                @DeleteMapping("/delete/{id}")
+                void delete(@PathVariable Integer id){
+                    personRepository.delete(id);
+                }
+            }
+        ```
+## throw an own exception
+* code
+    * `PersonNotFoundException.java`
+        ```java
+            package com.caesar.springboot_demo.person;
+            import org.springframework.http.HttpStatus;
+            import org.springframework.web.bind.annotation.ResponseStatus;
+            @ResponseStatus(HttpStatus.NOT_FOUND)
+            public class PersonNotFoundException extends RuntimeException{
+                public PersonNotFoundException(){
+                    super("Person Not Found");
+                }
+            }
+        ```
+    * `PersonController.java`
+        ```java
+            //...
+            import org.springframework.http.HttpStatus;
+            import org.springframework.web.bind.annotation.*;
+            @RestController
+            @RequestMapping("/person")
+            public class PersonController{
+                //...
+                @GetMapping("/read/{id}")
+                Person findById(@PathVariable Integer id){
+                    Optional <Person> person =  personRepository.findById(id);
+                    if(person.isEmpty())
+                        throw new PersonNotFoundException();//throw PersonNotFoundException that we defined
+                    return person.get();
+                }
+            }
+        ```
+## validation from `boot.springframework.org`
+* steps
+    1. open `pom.xml`
+    2. type these code within dependencies
+        ```xml
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+            </dependency>
+        ```
+    3. reload the `pom.xml`
+    4. add annotations
+* code
+    * `Person.java` (record)
+        ```java
+            package com.caesar.springboot_demo.person;
+            import java.time.LocalDateTime;
+            import jakarta.validation.constraints.*;//import @NotBlank, @Size, @Positive, @Email
+
+            public record Person(
+                    Integer id,
+                    @NotBlank//ensure the string is filled with at least one non-whitespace character
+                    //@NotEmpty ensures that the field is not null, not empty
+                    //@NotNull ensures that the field is not null
+                    @Size(min = 1, max = 30)//ensure the field has between [1, 30] character(s)
+                    String firstName,
+                    String lastName,
+                    @Positive//ensure the number is filled with positive number
+                    Integer age,
+                    Location address,
+                    @Email//ensure the string matches the email format
+                    String email,
+                    Long telephone,
+                    LocalDateTime registerDateTime
+            ){/*...*/}
+        ```
+    * `PersonController.java`
+        ```java
+            //...
+            import org.springframework.http.HttpStatus;
+            import org.springframework.validation.annotation.Validated;//import @Validated
+            import org.springframework.web.bind.annotation.*;
+            @RestController
+            @RequestMapping("/person")
+            public class PersonController{
+                //post
+                @ResponseStatus(HttpStatus.CREATED)
+                @PostMapping("/create")
+                void create(@RequestBody @Validated Person person){
+                    personRepository.create(person);
+                }
+            }
+        ```
+## throw some illegal argument exceptions
+* code
+    * `Person.java`
+        ```java
+            package com.caesar.springboot_demo.person;
+            import java.time.LocalDateTime;
+            import jakarta.validation.constraints.*;
+            public record Person(
+                    @PositiveOrZero
+                    Integer id,
+                    @NotBlank
+                    @Size(min = 1, max = 30)
+                    String firstName,
+                    String lastName,
+                    @Positive
+                    Integer age,
+                    Location address,
+                    @Email
+                    String email,
+                    Long telephone,
+                    LocalDateTime registerDateTime
+            ){
+                public Person{
+                    if(registerDateTime.isBefore(LocalDateTime.of(1989, 6, 4, 0, 0, 0)))
+                        throw new IllegalArgumentException("our server was running on June 4, 1989 at 0");
+                    if(id < 0)
+                        throw new IllegalArgumentException("id must greater than or equal to 0");
+                    if(firstName.isBlank())
+                        throw new IllegalArgumentException("first name cannot be a blank");
+                    if(firstName.length() > 30)
+                        throw new IllegalArgumentException("first name is so long");
+                    if(lastName.isBlank())
+                        throw new IllegalArgumentException("last name cannot be a blank");
+                    if(lastName.length() > 30)
+                        throw new IllegalArgumentException("last name is so long");
+                    if(age < 1)
+                        throw new IllegalArgumentException("age must greater than 0");
+                }
+                //...
             }
         ```

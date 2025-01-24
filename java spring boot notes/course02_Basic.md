@@ -1,5 +1,5 @@
 # Title: Course 02: Basic
-# Date: Janurary 21, 2025
+# Date: January 21, 2025
 # Author: Caesar James LEE
 ## `spring initializer`
 * We need a [`spring initializer`](https://start.spring.io/) to generate a spring boot project
@@ -7,7 +7,7 @@
     1. `Group`
         * Is a unique identifier for your project, typically following the **reverse domain name** notation convention
         * If your domain name is `triblec.com`, and group name should be `com.triblec`
-        * Repreents the group or organization that is responsible for the project and is used to organize your project in repositories or artifact repositories
+        * Represents the group or organization that is responsible for the project and is used to organize your project in repositories or artifact repositories
     2. `Artifact`
         * Is the name of your project or application, typically **in lowercase** and reflects the name of the generated artifact
         * Uniquely identifies the build output (`.jar` file) and is part of the project's dependency coordinates
@@ -54,7 +54,7 @@
         9. Extracts it and opens it on an IDE
         10. Runs project
             1. Clicks `run` button
-            2. Opens `terminal` in this reponsitory and type `./mvnw spring-boot:run`
+            2. Opens `terminal` in this repository and type `./mvnw spring-boot:run`
 ## output `hello world`
 1. create a `HelloWorld.java` in a new package `hello_world`
 2. type these code within the `HelloWorld.java`
@@ -92,12 +92,12 @@
 * It's a **form of metadata that provides additional information** about the code
 * It **doesn't change the behavior** of the code directly but can be used by **the compiler or runtime tools** (like **frameworks**) to perform a certain action
 * It's widely used in `Spring Boot` to define configuration, mark certain methods or classes, or control behavior at runtime
-* Comman Spring Boot annotations table:
+* Common Spring Boot annotations table:
     * | annotations                 | placed place      | function                                                                  |
     * | :-------------------------: | :---------------: | :-----------------------------------------------------------------------: |
     * | `@SpringBootApplication`    | Main class        | enables the `Spring Boot Application`<br>it combines `@EnableAutoConfiguration`, `@ComponentScan` and `@Configuration`                                                                                           |
     * | `@EnableAutoConfiguration`  | Main class        | automatically configure the application based on the dependencies on the class path                                                                                                                            |
-    * | `@ComponentScan`            | Main class        | tells Spring where to scan for components, comfigurations and services    |
+    * | `@ComponentScan`            | Main class        | tells Spring where to scan for components, configurations and services    |
     * | `@Configuration`            | Main class        | indicates that a class contains `bean` definitions                        |
     * | `@Bean`                     | methods           | declares a bean to be managed by the `Spring container`                   |
     * | `@Autowired`                | member variables  | Marks a field, constructor, setter method to be automatically injected<br>with a Spring Bean by `Dependency Injection (DI)`                                                                                      |
@@ -107,10 +107,10 @@
     * | `@Controller`               | classes           | marks a class as a Spring MVC controller<br>responsible for handing HTTP requests and returning view names                                                                                                        |
     * | `@ResponseBody`             | methods           | return value should be written directly to the HTTP response body         |
     * | `@RequestMapping`           | methods / classes | maps HTTP requests to handler methods of MVC and REST controllers         |
-    * | `@GetMapping`               | methods / classes | shrothand for `@RequestMapping(method = RequestMethod.GET)`               |
-    * | `@PostMapping`              | methods / classes | shrothand for `@RequestMapping(method = RequestMethod.POST)`              |
-    * | `@PutMapping`               | methods / classes | shrothand for `@RequestMapping(method = RequestMethod.PUT)`               |
-    * | `@DeleteMapping`            | methods / classes | shrothand for `@RequestMapping(method = RequestMethod.DELETE)`            |
+    * | `@GetMapping`               | methods / classes | shorthand for `@RequestMapping(method = RequestMethod.GET)`               |
+    * | `@PostMapping`              | methods / classes | shorthand for `@RequestMapping(method = RequestMethod.POST)`              |
+    * | `@PutMapping`               | methods / classes | shorthand for `@RequestMapping(method = RequestMethod.PUT)`               |
+    * | `@DeleteMapping`            | methods / classes | shorthand for `@RequestMapping(method = RequestMethod.DELETE)`            |
     * | `@RequestParam`             | parameters        | binds a request parameter from the URL or query string<br>to a method parameter in the controller                                                                                                                  |
     * | `@RequestBody`              | parameters        | used in RESTful web services to handle data sent by clients               |
     * | `@Service`                  | classes           | indicates that the class is a service and should be managed by Spring     |
@@ -166,7 +166,7 @@
         * `Service.class`
             ```java
                 package example;
-                import example.Repository;//import Respository class
+                import example.Repository;//import Repository class
                 public class Service{
                     private Repository repository;//declare a Repository instance
                     public Service(){
@@ -201,14 +201,14 @@
         * `Service.class`
             ```java
                 package example;
-                import example.Repository;//import Respository class
+                import example.Repository;//import Repository class
                 import org.springframework.beans.factory.annotation.Autowired;//import @Autowired
                 import org.springframework.stereotype.Component;//import @Component
                 @Component
                 public class Service{
                     private final Repository repository;//declare a final Repository instance
                     @Autowired
-                    public Service(Repository reponsitory){
+                    public Service(Repository repository){
                         this.repository = repository//assign to a Repository variable
                         //you don't need to create an instance
                     }

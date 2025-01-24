@@ -1,5 +1,5 @@
 # Title: Course 01: Introduction & Installation
-# Date: Janurary 20, 2025
+# Date: January 20, 2025
 # Author: Caesar James LEE
 ## requirements
 ### 1. JDK
@@ -8,9 +8,9 @@
 ### 2. Java Build Tools
 #### `Maven`
 * A powerful build automation tool primarily used for java projects
-* **Simplies the process of building, managing dependencies, and managng the lifecycle of a project**
-* It's used to **automate the build process**, **manage project dependencies**, **standardize project structure**, and **manage the roject lifecycle (from compilation to deployment)**
-* Uses `pom.xml` (Project Object Model) to to define project dependencies, build configuration, plugins, and anothers
+* **Simples the process of building, managing dependencies, and manage the lifecycle of a project**
+* It's used to **automate the build process**, **manage project dependencies**, **standardize project structure**, and **manage the project lifecycle (from compilation to deployment)**
+* Uses `pom.xml` (Project Object Model) to to define project dependencies, build configuration, plugins, and another
 * Installation
     * `Windows`
         1. [download](https://maven.apache.org/download.cgi) **binary zip archive**
@@ -30,7 +30,7 @@
     2. type `mvn -version`
 #### `Gradle`
 * An other build automation tool primarily used for java as well, although it can also be used with other programming languages
-* Uses `build.gradel` to configure
+* Uses `build.gradle` to configure
 * Instalation
     * `Windows`
         1. [download](https://gradle.org/releases/) the lastest version **binary-only**
@@ -86,7 +86,7 @@
 * cURL is a command-line tool for making HTTP requests to a server, which supports many protocols such as HTTP, FTP, etc
 * cURL is a useful tool for quick testing and interaction with Spring Boot API directly from the command line
 * HTTPie likes cURL but that is designed to be more user-friendly
-* Installatopn of `cURL`
+* Installation of `cURL`
     * `Windows`
         1. [download](https://curl.se/download.html) **`.zip` file**
         2. Extract it to a directory (named `curlPath`)
