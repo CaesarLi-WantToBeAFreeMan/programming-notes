@@ -357,7 +357,7 @@
         ```java
             //...
             import org.springframework.http.HttpStatus;
-            import org.springframework.validation.annotation.Validated;//import @Validated
+            import jakarta.validation.Valid;//import @Valid
             import org.springframework.web.bind.annotation.*;
             @RestController
             @RequestMapping("/person")
@@ -365,7 +365,7 @@
                 //post
                 @ResponseStatus(HttpStatus.CREATED)
                 @PostMapping("/create")
-                void create(@RequestBody @Validated Person person){
+                void create(@RequestBody @Valid Person person){
                     personRepository.create(person);
                 }
             }

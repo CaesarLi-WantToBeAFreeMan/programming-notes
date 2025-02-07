@@ -21,7 +21,7 @@ public record Person(
     public Person{
         if(registerDateTime.isBefore(LocalDateTime.of(1989, 6, 4, 0, 0, 0)))
             throw new IllegalArgumentException("our server was running on June 4, 1989 at 0");
-        if(id < 0)
+        if(id != null && id < 0)
             throw new IllegalArgumentException("id must greater than or equal to 0");
         if(firstName.isBlank())
             throw new IllegalArgumentException("first name cannot be a blank");
@@ -33,58 +33,5 @@ public record Person(
             throw new IllegalArgumentException("last name is so long");
         if(age < 1)
             throw new IllegalArgumentException("age must greater than 0");
-    }
-
-    @Override
-    public Integer id() {
-        return id;
-    }
-
-    @Override
-    public String firstName() {
-        return firstName;
-    }
-
-    @Override
-    public String lastName() {
-        return lastName;
-    }
-
-    @Override
-    public Integer age() {
-        return age;
-    }
-
-    @Override
-    public Location address() {
-        return address;
-    }
-
-    @Override
-    public String email() {
-        return email;
-    }
-
-    @Override
-    public Long telephone() {
-        return telephone;
-    }
-
-    @Override
-    public LocalDateTime registerDateTime() {
-        return registerDateTime;
-    }
-
-    @Override
-    public String toString() {
-        return "id = " + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", address=" + address +
-                ", email='" + email + '\'' +
-                ", telephone=" + telephone +
-                ", registerDateTime=" + registerDateTime +
-                '}';
     }
 }
