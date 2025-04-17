@@ -28,11 +28,6 @@
 | assert            | ǝˈsɝt         | 斷言；主張擁有    |
 | authentication    | ɒˌθɛntɪˈkеʃǝn | 證實             |
 
-## Basic Concepts
-
-1. `automated`
-    * we are concerned with letting the machine do the heavy lifting
-
 ## Git & GitHub
 
 ### GitHub
@@ -71,6 +66,9 @@
         * `branch` is optional and refers to the specific branch you want to push to
         * by default, Git pushes to the branch you're currently working on
     5. if this is your first time using Git on your machine, you'll need to enter your GitHub username and password (or personal access token for newer GitHub authentication)
+
+### Testing Project
+* [GitHub](https://github.com/SERG-Delft/mooc-software-testing)
 
 ### First Test
 * We have these two source codes:
