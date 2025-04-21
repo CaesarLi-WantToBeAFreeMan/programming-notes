@@ -101,6 +101,7 @@
 ```
 
 * Favicon File Format Support Table
+
 | Browser/Type      | ICO           | PNG       | GIF       | JPEG          | SVG           |
 | :---------------: | :-----------: | :-------: | :-------: | :-----------: | :-----------: |
 | File Type         | image/x-icon  | image/png | image/gif | image/jpeg    | image/svg+xml |

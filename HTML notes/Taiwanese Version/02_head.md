@@ -99,6 +99,7 @@
 ```
 
 * Favicon 格式支援表格
+
 | 瀏覽器/類型        | ICO           | PNG       | GIF       | JPEG          | SVG           |
 | :---------------: | :-----------: | :-------: | :-------: | :-----------: | :-----------: |
 | 檔案類型           | image/x-icon  | image/png | image/gif | image/jpeg    | image/svg+xml |

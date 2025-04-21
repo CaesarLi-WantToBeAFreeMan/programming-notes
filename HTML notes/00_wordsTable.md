@@ -10,3 +10,5 @@
 | consortium    | kǝnˈsɒrʃɪǝm       | noun                  | 聯合                  |
 | concise       | kǝnˈsaɪs          | adjective             | 簡明的                |
 | crucial       | ˈkruʃǝl           | adjective             | 重要的                |
+| acronym       | ˈækrǝnɪm          | noun                  | 首字母縮略字          |
+| parenthesis   | pǝˈrɛnθǝsɪs       | noun                  | 插入語；圓括號        |
