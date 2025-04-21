@@ -2,7 +2,7 @@
   "employees": [
     {
       "id": "0",
-      "name": "Caesar LEE",
+      "name": "a",
       "age": 18,
       "skill": "programming",
       "position": "junior full-stack engineer"
@@ -34,6 +34,13 @@
       "age": 21,
       "skill": "singing & dancing",
       "position": "professional singer"
+    },
+    {
+      "id": "5",
+      "name": "i KNOW",
+      "age": 19,
+      "skill": "i",
+      "position": "know"
     }
   ]
 }

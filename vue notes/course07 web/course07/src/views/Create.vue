@@ -89,7 +89,8 @@
                 }).then(response => response.json())
                     .then(() => {
                                 alert("this employee information has been created");
-                                window.location.reload();
+                                //window.location.reload();
+                                console.log(`this.employees:\t ${this.employees}`);
                                 })
                     .catch(error => {
                                     alert(error);

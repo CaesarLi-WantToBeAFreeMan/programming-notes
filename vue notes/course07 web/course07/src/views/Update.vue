@@ -93,14 +93,19 @@
                     method: "PUT",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(this.employee)
-                }).then(response => response.json())
+                }).then(response => {
+                                    console.log(response + "\n");
+                                    response.json();
+                                    })
                     .then(() => {
                                 alert("this employee information has been updated");
-                                window.location.reload();
+                                //window.location.reload();
+                                console.log(`id:\t ${this.employee.id}\nname:\t${this.employee.name}\nage:\t${this.employee.age}\nskill:\t${this.employee.skill}\nposition:\t${this.employee.position}`);
                                 })
                     .catch(error => {
                                     alert(error);
                                     alert("failed to update this employee information");
+                                    console.log(error + "\n");
                                     });
             }
         }

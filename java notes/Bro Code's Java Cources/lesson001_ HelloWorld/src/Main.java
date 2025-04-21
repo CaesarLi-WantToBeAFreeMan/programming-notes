@@ -12,7 +12,7 @@ public class Main {
 		System.out.print("I love Java!");
 		System.out.print("\n\n\nThose sentences were outputed by \tSystem.out.println()\t function\n");
 		System.out.println("Hello World!");
-		System.out.println("I love Java!"); 
+		System.out.println("I love Java!");
 		//This is a single line comment, like C++
 		/*
 		 * This

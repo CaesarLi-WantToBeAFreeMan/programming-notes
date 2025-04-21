@@ -23,7 +23,7 @@
         },
         mounted(){
             fetch("http://localhost:3000/employees").then(response => response.json())
-                                                    .then(data => this.employees = data)
+                                                    .then(data => {this.employees = data; console.log(`this.employees:\t ${this.employees}`);})
                                                     .catch(error => alert(error));
         }
     }

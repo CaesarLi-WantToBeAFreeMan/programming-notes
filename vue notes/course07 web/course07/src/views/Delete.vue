@@ -48,7 +48,8 @@
                     }).then(response => response.json())
                         .then(() => {
                             alert("this employee has been fired");
-                            window.location.reload();
+                            //window.location.reload();
+                            console.log(`this.employees:\t ${this.employees}`);
                         })
                         .catch(error => {
                             alert(error);
