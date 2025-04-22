@@ -68,6 +68,17 @@
     </p>
 ```
 
+## `<wbr>` - Word Break Opportunity
+
+* A **self-closing** tag
+* Suggests a location in text where the browser may break a long word and wrap it to the next line
+* Example
+```html
+    <p>
+        verylonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglongword<wbr>hi
+    </p>
+```
+
 ## `<hr>` - Horizontal Rule
 
 * A **self-closing** tag
@@ -231,6 +242,19 @@
     </p>
 ```
 
+## `<dfn></dfn>` - Definition Term
+
+* A **non-self-closing** tag
+* Used to mark the term being defined in a sentence or paragraph
+* Typically italicized by default in most browsers
+* Help screen readers and semantic tools understand that this is a definition
+* Example
+```html
+    <p>
+        <dfn>USA</dfn> is a country located in North America
+    </p>
+```
+
 ## `<del></del>` - Deleted Text
 
 * A **non-self-closing** tag
@@ -242,6 +266,18 @@
     </p>
 ```
 
+## `<s></s>` - Strikethrough Text (No Semantic Meaning)
+
+* A **non-self-closing** tag
+* Render text with a strikethrough line (like a horizontal line through it)
+* Used to indicate inaccurate or no longer relevant content, but without semantic emphasis
+* Example
+```html
+    <p>
+        <s>strikethrough</s> text
+    </p>
+```
+
 ## `<ins></ins>` - Inserted Text
 
 * A **non-self-closing** tag
@@ -250,6 +286,18 @@
 ```html
     <p>
         <ins>inserted</ins> text
+    </p>
+```
+
+## `<u></u>` - Underlined Text (No Semantic Meaning)
+
+* A **non-self-closing** tag
+* Render text with an underline
+* Don't carry any semantic meaning
+* Example
+```html
+    <p>
+        <u>underlined</u> text
     </p>
 ```
 
@@ -311,7 +359,7 @@
 
 ## `<rp></rp>` - Ruby Parentheses
 
-* A **non-self-closing** tag
+* A **non-self-closing** ta  g
 * Show in browsers that don’t support ruby
 * Example
     ```html
@@ -334,6 +382,35 @@
             <rp>)</rp>
         </ruby>
     ```
+
+## `<bdi></bdi>` - Bidirectional Isolation
+
+* A **non-self-closing** tag
+* Used to isolate part of the text that may have a different text direction
+* Helps avoid layout issues when mixing left-to-right (LTR, e.g. Chinese, English, etc) and right-to-left (RTL, e.g. Arabic, Hebrew, etc) languages
+* The browser auto-detects the direction of the content inside `<bdi></dbi>`
+* Not supported for `Appal Safari`
+* Example
+```html
+    <p>username: <bdi>Caesar</bdi> 18 years old</p> <!--LTR English-->
+    <p>username: <bdi>克獨</bdi> 18 years old</p> <!--LTR Chinese-->
+    <p>username: <bdi>أحمد</bdi> 18 years old</p> <!--RTL Arabic-->
+    <p>username: <bdi>דניאל</bdi> 18 years old</p> <!--RTL Hebrew-->
+```
+
+## `<bdo></bdo>` - Bidirectional Override
+
+* A **non-self-closing** tag
+* Used to force a specific text direction, overriding the browser’s default or natural direction
+* You must use the `dir` attribute with a value of:
+    1. `ltr` left to right
+    2. `rtl` right to left
+* Example
+```html
+    <p>Normal: 1234 السلام</p>
+    <p>Forced LTR: <bdo dir = "ltr">1234 السلام</bdo></p>
+    <p>Forced RTL: <bdo dir = "rtl">1234 السلام</bdo></p>
+```
 
 ## `<!---->` - Comment
 
