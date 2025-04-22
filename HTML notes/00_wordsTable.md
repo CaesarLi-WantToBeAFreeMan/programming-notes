@@ -13,3 +13,4 @@
 | acronym       | ˈækrǝnɪm          | noun                  | 首字母縮略字          |
 | parenthesis   | pǝˈrɛnθǝsɪs       | noun                  | 插入語；圓括號        |
 | bidirectional | ˌbaɪdǝˈrɛkʃǝnḷ    | adjective             | 雙向的                |
+| anchor        | ˈæŋkɚ             | noun                  | 錨                   |
