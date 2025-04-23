@@ -1,23 +1,272 @@
 <!DOCTYPE html>
-<html>
+<html lang = "en">
     <head>
+        <meta charset = "UTF-8">
         <title>06 Boxes</title>
         <style>
-            .programming-languages{
+            body{
+                background-color: black;
+                color: white;
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            header{
+                background-color: gray;
+                padding: 1rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border-bottom: 2px solid #ccc;
+            }
+
+            .top-bar{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1rem;
+            }
+
+            .top-bar img{
+                height: 50px;
+            }
+
+            .top-bar h1{
+                flex: 1;
+                text-align: center;
+                margin: 0;
+            }
+
+            .top-bar input [type = "search"]{
+                padding: 0.5rem;
+                font-size: 1rem;
+            }
+
+            nav{
+                display: flex;
+                gap: 1rem;
+            }
+
+            nav a{
+                text-decoration: none;
+                color: cyan;
+                padding: 0.5rem 1rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: darkblue;
+            }
+
+            .content-container{
+                display: flex;
+            }
+
+            aside{
+                width: 20%;
+                background-color: darkgray;
+                padding: 1rem;
+                border-right: 1px solid white;
+            }
+
+            main{
+                width: 60%;
+                padding: 1rem;
+            }
+
+            .ad-container{
+                width: 20%;
+                background-color: darkgray;
+                padding: 1rem;
+                border-left: 1px solid white;
+            }
+
+            .section-container{
+                margin-bottom: 2rem;
+                padding-bottom: 1rem;
+                border-bottom: 2px solid #ccc;
+            }
+
+            .figure-container{
+                text-align: center;
+                margin: 1rem 0;
+                padding: 1rem;
+                background-color: navy;
+                border-radius: 8px;
+            }
+
+            .figure-container img{
+                height: 60px;
+                display: block;
+                margin: 0 auto 1rem;
+            }
+
+            .figure-container p{
+                margin: 0.5rem 0;
+            }
+
+            .dates{
                 color: red;
+                font-weight: bold;
+            }
+
+            .go-to-top-buttons{
+                display: block;
+                text-align: center;
+            }
+
+            footer{
+                margin-top: 2rem;
+                font-size: 0.9rem;
+                color: #555;
+                border-top: 1px solid #ccc;
+                padding-top: 1rem;
+            }
+
+            footer{
+                margin-top: 2rem;
+                font-size: 0.9rem;
+                color: #555;
+                border-top: 1px solid #ccc;
+                padding-top: 1rem;
+                text-align: center;
+            }
+
+            footer address{
+                font-style: normal;
+            }
+
+            footer address a{
+                color: lightblue;
+                margin: 0 0.5rem;
+                text-decoration: none;
             }
         </style>
     </head>
     <body>
-        <div style = "border: 1px solid cyan;" class = "container">
-            <p>Hello, world!</p>
-        </div>
-        <p>
-            <span class = "programming-languages">C++</span>,
-            <span class = "programming-languages">Java</span>,
-            <span class = "programming-languages">Python</span>
-            and
-            <span class = "programming-languages">JavaScript</span>
-            are programming languages</p>
+        <header>
+            <div class = "top-bar">
+                <img src = "https://www.w3.org/Icons/w3c_home" alt = "W3C Logo">
+                <h1>Web Technology Overview</h1>
+                <input type = "search" placeholder = "Search...">
+            </div>
+            <nav>
+                <a href = "#html">HTML</a>
+                <a href = "#css">CSS</a>
+                <a href = "#js">JavaScript</a>
+            </nav>
+        </header>
+
+        <article class = "content-container">
+            <aside>
+                <h3>Contents</h3>
+                <ul>
+                    <li>
+                        <a href = "#html"><strong>HTML</strong></a>
+                        <ul>
+                            <a href = "#html-intro"><li>Introduction</li></a>
+                            <a href = "#html-history"><li>History</li></a>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href = "#css"><strong>CSS</strong></a>
+                        <ul>
+                            <a href = "#css-intro"><li>Introduction</li></a>
+                            <a href = "#css-history"><li>History</li></a>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href = "#js"><strong>JavaScript</strong></a>
+                        <ul>
+                            <a href = "#js-intro"><li>Introduction</li></a>
+                            <a href = "#js-history"><li>History</li></a>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+
+            <main>
+                <section id = "html" class = "section-container">
+                    <h2>HTML</h2>
+                    <figure class = "figure-container">
+                        <figcaption>HTML</figcaption>
+                        <img src = "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt = "HTML Logo">
+                        <p>Created: 1993</p>
+                        <p>Author: Tim Berners-Lee (W3C)</p>
+                    </figure>
+
+                    <article>
+                        <h3 id = "html-intro">Introduction</h3>
+                        <p>HTML (HyperText Markup Language) is the standard markup language used to create webpages. It describes the structure of web documents using tags and elements.</p>
+                        <h3 id = "html-history">History</h3>
+                        <p><span class = "dates">1993</span> — <strong>HTML 1.0 Released</strong>: The first version of HTML was introduced by Tim Berners-Lee as a means to share documents via the Internet.</p>
+                        <p><span class = "dates">1995</span> — <strong>HTML 2.0 Standardized</strong>: It became an official standard and gained more structured tags.</p>
+                        <p><span class = "dates">2014</span> — <strong>HTML5 Finalized</strong>: Introduced new semantic elements, video/audio support, and offline features.</p>
+                        <footer>
+                            <div class = "go-to-top-buttons"><a href = "#top">Go to Top</a></div>
+                        </footer>
+                    </article>
+                </section>
+
+                <section id = "css" class = "section-container">
+                    <h2>CSS</h2>
+                    <figure class = "figure-container">
+                        <figcaption>CSS</figcaption>
+                        <img src = "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt = "CSS Logo">
+                        <p>Created: 1996</p>
+                        <p>Author: Håkon Wium Lie (W3C)</p>
+                    </figure>
+
+                    <article>
+                        <h3 id = "css-intro">Introduction</h3>
+                        <p>CSS (Cascading Style Sheets) is used to control the layout and appearance of HTML elements. It allows you to style your web pages efficiently and consistently.</p>
+                        <h3 id = "css-history">History</h3>
+                        <p><span class = "dates">1996</span> — <strong>CSS1 Introduced</strong>: Provided basic style control like fonts, colors, and spacing.</p>
+                        <p><span class = "dates">1998</span> — <strong>CSS2 Released</strong>: Added support for positioning, z-index, and media types.</p>
+                        <p><span class = "dates">2011+</span> — <strong>CSS3 Modularization</strong>: Introduced features like animations, transitions, flexbox, and grid layouts.</p>
+                        <footer>
+                            <div class = "go-to-top-buttons"><a href = "#top">Go to Top</a></div>
+                        </footer>
+                    </article>
+                </section>
+
+                <section id = "js" class = "section-container">
+                    <h2>JavaScript</h2>
+                    <figure class = "figure-container">
+                        <figcaption>JavaScript</figcaption>
+                        <img src = "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JS Logo">
+                        <p>Created: 1995</p>
+                        <p>Author: Brendan Eich (Netscape)</p>
+                    </figure>
+
+                    <article>
+                        <h3 id = "js-intro">Introduction</h3>
+                        <p>JavaScript is a scripting language used to create dynamic and interactive effects within web browsers. It works alongside HTML and CSS to enhance the user experience.</p>
+                        <h3 id = "js-history">History</h3>
+                        <p><span class = "dates">1995</span> — <strong>JavaScript Created</strong>: Originally named Mocha, then renamed to LiveScript, and finally JavaScript.</p>
+                        <p><span class = "dates">1997</span> — <strong>Standardized as ECMAScript</strong>: JavaScript was standardized by ECMA International as ECMAScript.</p>
+                        <p><span class = "dates">2009</span> — <strong>Node.js Released</strong>: Enabled JavaScript to run on servers, expanding its use cases beyond the browser.</p>
+                        <footer>
+                            <div class = "go-to-top-buttons"><a href = "#top">Go to Top</a></div>
+                        </footer>
+                    </article>
+                </section>
+            </main>
+
+            <aside class = "ad-container">
+                <h3>Ad</h3>
+                <p>advertisement area</p>
+            </aside>
+        </article>
+
+        <footer>
+            <address>
+                <a href = "https://en.wikipedia.org/wiki/HTML" target = "_blank" rel = "noopener noreferrer">HTML on Wikipedia</a> |
+                <a href = "https://en.wikipedia.org/wiki/Cascading_Style_Sheets" target="_blank" rel = "noopener noreferrer">CSS on Wikipedia</a> |
+                <a href = "https://en.wikipedia.org/wiki/JavaScript" target = "_blank" rel = "noopener noreferrer">JavaScript on Wikipedia</a>
+            </address>
+        </footer>
     </body>
 </html>
