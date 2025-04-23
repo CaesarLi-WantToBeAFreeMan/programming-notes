@@ -49,5 +49,15 @@
 
 * A **non-self-closing** tag
 * Used to create a clickable button on a webpage
-* It's useless until we write some JavaScript codes
-* We will discuss attributes in `form` section
+* Doesn't do anything by itself — it needs JavaScript to perform actions
+* We'll talk more about its attributes in the `form` section
+
+## `<details></details>` -  Expandable Content Container
+
+* A **non-self-closing** tag
+* Specify additional details that the user can open and close on demand
+* Used to create an interactive widget that the user can 
+
+## `<summary></summary>` - Label for a `<details></details>` Element
+
+* A **non-self-closing** tag
