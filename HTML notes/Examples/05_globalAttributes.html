@@ -2,11 +2,102 @@
 <html>
     <head>
         <title>05 Global Attributes</title>
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
     </head>
     <body>
-        <h1>05 Global Attributes</h1>
+        <h1 id = "title">05 Global Attributes</h1>
         <hr>
         <h2>accesskey</h2>
         <a href = "https://www.google.com/" target = "_blank" accesskey = "g">visit Google</a>
+        <hr>
+        <h2>class</h2>
+        <p class = "descriptions highlights">content</p>
+        <hr>
+        <h2>contenteditable</h2>
+        <p contenteditable = "true">you can edit the element</p>
+        <p>you cannot edit the element</p>
+        <hr>
+        <h2>hidden</h2>
+        <p>visible element</p>
+        <p hidden>invisible element</p>
+        <hr>
+        <h2>style</h2>
+        <div style = "background-color: black">
+            <p style = "font-size: 30px; color: red; font-weight: lighter; text-align: center">styled text</p>
+        </div>
+        <hr>
+        <h2>title</h2>
+        <a href = "https://www.google.com/" target = "_blank" title = "visit Google">visit Google</a>
+        <hr>
+        <h2>lang</h2>
+        <p lang = "en">Hello</p>
+        <p lang = "zh-hant">你好</p>
+        <hr>
+        <h2>draggable</h2>
+        <div style = "width: 300px; height: 100px; margin: 5px auto; padding: 5px 10px; border: 1px solid gray"
+            ondrop = "drop(event)" ondragover = "allowDrop(event)"></div>
+        <br>
+        <p id = "draggable-paragraph" draggable = "true" ondragstart = "drag(event)">draggable text</p>
+        <p ondragstart = "drag(event)">draggable text</p>
+        <hr>
+        <h2>inert</h2>
+        <div inert>
+            <p>you can still see me</p>
+            <button>you cannot click me</p>
+        </div>
+        <hr>
+        <h2>dir</h2>
+        <p lang = "en" dir = "rtl">hello</p>
+        <p lang = "zh-hant" dir = "rtl">你好</p>
+        <hr>
+        <h2>spellcheck</h2>
+        <p lang = "en" spellcheck = "true">dont sho a mstak sugestion</p>
+        <p lang = "en" contenteditable = "true" spellcheck = "true">sho a mstak sugestion</p>
+        <hr>
+        <h2>enterkeyhint, useful for mobile</h2>
+        <p contenteditable = "true">default enter</p>
+        <p contenteditable = "true" enterkeyhint = "done">visual keyboard enter key becomes done</p>
+        <p contenteditable = "true" enterkeyhint = "go">visual keyboard enter key becomes go</p>
+        <p contenteditable = "true" enterkeyhint = "next">visual keyboard enter key becomes next</p>
+        <p contenteditable = "true" enterkeyhint = "previous">visual keyboard enter key becomes previous</p>
+        <p contenteditable = "true" enterkeyhint = "search">visual keyboard enter key becomes search</p>
+        <p contenteditable = "true" enterkeyhint = "send">visual keyboard enter key becomes send</p>
+        <hr>
+        <h2>popover</h2>
+        <p popover id = "popover-text">a popover text</p>
+        <button popovertarget = "popover-text">toggle popover text</p>
+        <hr>
+        <h2>top 6 search engine in March 2025</h2>
+        <p>using <b>p</b> instead of <b>ol</b> tag, cause we haven't talk it yet</p>
+        <p><a href = "https://www.google.com/" target = "_blank" tabindex = "1">Google</a>: 89.74%, USA</p>
+        <p><a href = "https://www.bing.com/" target = "_blank" tabindex = "2">bing</a>: 4.00%, USA</p>
+        <p><a href = "https://yandex.com/" target = "_blank" tabindex = "5">YANDEX</a>: 2.49%, Russia</p>
+        <p><a href = "https://www.yahoo.com/" target = "_blank" tabindex = "3">Yahoo!</a>: 1.33%, USA</p>
+        <p><a href = "https://duckduckgo.com/" target = "_blank" tabindex = "4">DuckDuckGo</a>0.79%, USA</p>
+        <p><a href = "https://www.baidu.com/" target = "_blank" tabindex = "6">Baidu</a>: 0.62%, China</p>
+        <hr>
+        <h2>data-*</h2>
+        <p id = "user" data-username = "caesar">Caesar</p>
+        <hr>
+        <a href = "#title">go to top</a>
+        <script>
+            const user = document.querySelector("#user");
+
+            function allowDrop(event){
+                event.preventDefault();
+            }
+
+            function drag(event){
+                event.dataTransfer.setData("Text", event.target.id);
+            }
+
+            function drop(event){
+                let data = event.dataTransfer.getData("Text");
+                event.target.appendChild(document.getElementById(data));
+                event.preventDefault();
+            }
+
+            console.log(`username:\t${user.dataset.username}`);
+        </script>
     </body>
 </html>

@@ -51,6 +51,15 @@
 * Used to create a clickable button on a webpage
 * Doesn't do anything by itself — it needs JavaScript to perform actions
 * We'll talk more about its attributes in the `form` section
+* Example
+```html
+    <script>
+        function changeColor(){
+            document.getElementById("change-color-btn").style.color = "red";
+        }
+    </script>
+    <button id = "change-color-btn" onclick = "changeColor()">change text color</button>
+```
 
 ## `<details></details>` -  Expandable Content Container
 
