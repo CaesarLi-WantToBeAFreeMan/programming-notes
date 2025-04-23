@@ -70,7 +70,7 @@
     <meta http-equiv = "refresh" content = "30">
 ```
 
-## <base> 標籤
+## `<base>` 標籤
 * **自關閉** 的標籤
 * 指定所有相對路徑的 **基礎網址**（base URL）
 * 對於引用圖片、樣式表、或 JavaScript 很有幫助
@@ -80,7 +80,7 @@
     <base href = "images/02/">
 ```
 
-## <link> 標籤
+## `<link>` 標籤
 * **自關閉** 的標籤
 * 定義目前文件和外部資源的關係
 * 常用來：

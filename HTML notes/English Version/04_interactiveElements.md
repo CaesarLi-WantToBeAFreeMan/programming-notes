@@ -60,13 +60,3 @@
     </script>
     <button id = "change-color-btn" onclick = "changeColor()">change text color</button>
 ```
-
-## `<details></details>` -  Expandable Content Container
-
-* A **non-self-closing** tag
-* Specify additional details that the user can open and close on demand
-* Used to create an interactive widget that the user can 
-
-## `<summary></summary>` - Label for a `<details></details>` Element
-
-* A **non-self-closing** tag

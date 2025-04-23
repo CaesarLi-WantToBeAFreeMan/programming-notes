@@ -200,7 +200,7 @@
 * Example
 ```html
     <p>
-        <cite>Genesis 1:3<</cite>
+        <cite>Genesis 1:3</cite>
         <blockquote>
             And God said,
             <q>Let there be light,</q>
