@@ -75,7 +75,7 @@
     1. `at(pos)`: safe access, cannot change
     2. `front()`: first element
     3. `back()`: last element
-    3. `data()`: pointer to vector
+    4. `data()`: pointer to vector
 
 4. modifiers
     1. `assign(num, value)`: fill with num values
