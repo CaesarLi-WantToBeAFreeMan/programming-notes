@@ -1,0 +1,193 @@
+Running Test: subtractiveNotation1()
+test string:	IV
+expected value:	4
+actual value:	4
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: subtractiveNotation2()
+test string:	IX
+expected value:	9
+actual value:	9
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: subtractiveNotation3()
+test string:	XIV
+expected value:	14
+actual value:	14
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: subtractiveNotation4()
+test string:	XLIV
+expected value:	44
+actual value:	44
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: subtractiveNotation5()
+test string:	XCIV
+expected value:	94
+actual value:	94
+result:	PASS
+runtime:	2 ms
+
+------------
+
+Running Test: subtractiveNotation6()
+test string:	CDXLIV
+expected value:	444
+actual value:	444
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: multipleDigits1()
+test string:	II
+expected value:	2
+actual value:	2
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: multipleDigits2()
+test string:	III
+expected value:	3
+actual value:	3
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: multipleDigits3()
+test string:	VIII
+expected value:	8
+actual value:	8
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: multipleDigits4()
+test string:	XVII
+expected value:	17
+actual value:	17
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: invalid1()
+test string:	IIII
+expected value:	0
+actual value:	0
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: invalid2()
+test string:	VIIII
+expected value:	0
+actual value:	0
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: invalid3()
+test string:	IIIV
+expected value:	0
+actual value:	0
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: invalid4()
+test string:	A
+expected value:	0
+actual value:	0
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: singleDigit1()
+test string:	I
+expected value:	1
+actual value:	1
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: singleDigit2()
+test string:	V
+expected value:	5
+actual value:	5
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: singleDigit3()
+test string:	X
+expected value:	10
+actual value:	10
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: singleDigit4()
+test string:	L
+expected value:	50
+actual value:	50
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: singleDigit5()
+test string:	C
+expected value:	100
+actual value:	100
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: singleDigit6()
+test string:	D
+expected value:	500
+actual value:	500
+result:	PASS
+runtime:	0 ms
+
+------------
+
+Running Test: singleDigit7()
+test string:	M
+expected value:	1000
+actual value:	1000
+result:	PASS
+runtime:	0 ms
+
+------------
+
+============ summary ============
+passed:	21
+failed:	0
+runtime:	380 ms
