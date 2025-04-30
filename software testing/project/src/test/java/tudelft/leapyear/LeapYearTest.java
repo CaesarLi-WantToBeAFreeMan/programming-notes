@@ -3,29 +3,24 @@ package tudelft.leapyear;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LeapYearTest {
+public class LeapYearTest{
     @Test
-    public void leapYearsThatAreNonCenturialYears() {
-        LeapYear ly = new LeapYear();
-        boolean result = ly.isLeapYear(2016);
-        Assertions.assertTrue(result);
+    public void leapYearsThatAreNonCenturialYears(){
+        Assertions.assertTrue(new LeapYear().isLeapYear(2016));//assert result is true
     }
 
     @Test
-    public void leapCenturialYears() {
-        LeapYear ly = new LeapYear();
-        Assertions.assertTrue(ly.isLeapYear(2000));
+    public void leapCenturialYears(){
+        Assertions.assertTrue(new LeapYear().isLeapYear(2000));
     }
 
     @Test
-    public void nonLeapCenturialYears() {
-        LeapYear ly = new LeapYear();
-        Assertions.assertFalse(ly.isLeapYear(1500));
+    public void nonLeapCenturialYears(){
+        Assertions.assertFalse(new LeapYear().isLeapYear(1500));//assert result is false
     }
 
     @Test
-    public void nonLeapYears() {
-        LeapYear ly = new LeapYear();
-        Assertions.assertFalse(ly.isLeapYear(2017));
+    public void nonLeapYears(){
+        Assertions.assertFalse(new LeapYear().isLeapYear(2017));
     }
 }
