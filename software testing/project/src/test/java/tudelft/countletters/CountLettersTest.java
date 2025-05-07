@@ -3,18 +3,14 @@ package tudelft.countletters;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CountLettersTest {
-
+public class CountLettersTest{
     @Test
-    public void multipleMatchingWords() {
-        int words = new CountLetters().count("cats|dogs");
-        Assertions.assertEquals(2, words);
+    public void multipleMatchingWords(){
+        Assertions.assertEquals(2, new CountLetters().count("cats|dogs"));
     }
 
     @Test
-    public void lastWordDoesNotMatch() {
-        int words = new CountLetters().count("cats|dog");
-        Assertions.assertEquals(1, words);
+    public void lastWordDoesNotMatch(){
+        Assertions.assertEquals(1, new CountLetters().count("cats|dog"));
     }
-
 }

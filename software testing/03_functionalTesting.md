@@ -187,7 +187,7 @@
 ### 5. `existence`
 
 * input may be missing
-* e.g., `null` or empty`
+* e.g., `null` or `empty`
 * check system behavior when data is absent or undefined
 
 ### 6. `cardinality`

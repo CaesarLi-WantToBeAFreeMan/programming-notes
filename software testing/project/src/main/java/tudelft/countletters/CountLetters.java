@@ -1,23 +1,17 @@
 package tudelft.countletters;
 
-public class CountLetters {
-
-    public int count(String str) {
+public class CountLetters{
+    public int count(String str){
         int words = 0;
-        char last = ' ';
-        for(int i = 0; i < str.length(); i++) {
-            if(!Character.isLetter(str.charAt(i)) &&
-                    (last == 'r' || last == 's')) {
+        char previous = ' ', current = ' ';
+        for(int i = 0; i < str.length(); i++){
+            current = str.charAt(i);
+            if (!Character.isLetter(current) && (previous == 'r' || previous == 's'))
                 words++;
-            }
-
-            last = str.charAt(i);
+            previous = current;
         }
-
-        if(last == 'x' || last == 's')
+        if(previous == 'x' || previous == 's')
             words++;
-
         return words;
     }
-
 }

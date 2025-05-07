@@ -24,6 +24,7 @@
 | trapezoid         | ˈtræpǝˌzɒɪd       | 梯形                       |
 | asymmetric        | ˌæsɪˈmɛtrɪk       | 不對稱的                   |
 | parallelogram     | ˌpærǝˈlɛlǝˌɡræm   | 平行四邊形                 |
+| simultaneously    | saɪmǝlˈtеnɪǝslɪ   | 同時地                     |
 
 ## structural testing
 
@@ -46,8 +47,27 @@
     * test whether every boolean sub-expression has been evaluated both `true` and `false` at least once
 6. `decision/condition coverage`
     * combine `decision coverage` and `condition coverage`
-7. `modified condition/decision coverage`
-    * test whether each individual condition within a decision independently affect the result
+7. `modified condition/decision coverage` (`MC/DC`)
+    * each condition is in a decision has been shown to independently affect the overall decision outcome
+    * to show independent effect, we **flip one** condition while **keeping others** fixed, and the **outcome must change**
+    * `MC/DC` doesn't required all combinations, and which needs just **enough** to demonstrate independence
+    * example: `A && (B || C)`
+
+    | row   | A     | B     | C     | outcome   |
+    | :---: | :---: | :---: | :---: | :-------: |
+    | 0     | true  | true  | true  | true      |
+    | 1     | true  | true  | false | true      |
+    | 2     | true  | false | true  | true      |
+    | 3     | true  | false | false | false     |
+    | 4     | false | true  | true  | false     |
+    | 5     | false | true  | false | false     |
+    | 6     | false | false | true  | false     |
+    | 7     | false | false | false | false     |
+
+    * for A, {0, 4}, {1, 5}, {2, 6} are valid
+    * for B, {1, 3} is valid
+    * for C, {2, 3} is valid
+    * minimal `MC/DC` test set: {1, 2, 3, 6}, because we can test A, B, and C simultaneously
 8. `multiple condition coverage`
     * test all possible combinations of boolean conditions in a decision
 
