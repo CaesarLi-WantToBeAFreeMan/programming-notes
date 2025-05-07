@@ -25,6 +25,11 @@
 | asymmetric        | ˌæsɪˈmɛtrɪk       | 不對稱的                   |
 | parallelogram     | ˌpærǝˈlɛlǝˌɡræm   | 平行四邊形                 |
 | simultaneously    | saɪmǝlˈtеnɪǝslɪ   | 同時地                     |
+| counter           | ˈkaʊntɚˌpɑrt      | 互為補充的人（或物）        |
+| unfeasible        | ʌnˈfizǝbḷ         | 不能實行的                 |
+| apparently        | ǝˈpærǝntlɪ        | 顯然地                    |
+| conclusive        | kǝnˈklusɪv        | 決定性的；確實的；最終的    |
+| syntactic         | sɪnˈtæktɪk        | 按照句法的；句法的         |
 
 ## structural testing
 
@@ -51,6 +56,7 @@
     * each condition is in a decision has been shown to independently affect the overall decision outcome
     * to show independent effect, we **flip one** condition while **keeping others** fixed, and the **outcome must change**
     * `MC/DC` doesn't required all combinations, and which needs just **enough** to demonstrate independence
+    * for `n` conditions, `n + 1` tests are enough, and which is definitely better than $2^n$
     * example: `A && (B || C)`
 
     | row   | A     | B     | C     | outcome   |
@@ -70,6 +76,21 @@
     * minimal `MC/DC` test set: {1, 2, 3, 6}, because we can test A, B, and C simultaneously
 8. `multiple condition coverage`
     * test all possible combinations of boolean conditions in a decision
+
+### coverages relationship
+
+1. if you achieve **100%** `decision coverage`, you have also achieved **100%** `line coverage`
+2. if you achieve **100%** `path coverage`, you have also achieved **100%** `decision coverage`
+3. relationship figure
+```mermaid
+    flowchart TD;
+    path(["path coverage"]);
+    path --> MCDC(["modified condition/decision coverage (MC/DC) coverage"]);
+    MCDC --> branch(["branch coverage"]);
+    MCDC --> condition(["condition coverage"]);
+    branch --> statementOrLine(["statement/line coverage"]);
+    condition --> statementOrLine;
+```
 
 ### run test cases with code coverage
 
