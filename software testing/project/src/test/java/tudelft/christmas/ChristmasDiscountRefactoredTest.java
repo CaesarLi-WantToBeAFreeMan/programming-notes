@@ -7,7 +7,13 @@ import org.mockito.Mockito;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class ChristmasDiscountRefactoredTest {
+public class ChristmasDiscountRefactoredTest{
+    //test ChristmasDiscount
+    //for May 8, 2025, the result is perfect
+    @Test
+    public void today(){
+        Assertions.assertEquals(100.0, new ChristmasDiscount().applyDiscount(100.0), 0.000_1);
+    }
 
     @Test
     public void christmas() {

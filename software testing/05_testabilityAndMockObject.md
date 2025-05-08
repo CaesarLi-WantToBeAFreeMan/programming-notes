@@ -358,3 +358,52 @@
             }
         }
     ```
+* mock
+    * `InvoiceFilter`
+    ```java
+        public class InvoiceFilter{
+            private InvoiceDao dao;
+            public InvoiceFilter(InvoiceDao dao){
+                this.dao = dao;
+            }
+            public List<Invoice> filter(){
+                List  <Invoice> filtered = new ArrayList<>();
+                for(Invoice i : this.dao.all())
+                    if(i.getValue() < 100.0)
+                        filtered.add(i);
+                return filtered;
+            }
+        }
+    ```
+    * `InvoiceFilterTest`
+    ```java
+        public class InvoiceFilterTest{
+            @Test
+            void filterInvoices(){
+                Invoice mauricio = new Invoice("Mauricio", 20.0),
+                        arie = new Invoice("Arie", 300.0);
+                //create a mock of the InvoiceDao class
+                InvoiceDao dao = Mockito.mock(InvoiceDao.class);
+                //create a list that contains both invoices
+                List <Invoice> list = Arrays.asList(mauricio, arie);
+                //stub the all method to return the list instead of hitting a database
+                Mockito.when(dao.all()).thenReturn(list);
+                InvoiceFilter filter = new InvoiceFilter(dao);
+                List <Invoice> result = filter.filter();
+                Assertions.assertEquals(mauricio, result.get(0));
+                Assertions.assertEquals(1, result.size());
+                dao.close();
+            }
+        }
+    ```
+
+### technical terms
+
+1. `controllability`
+    * determine the work it takes to set up and run test cases and the extent to which individual functions and features of the system under test (SUT) can be made to respond to test cases.
+    * in other words, how easy it is for us to provide inputs and invoke the behavior that we want in the system under test
+2. `observability`
+    * determine the work it takes to set up and run test cases and the extent to which the response of the system under test (SUT) to test cases can be verified
+    * in other words, how easy it is for us to observe the system under test in order to verify whether the system behaved as expected
+3. `System Under Test` (`SUT`)
+    * the code, module, class, function, or full system that you're currently testing
