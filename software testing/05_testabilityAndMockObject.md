@@ -13,6 +13,14 @@
 | flaky             | ˈflеkɪ            | 薄片的；成層狀的；不穩定的   |
 | mock              | mɑk               | 假的；模擬的                |
 | invoice           | ˈɪnvɒɪs           | 開……的發票；將……列入清單     |
+| infrastructure    | ˈɪnfrǝˌstrʌktʃɚ   | 公共建設；基礎建設           |
+| legacy            | ˈlɛɡǝsɪ           | 遺產                       |
+| precise           | prɪˈsaɪs          | 精確的；嚴格的              |
+| verbose           | vɚˈbos            | 囉嗦的；冗長的              |
+| decorator         | ˈdɛkǝˌrеtɚ        | 室內設計師                  |
+| stub              | stʌb              | 殘端；菸蒂；存根             |
+| snapshot          | ˈsnæpˌʃɑt         | 快照；急射；簡要印象         |
+| tie               | taɪ               | 繫；束縛；打成平手           |
 
 
 ## Unknown phrase
@@ -78,3 +86,275 @@
 
     style box opacity:0;
 ```
+
+## mock object
+
+* fake implementations of real objects used to simulate the behavior of complex, real components
+* mainly used in `unit testing` to isolate the code being tested
+* advantages
+    1. without dependencies(e.g. databases, web services, etc)
+    2. simulate specific behaviors or error conditions
+    3. verify interactions with the expected parameters
+    4. test run faster since no real external resources are used
+
+### popular mock libraries
+
+1. `C++`
+    * `Google Mock` (`gMock`)
+        * features
+            1. powerful matchers
+            2. mock classes
+            3. integration with `gTest`
+        * open source (license)
+            * ✅ (`BSD`)
+        * IDE
+            1. `JetBrains CLion`
+            2. `Microsoft Visual Studio Code`
+            3. `QT creator`
+        * platform
+            1. `Linux`
+            2. `Microsoft Windows`
+            3. `Apple macOS`
+        * pros
+            1. native C++ support
+            2. strong matcher system
+        * cons
+            1. more setup required
+            2. C++ template complexity
+2. `Java`
+    * `Mockito`
+        * features
+            1. easy to use
+            2. annotations
+            3. `BDD-style` API
+            4. argument matching
+        * open source (license)
+            * ✅ (`MIT`)
+        * IDE
+            1. `JetBrains IntelliJ IDEA`
+            2. `Eclipse`
+            3. `Microsoft Visual Studio Code`
+        * platform
+            * cross-platform
+        * pros
+            1. simple syntax
+            2. well-documented
+            3. large community
+        * cons
+            1. limited to Java
+            2. cannot mock `static` and `final` methods
+    * `EasyMock`
+        * features
+            1. `record-replay` model
+            2. strict expectations
+        * open source (license)
+            * ✅ (`apache 2.0`)
+        * IDE
+            1. `JetBrains IntelliJ IDEA`
+            2. `Eclipse`
+        * platform
+            * cross-platform
+        * pros
+            1. strict control
+            2. useful for legacy code
+        * cons
+            1. more verbose
+            2. less flexible then `Mockito`
+    * `JMock`
+        * features
+            1. precise expectation rules
+        * open source (license)
+            * ✅ (`BSD`)
+        * IDE
+            1. `JetBrains IntelliJ IDEA`
+            2. `Eclipse`
+        * platform
+            * cross-platform
+        * pros
+            1. fine-grained control
+        * cons
+            1. verbose syntax
+            2. stepper learning curve
+3. `Python`
+    * `unittest.mock`
+        * features
+            1. build-in
+            2. patch decorator
+            3. call assertions
+        * open source (license)
+            * ✅ (`PSF`)
+        * IDE
+            1. `JetBrains PyCharm`
+            2. `Microsoft Visual Studio Code`
+            3. `Thonny`
+        * platform
+            * cross-platform
+        * pros
+            1. included in standard lib
+            2. no installed need
+        * cons
+            1. less powerful for complex behavior
+4. `JavaScript`
+    * `sinon.js`
+        * features
+            1. fakes, spies, stubs
+            2. work with `Mocha`, `Jasmine`, etc
+        * open source (license)
+            * ✅ (`BSD`)
+        * IDE
+            1. `Microsoft Visual Studio Code`
+            2. `JetBrains WebStorm`
+        * platform
+            1. web
+            2. `node.js`
+        * pros
+            1. great for frontend
+            2. work with all test libs
+        * cons
+            1. not suitable for `non-JS` code
+    * `Jest Mocks`
+        * features
+            1. build-in mocking
+            2. auto mocks
+            3. mock functions
+        * open source (license)
+            * ✅ (`MIT`)
+        * IDE
+            1. `Microsoft Visual Studio Code`
+            2. `JetBrains WebStorm`
+        * platform
+            1. web
+            2. `node.js`
+        * pros
+            1. easy setup
+            2. snapshot testing
+        * cons
+            1. tied to `Jest`
+
+### example for `Mockito`
+
+* I've four class: `Invoice` (entity for invoice), `InvoiceDao` (access the database), `InvoiceFilter` (filter the data) and `InvoiceFilterTest`  (test class)
+* access database
+    * `Invoice`
+        ```java
+            public class Invoice{
+                private String customer;
+                private double value;
+                //constructor
+                public Invoice(String customer, double value){
+                    this.customer = customer;
+                    this.value = value;
+                }
+
+                //getters
+                public String getCustomer(){
+                    return customer;
+                }
+
+                public double getValue(){
+                    return value;
+                }
+
+                //override methods
+                @Override
+                public boolean equals(Object object){
+                    if(this == object)
+                        return true;
+                    if(object == null || this.getClass() != object.getClass())
+                        return false;
+                    Invoice invoice = (Invoice)object;
+                    if(Double.compare(invoice.value, this.value) != 0)
+                        return false;
+                    return this.customer != null ? this.customer.equals(invoice.customer) : invoice.customer == null;
+                }
+
+                @Override
+                public int hashCode(){
+                    int result = customer != null ? customer.hashCode() : 0;
+                    long temp  = Double.doubleToLongBits(value);
+                    //>>> for unsigned right shift
+                    result = 31 * result + (int)(temp ^ (temp >>> 32));
+                    return result;
+                }
+            }    
+        ```
+    * `InvoiceDao`
+        ```java
+            public class InvoiceDao{
+                private static Connection c;
+                public InvoiceDao(){
+                    try{
+                        if(c != null)
+                            return;
+                        c = DriverManager.getConnection("jdbc:hsqldb:file:mymemdb.db", "SA", "");
+                        c.prepareStatement("CREATE TABLE IF NOT EXISTS invoice (name VARCHAR(100), value DOUBLE)").execute();
+                    }catch(SQLException e){
+                        throw new RuntimeException(e);
+                    }
+                }
+                public List<Invoice> all(){
+                    List  <Invoice> allInvoices = new ArrayList<>();
+                    try{
+                        PreparedStatement ps = c.prepareStatement("SELECT * FROM invoice");
+                        ResultSet rs = ps.executeQuery();
+                        while(rs.next()){
+                            String name = rs.getString("name");
+                            double value = rs.getDouble("value");
+                            allInvoices.add(new Invoice(name, value));
+                        }
+                    }catch(SQLException e){
+                        throw new RuntimeException(e);
+                    }finally{
+                        return allInvoices;
+                    }
+                }
+                public void save(Invoice inv){
+                    try{
+                        PreparedStatement ps = c.prepareStatement("INSERT INTO invoice (name, value) VALUES (?,?)");
+                        ps.setString(1, inv.getCustomer());
+                        ps.setDouble(2, inv.getValue());
+                        ps.execute();
+                        c.commit();
+                    }catch(SQLException e){
+                        throw new RuntimeException(e);
+                    }
+                }
+                public void close(){
+                    try{
+                        c.close();
+                    }catch(SQLException e){
+                        throw new RuntimeException(e);
+                    }
+                }
+            }    
+        ```
+    * `InvoiceFilter`
+        ```java
+            public class InvoiceFilter{
+                public List<Invoice> filter(){
+                    List  <Invoice> filtered = new ArrayList<>();
+                    for(Invoice inv : new InvoiceDao().all())
+                        if(i.getValue() < 100.0)
+                            filtered.add(i);
+                    return filtered;
+                }
+            }
+        ```
+* `InvoiceFilterTest`
+    ```java
+        public class InvoiceFilterTest{
+            @Test
+            void filterInvoices(){
+                InvoiceDao dao = new InvoiceDao();
+                Invoice mauricio = new Invoice("Mauricio", 20.0),
+                        arie = new Invoice("Arie", 300.0);
+                dao.save(mauricio);
+                dao.save(arie);
+                InvoiceFilter filter = new InvoiceFilter(dao);
+                List <Invoice> result = filter.filter();
+                Assertions.assertEquals(mauricio, result.get(0));
+                Assertions.assertEquals(1, result.size());
+                dao.close();
+            }
+        }
+    ```

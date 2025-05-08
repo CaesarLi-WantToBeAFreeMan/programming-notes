@@ -4,22 +4,23 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//access the database
 public class InvoiceDao{
     private static Connection c;
     public InvoiceDao(){
         try{
-            if(c  !=  null)
+            if(c != null)
                 return;
             c = DriverManager.getConnection("jdbc:hsqldb:file:mymemdb.db", "SA", "");
-            c.prepareStatement("create table invoice (name varchar(100), value double)").execute();
-        }catch (SQLException e){
+            c.prepareStatement("CREATE TABLE IF NOT  EXITS invoice (name VARCHAR(100), value DOUBLE)").execute();
+        }catch(SQLException e){
             throw new RuntimeException(e);
         }
     }
     public List<Invoice> all(){
         List  <Invoice> allInvoices = new ArrayList<>();
         try{
-            PreparedStatement ps = c.prepareStatement("select * from invoice");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM invoice");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String name = rs.getString("name");
@@ -34,7 +35,7 @@ public class InvoiceDao{
     }
     public void save(Invoice inv){
         try{
-            PreparedStatement ps = c.prepareStatement("insert into invoice (name, value) values (?,?)");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO invoice (name, value) VALUES (?,?)");
             ps.setString(1, inv.getCustomer());
             ps.setDouble(2, inv.getValue());
             ps.execute();
@@ -46,7 +47,7 @@ public class InvoiceDao{
     public void close(){
         try{
             c.close();
-        }catch (SQLException e){
+        }catch(SQLException e){
             throw new RuntimeException(e);
         }
     }
