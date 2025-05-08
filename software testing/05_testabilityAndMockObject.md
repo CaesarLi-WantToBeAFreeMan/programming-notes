@@ -21,7 +21,8 @@
 | stub              | stʌb              | 殘端；菸蒂；存根             |
 | snapshot          | ˈsnæpˌʃɑt         | 快照；急射；簡要印象         |
 | tie               | taɪ               | 繫；束縛；打成平手           |
-
+| tolerance         | ˈtɑlǝrǝns         | 寬容；忍耐；容許量           |
+| hexagonal         | hɛkˈsæɡǝnḷ        | 六角形的                    |
 
 ## Unknown phrase
 
@@ -86,6 +87,10 @@
 
     style box opacity:0;
 ```
+
+### note
+
+* **badly designed** class models are the **biggest enemy** of testability
 
 ## mock object
 
@@ -407,3 +412,53 @@
     * in other words, how easy it is for us to observe the system under test in order to verify whether the system behaved as expected
 3. `System Under Test` (`SUT`)
     * the code, module, class, function, or full system that you're currently testing
+
+## test a floating number
+
+* as we all know, some decimal numbers cannot be precisely represented in binary form
+* what we can do instead is compute them as accurately as possible by including more decimal places 
+* to handle this, we use a concept called `delta`, denoted by the symbol $\Delta$, to measure the difference between the actual value and the computed value
+* typically, we set `delta` to $10^{-9}$ (or `1e-9`)
+* we can use `Assertion.assertEquals(expectedNumber, computedNumber, delta)` to test whether the solution is correct within the allowed margin of error
+
+## `ports & adapters architecture`
+
+1. `domain`
+    * the core logic of the application
+    * independent of external concerns like databases, user interfaces, etc
+2. `port`
+    * an interface that define how the domain interacts the outside world
+    * has two different types
+        1. `input port` aka `driving port`
+        2. `output pot` aka `driven port`
+3. `adapter`
+    * implementation of the port
+    * translate data and operations between the domain and a specific external systems
+    * has two different types
+        1. `DB adapter`
+            * content the domain to a database
+        2. `webservice adapter`
+            * connect the domain to a web service
+```mermaid
+    graph LR;
+    database((database<br>DB)) <--> adapterDB([DB adapter]);
+    adapterDB <--> portDB([DB port]);
+    portDB <--> domain{{domain}};
+    domain <--> portWS([WS port]);
+    portWS <--> adapterWS([WS adapter]);
+    adapterWS <--> webservice((web service<br>WS));
+
+    subgraph architecture;
+        domain;
+        portDB;
+        portWS;
+    end;
+```
+* `ports & adapters architecture` improves the testability, because we can easily mock the ports
+
+## dependency injection
+
+
+| feature       | traditional (`tightly coupled`)           | dependency injection (`loosely coupled)   |
+| definition    | class directly creates its dependencies   | dependencies are passed from outside      |
+| coupling      | high -- hard-wired classes                | low -- classes are flexible & swappable   |
