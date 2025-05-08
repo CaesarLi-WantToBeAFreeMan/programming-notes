@@ -23,6 +23,7 @@
 | tie               | taɪ               | 繫；束縛；打成平手           |
 | tolerance         | ˈtɑlǝrǝns         | 寬容；忍耐；容許量           |
 | hexagonal         | hɛkˈsæɡǝnḷ        | 六角形的                    |
+| immutable         | ɪˈmjutǝbḷ         | 永遠不變的                  |
 
 ## Unknown phrase
 
@@ -458,7 +459,136 @@
 
 ## dependency injection
 
+### definition
 
-| feature       | traditional (`tightly coupled`)           | dependency injection (`loosely coupled)   |
-| definition    | class directly creates its dependencies   | dependencies are passed from outside      |
-| coupling      | high -- hard-wired classes                | low -- classes are flexible & swappable   |
+* a design pattern that promotes loose coupling by injecting dependencies from the outside rather than letting a class create them internally
+* often part of `Inversion of Control` (`IoC`), where control of object creation and binding is shifted from the class to a container, like `Spring` framework
+
+### common dependency injection types
+
+1. `constructor injection`
+    * dependencies are passed via the constructor
+    * best for **required** dependencies and make the class **immutable**
+2. `setter injection`
+    * dependencies are passed via public setter methods
+    * best for **optional** dependencies or when **mutability is acceptable**
+3. `interface injection`
+    * dependency is injected through an interface method that the client class implements
+    * **used rarely**
+    * some dependency injection does not support this
+
+### differences
+| feature           | traditional (`tightly coupled`)                       | dependency injection (`loosely coupled`)                                              |
+| :---------------: | :---------------------------------------------------: | :-----------------------------------------------------------------------------------: |
+| definition        | class directly creates its dependencies               | dependencies are passed from outside                                                  |
+| coupling          | high -- hard-wired classes                            | low -- classes are flexible & swappable                                               |
+| testability       | hard to test (need real dependencies)                 | easy to test (can use mocks or stubs)                                                 |
+| flexibility       | hard to extend or replace dependencies                | easy to change dependencies                                                           |
+| maintenance       | any change in a dependency affects dependent class    | change in dependencies rarely affect other classes                                    |
+| example of usage  | quick prototypes, small apps                          | scalable, maintainable apps (e.g. enterprise apps)                                    |
+| framework support | not required                                          | often used with frameworks like `Spring` (`Java`), `Dagger` (`Android`), Guicw, etc   |
+| code smell        | violation of `SRP` and `OCP`                          | follows `SOLID` principles                                                            |
+
+### example
+
+* traditional
+    * `Student.java`
+    ```java
+        class Student{
+            private String firstName, lastName;
+            private Course course = new Course();
+            public Student(String firstName, String lastName, String courseName, double courseCredit, String courseTeacher, String classroomLocation){
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.course.setCourse(courseName, courseCredit, courseTeacher, classroomLocation);
+            }
+
+            @Override
+            public String toString(){
+                return this.firstName + " " + this.lastName + "'s chosen class info:\n"
+                    + "course name:\t" + this.course.getCourseName() + "\n"
+                    + "course credit:\t" + this.course.getCourseCredit() + "\n"
+                    + "course teacher:\t" + this.course.getCourseTeacher() + "\n"
+                    + "classroom location:\t" + this.course.getClassroomLocation();
+            }
+        }
+    ```
+    * `Course.java`
+    ```java
+        class Course{
+            private String courseName, courseTeacher, classroomLocation;
+            private double courseCredit;
+
+            public Course() {
+                this.courseName = "";
+                this.courseCredit = 0.0;
+                this.courseTeacher = "";
+                this.classroomLocation = "";
+            }
+
+            public void setCourse(String courseName, double courseCredit, String courseTeacher, String classroomLocation) {
+                this.courseName = courseName;
+                this.courseCredit = courseCredit;
+                this.courseTeacher = courseTeacher;
+                this.classroomLocation = classroomLocation;
+            }
+
+            public String getCourseName(){
+                return this.courseName;
+            }
+
+            public double getCourseCredit(){
+                return this.courseCredit;
+            }
+            public String getCourseTeacher(){
+                return this.courseTeacher;
+            }
+            public String getClassroomLocation(){
+                return this.classroomLocation;
+            }
+        }
+    ```
+    * `Main.java`
+    ```java
+        public class Main{
+            public static void main(String [] args){
+                Student student = new Student("Caesar", "Lee", "Software Testing", 3.0, "Mr. Lee", "Room 8964");
+                System.out.println(student);
+            }
+        }
+    ```
+* dependency injection
+    * `Student.java`
+        ```java
+            class Student{
+                public Student(String firstName, String lastName, Course course){
+                    this.firstName = firstName;
+                    this.lastName = lastName;
+                    this.course = course;
+                }
+                //does not change the rest
+            }
+        ```
+    * `Main.java`
+        ```java
+            public class Main{
+                public static void main(String [] args){
+                    Course course = new Course("Software Testing", 3.0, "Mr. Lee", "Room 8964");
+                    Student student = new Student("Caesar", "Lee", course);
+                    System.out.println(student);
+                }
+            }
+
+        ```
+    * `Course.java`
+        ```java
+            class Course{
+                public Course(String courseName, double courseCredit, String courseTeacher, String classroomLocation){
+                    this.courseName = courseName;
+                    this.courseCredit = courseCredit;
+                    this.courseTeacher = courseTeacher;
+                    this.classroomLocation = classroomLocation;
+                }
+                //does not change the rest
+            }
+        ```
