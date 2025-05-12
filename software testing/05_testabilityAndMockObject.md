@@ -24,6 +24,8 @@
 | tolerance         | ˈtɑlǝrǝns         | 寬容；忍耐；容許量           |
 | hexagonal         | hɛkˈsæɡǝnḷ        | 六角形的                    |
 | immutable         | ɪˈmjutǝbḷ         | 永遠不變的                  |
+| stripe            | straɪp            | 條紋；狹長地帶；類型，特點   |
+| cohesive          | koˈhisɪv          | 凝聚性的；有結合力的        |
 
 ## Unknown phrase
 
@@ -463,6 +465,9 @@
 
 * a design pattern that promotes loose coupling by injecting dependencies from the outside rather than letting a class create them internally
 * often part of `Inversion of Control` (`IoC`), where control of object creation and binding is shifted from the class to a container, like `Spring` framework
+* for example: to use a hammer
+    1. `tradition`: search for a hammer, pick it up, and use it
+    2. `dependency injection`: someone gives you a hammer, and you use it
 
 ### common dependency injection types
 
@@ -592,3 +597,80 @@
                 //does not change the rest
             }
         ```
+
+## `dependency injection` vs `dependency inversion`
+
+### `dependency injection`
+
+* focus on how objects get their dependencies
+* a design pattern used to supply objects with their needed resources (dependencies) from the outside, instead of creating them internally
+
+### `dependency inversion`
+
+* focus on how code is architected — specifically, how high-level and low-level components should interact
+* a design principle (the "D" in SOLID) that guides dependency management at the architecture level
+* key rules
+    1. high-level modules should not depend on low-level modules, and both should depend on abstractions
+    2. abstractions should not depend on details
+    3. details should depend on abstractions
+
+## `SOLID`
+
+### definition
+
+* five core design principles in `Object-Oriented Programming` (`OOP`) that help developers create **clean**, **maintainable**, and **scalable** code
+
+### `S` - `Single Responsibility Principle` (`SRP`)
+
+* `definition`: a class should have **only one** reason to change
+* `goal`: make classes easier to understand and modify
+* `example`: `ReportPrinter` class just define some methods to print a report
+
+### `O` - `Open/Closed Principle` (`OCP`)
+
+* `definition`: software entities (`class`es, `module`s, `function`s) should be **open** for **extension**, but **closed** for **modification**
+* `goal`: add new features by extending, not changing, existing code
+* `example`: use `interfaces` or `abstract classes` so you can add new behaviors without touching existing code
+
+### `L` - `Liskov Substitution Principle` (`LSP`)
+
+* `definition`: subtypes must be substitution for their base types without breaking the program
+* `goal`: make **polymorphism safe**
+* `example`: if `Bird` is a superclass, and `Penguin` is a subclass, `Penguin` shouldn't break logic that expects a `Bird` (e.g., you cannot assume all birds can fly, like turkeys, chicken, gooses, and penguin cannot fly)
+
+### `I` - `Interface Segregation Principle` (`ISP`)
+
+* `definition`: clients should not be forced to depend on interfaces they do not use
+* `in other words`: an interface should be small, and which just has a single feature
+* `goal`: favor **small**, **specific** interfaces over one **large**, **general** one
+* `example`: split `Shape` interface into `ShapeCalculator`, `ShapePrinter`, etc, instead of implementing everything
+
+### `D` - `Dependency Inversion Principle` (`DIP`)
+
+* `definition`: high-level modules should not depend on low-level modules, and both should depend on abstractions
+* `goal`: enable better flexibility  and testability
+* `example`: a `paymentService` should depend on a `PaymentGateway` interface, not a specific `StripeGateway` class
+
+## advices about testability
+
+1. `avoid low cohesion`
+    * classes often become hard to test when they do too many unrelated things
+2. `promote high cohesion`
+    * break large, mixed-responsibility classes into smaller, focused classes that are easier to test
+3. `simplify complex conditions`
+    * break down complicated logic so you can test each part independently
+4. `don’t test private methods directly`
+    * if you feel the need to, consider refactoring (rewrite) the private method into its own class with a public interface
+5. `reduce tight coupling`
+    * group related dependencies or create larger abstractions to simplify the class interface and allow easier mocking/stubbing
+6. `avoid static methods for core logic`
+    * static methods are hard to mock and often make testing harder
+7. `wrap static calls in interfaces or layers`
+    * use `dependency injection` or an `adapter pattern` to isolate static dependencies
+8. `be cautious with infrastructure logic` (e.g., `DB`, `file I/O`)
+    * infrastructure makes testing slow and brittle
+    * Abstract it out into interfaces and mock them in unit tests
+9. `encapsulate your logic`
+    * use access modifiers (e.g., `private`, `protected`) wisely to hide internal details and maintain clear boundaries
+10. `use dependency injection`
+    * to control and replace dependencies easily in test environments
