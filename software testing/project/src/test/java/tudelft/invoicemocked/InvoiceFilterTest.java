@@ -7,16 +7,16 @@ import org.mockito.Mockito;
 import java.util.Arrays;
 import java.util.List;
 
-public class InvoiceFilterTest {
+public class InvoiceFilterTest{
     @Test
-    void filterInvoices() {
+    void filterInvoices(){
 
         Invoice mauricio = new Invoice("Mauricio", 20.0);
         Invoice arie = new Invoice("Arie", 300.0);
 
         InvoiceDao dao = Mockito.mock(InvoiceDao.class);
 
-        List<Invoice> results = Arrays.asList(mauricio, arie);
+        List <Invoice> results = Arrays.asList(mauricio, arie);
         Mockito.when(dao.all()).thenReturn(results);
 
         InvoiceFilter filter = new InvoiceFilter(dao);
