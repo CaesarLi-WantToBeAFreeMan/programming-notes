@@ -1,0 +1,99 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'jacoco'
+    id 'checkstyle'
+    id 'pmd'
+    id 'com.github.spotbugs' version '1.7.1'
+}
+
+sourceSets {
+    defaultTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/default-test/java')
+        }
+        resources.srcDir file('src/default-test/resources')
+    }
+}
+
+configurations {
+    defaultTestCompile.extendsFrom testCompile
+    defaultTestImplementation.extendsFrom testImplementation
+    defaultTestRuntime.extendsFrom testRuntime
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.google.guava:guava:$guavaVersion"
+
+    compileOnly "com.github.spotbugs:spotbugs-annotations:$spotbugsAnnotationsVersion"
+
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "org.assertj:assertj-core:$assertjVersion"
+}
+
+task defaultTest(type: Test) {
+    testClassesDirs = sourceSets.defaultTest.output.classesDirs
+    classpath = sourceSets.defaultTest.runtimeClasspath
+}
+test.dependsOn defaultTest
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+defaultTest {
+    useJUnitPlatform()
+}
+
+jacoco {
+    toolVersion = jacocoVersion
+}
+
+jacocoTestReport {
+    executionData tasks.withType(Test)
+    reports {
+        csv.enabled true
+    }
+}
+
+checkstyle {
+    configFile file("checkstyle.xml")
+    ignoreFailures = false
+}
+
+pmd {
+    ruleSetFiles "pmd-rules.xml"
+    ruleSets = []
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+task staticAnalysis(type: GradleBuild) {
+    tasks = [
+        'clean',
+        'checkstyleMain',
+        'checkstyleTest',
+        'checkstyleDefaultTest',
+        'pmdMain',
+        'pmdTest',
+        'pmdDefaultTest',
+        'spotbugsMain',
+        'spotbugsTest',
+        'spotbugsDefaultTest',
+    ]
+}
+
+mainClassName = 'nl.tudelft.jpacman.Launcher'
