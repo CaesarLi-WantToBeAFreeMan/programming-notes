@@ -1,0 +1,59 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{xeCJK} % For Chinese characters
+\setCJKmainfont{SimSun} % or another Chinese font installed on your system
+
+\title{空间向量与解析几何测试题}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{一、填空}
+
+1. 点 $(-2, 3, -4)$ 关于 $zOx$ 面的对称点坐标是 \underline{\hspace{2cm}}，对称点位于第 \underline{\hspace{2cm}} 卦限。点 $(-2, 3, -4)$ 关于 $y$ 轴的对称点坐标是 \underline{\hspace{2cm}}，对称点位于第 \underline{\hspace{2cm}} 卦限。\\
+
+2. 点 $(-1, 2, 4)$ 到 $yOZ$ 面的距离是 \underline{\hspace{2cm}}。点 $(-1, 2, 4)$ 到 $y$ 轴的距离是 \underline{\hspace{2cm}}。\\
+
+3. 设 $\vec{a} = (2, 1, -1)$，$\vec{b} = (1, 3, 2)$，则 $2\vec{a} - 3\vec{b} = \underline{\hspace{2cm}}$，$\vec{e}_{2\vec{a} - 3\vec{b}} = \underline{\hspace{2cm}}$，$\vec{a} \cdot \vec{b} = \underline{\hspace{2cm}}$，$\vec{a} \times \vec{b} = \underline{\hspace{2cm}}$。设 $|\vec{a}| = 2$，$|\vec{b}| = 3$，$<\vec{a}, \vec{b}> = \frac{\pi}{3}$，则 $\vec{a} \cdot \vec{b} = \underline{\hspace{2cm}}$。\\
+
+4. 已知向量 $\vec{a} = \left(2, 1, -\frac{1}{2}\right)$ 与向量 $\vec{b} = (4, 2, m)$ 平行，则 $m = \underline{\hspace{2cm}}$。已知向量 $\vec{a} = (2, 1, -t)$ 与向量 $\vec{b} = (2, -2, 2)$ 垂直，则 $t = \underline{\hspace{2cm}}$。\\
+
+5. 已知向量 $\vec{a} = (1, -2, 2)$，求单位向量 $\vec{e}_{\vec{a}} = \underline{\hspace{4cm}}$。\\
+
+6. 过点 $(1, 2, 3)$ 且法向量为 $\vec{n} = (2, -5, 3)$ 的平面方程为 \underline{\hspace{4cm}}。过点 $(-2, 3, -1)$ 且与 $y$ 轴垂直的平面方程为 \underline{\hspace{4cm}}。\\
+
+7. 平面 $2x - 2y + z - 4 = 0$ 的与三个坐标平面围成的空间立体的体积为 \underline{\hspace{2cm}}。\\
+
+8. 直线 $\frac{1 - x}{3} = \frac{y + 2}{1} = \frac{z - 3}{-2}$ 的一个方向向量为 \underline{\hspace{2cm}}。\\
+
+9. 过点 $(1, -2, 3)$ 且法向量为 $\vec{n} = (2, -5, 3)$ 的平面方程为 \underline{\hspace{4cm}}。\\
+
+10. 若平面 $2x - 2y + z - 5 = 0$ 与平面 $\lambda x - y + 3z - 2 = 0$ 垂直，则 $\lambda = \underline{\hspace{2cm}}$。\\
+
+11. 若直线 $\frac{x - 1}{m} = \frac{y + 2}{1} = 3 - z$ 与平面 $x - ny + 3z - 2 = 0$ 垂直，则 $m = \underline{\hspace{2cm}}$，$n = \underline{\hspace{2cm}}$。\\
+
+12. 点 $(2, -1, 3)$ 到平面 $2x - 2y + z - 5 = 0$ 的距离为 \underline{\hspace{2cm}}。\\
+
+13. 点 $(2, -1, 3)$ 到平面 $2x - 2y + z - 5 = 0$ 的距离为 \underline{\hspace{2cm}}。\\
+
+14. 过点 $(-2, 3, -1)$ 且与平面 $3x - 2y + z - 5 = 0$ 垂直的直线方程为 \underline{\hspace{4cm}}。\\
+
+15. 过点 $(-1, 4, 2)$ 且与平面 $3x - 2y + z - 5 = 0$ 垂直的直线方为 \underline{\hspace{4cm}}。\\
+
+16. 直线 $\frac{x - 1}{2} = \frac{y + 2}{1} = \frac{z - 3}{1}$ 与直线 $\frac{x + 1}{1} = \frac{y - 4}{2} = 3 - z$ 的夹角为 \underline{\hspace{2cm}}。直线 $\frac{x - 1}{2} = \frac{y + 2}{1} = \frac{z - 3}{1}$ 与平面 $x + 2y - z - 5 = 0$ 的夹角为 \underline{\hspace{2cm}}。\\
+
+17. 把直线 $\frac{x - 3}{2} = \frac{y + 2}{-1} = \frac{z - 1}{5}$ 化为参数方程 \underline{\hspace{4cm}}。\\
+
+\section*{二、计算}
+
+1. 求过点 $(-1, 3, -2)$ 和 $y$ 轴的平面方程。\\[2cm]
+
+2. 设 $\vec{a} = (1, 2, 3)$，$\vec{b} = (0, 1, -2)$，求 $(\vec{a} + \vec{b}) \times (\vec{a} - \vec{b})$。\\[2cm]
+
+3. 已知点 $A(-2, 3, 4)$，点 $B(1, 2, 3)$，点 $C(-3, 1, 2)$，求 $\triangle ABC$ 的面积。\\[2cm]
+
+4. 求过点 $(2, -2, -1)$，且与直线 $2x + 3y + z - 6 = 0$ 和 $3x - 2y - z + 1 = 0$ 垂直的平面方程。\\[2cm]
+
+\end{document}
