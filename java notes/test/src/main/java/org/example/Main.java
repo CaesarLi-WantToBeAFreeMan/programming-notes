@@ -1,56 +1,39 @@
 package org.example;
 
-import java.time.LocalTime;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Main{
     public static void main(String [] args){
-        //create instances
-        LocalTime now = LocalTime.now();
+        //creation
+        ZonedDateTime now = ZonedDateTime.now();
         System.out.println("now:\t" + now);
-        LocalTime time0 = LocalTime.of(12, 45, 30, 750_123_456);
+        ZonedDateTime zone0 = ZonedDateTime.of(2024, 12, 25, 10, 30, 0, 0, ZoneId.of("America/Los_Angeles"));
         System.out.printf(
-            "hour of time0:\t%d\nminute of time0:\t%d\nsecond of time0:\t%d\nnanosecond of time:\t%d\n",
-            time0.getHour(),
-            time0.getMinute(),
-            time0.getSecond(),
-            time0.getNano()
+            "zone of zone0:\t%s\nyear of zone0:\t%d\nmonth of zone0:\t%s\nday of month of zone0:\t%d\nhour of zone0:\t%d\nminute of zone0:\t%d\nsecond of zone0:\t%d\n",
+            zone0.getZone(),
+            zone0.getYear(),
+            zone0.getMonth(),
+            zone0.getDayOfMonth(),
+            zone0.getHour(),
+            zone0.getMinute(),
+            zone0.getSecond()
         );
-        LocalTime parsed = LocalTime.parse("06:04");
+        ZonedDateTime parsed = ZonedDateTime.parse("2025-01-01T12:00:00-05:00[Asia/Taipei]");
         System.out.println("parsed:\t" + parsed);
+
+        //modifications
+        System.out.println("adding 84 hours:\t" + now.plus(5, ChronoUnit.HOURS).plusDays(3));
 
         //comparisons
         System.out.printf(
-            "is time0 equals midnight:\t%b\nis time0 before now:\t%b\nis time0 after now:\t%b\n",
-            time0.equals(now),
-            time0.isBefore(now),
-            time0.isAfter(now)
+            "is zone0 after now:\t%b\n",
+            zone0.isEqual(now)
         );
 
-        //modifications
-        time0.plusHours(1);
-        time0.plus(15, ChronoUnit.MINUTES);
-        System.out.println("after adding 75 minutes:\t" + time0);
-        time0.withNano(0);
-        time0.with(ChronoField.SECOND_OF_MINUTE, 0);
-        System.out.println("after setting nanosecond and second to 0:\t" + time0);
-
-        //conversion
-        System.out.printf(
-            "nanosecond of day:\t%d\nformat string:\t%s\n",
-            time0.toNanoOfDay(),
-            time0.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
-        );
-
-        //extra methods
-
-        System.out.printf(
-                "time0 is supported for ChronoFielf.SECOND_OF_MINUTE:\t%b\nrange of minute of hour:\t%s\ntruncate to minutes:\t%s\n",
-                time0.isSupported(ChronoField.SECOND_OF_MINUTE),
-                time0.range(ChronoField.MINUTE_OF_HOUR),
-                time0.truncatedTo(ChronoUnit.MINUTES)
-        );
+        //formatting
+        System.out.println("formatted zone0:\t" + zone0.format(DateTimeFormatter.ofPattern("MM dd, yy HH:mm:ss (Z)")));
     }
 }
