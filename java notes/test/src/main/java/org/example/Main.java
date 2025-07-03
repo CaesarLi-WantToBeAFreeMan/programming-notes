@@ -1,32 +1,37 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Scanner;
 
-import static java.util.Collections.swap;
+public class Main{
+    public static void main(String [] args){
+        System.out.println("please enter an integer that represents a day of week:\t");
+        Scanner scanner = new Scanner(System.in);
+        int input = scanner.nextInt();
 
-public class Main {
-    public static void main(String[] args) {
-        List <Integer> nums = new ArrayList<>(Arrays.asList(1, -9, 4, 5, 0, -8));
-        System.out.println("original nums:\n");
-        printList(nums);
-        bubbleSort(nums);
+        String dayOfWeek = switch(input){
+            case 1 -> "Monday";
+            case 2 -> "Tuesday";
+            case 3 -> {
+                System.out.println("middle of the week");
+                yield "Wednesday";
+            }
+            case 4 -> "Thursday";
+            case 5 -> "Friday";
+            case 6 -> {
+                System.out.println("the first day of weekend");
+                yield "Saturday";
+            }
+            case 7 -> {
+                System.out.println("the last day of weekend");
+                yield "Sunday";
+            }
+            case -1, 8 -> "please try again";
+            default -> {
+                System.out.println("invalid input");
+                yield "please enter an integer in the range [1, 7]";
+            }
+        };
 
-        System.out.println("sorted nums:\n");
-        printList(nums);
-    }
-
-    private static void bubbleSort(List <Integer> nums){
-        for(int i = 0; i < nums.size(); i++)
-            for(int j = i + 1; j < nums.size(); j++)
-                if(nums.get(i) > nums.get(j))
-                    swap(nums, i, j);
-    }
-
-    private static void printList(List <Integer> nums){
-        for(var num : nums)
-            System.out.print(num + "\t");
-        System.out.println();
+        System.out.println(dayOfWeek);
     }
 }
