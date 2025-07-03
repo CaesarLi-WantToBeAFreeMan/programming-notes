@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e2cee6d-29be-40d5-bd8c-38c9dbaece37" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../new java notes/language syntax/009.date&amp;time.md" beforeDir="false" afterPath="$PROJECT_DIR$/../new java notes/language syntax/009.date&amp;time.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../new java notes/language syntax/010.methods.md" beforeDir="false" afterPath="$PROJECT_DIR$/../new java notes/language syntax/010.methods.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +23,7 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2yp2Czu5lrwbJM8FxAP5reRGlSI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
