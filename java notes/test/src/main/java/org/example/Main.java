@@ -2,18 +2,14 @@ package org.example;
 
 public class Main{
     public static void main(String [] args){
-        Shape [] triangles = {
-            new EquilateralTriangle(3),
-            new IsoscelesTriangle(5, 6),
-            new ScaleneTriangle(4, 5, 6),
-        };
-
-        for(var triangle : triangles){
-            System.out.println("Type:\t\t" + triangle.getName());
-            System.out.println("Is Triangle?\t" + triangle.isTriangle());
-            System.out.printf("Area:\t\t%.3f\n", triangle.getArea());
-            System.out.printf("Perimeter:\3%.2f\n", triangle.getCircumference());
-            System.out.println("--------");
-        }
+        CartesianCoordinate cartesianCoordinate = new CartesianCoordinate(1, 2);
+        System.out.println("coordinate:\t" + cartesianCoordinate);
+        System.out.println("its distance from origin point:\t" + cartesianCoordinate.getDistanceFromOriginPoint());
+        System.out.println("its position:\t" + cartesianCoordinate.getPosition());
+        //cartesianCoordinate.x = 0; you cannot change a final field
+        //cartesianCoordinate.y() = 0;
+        System.out.println("its x value:\t" + cartesianCoordinate.x());
+        System.out.println("its y value:\t" + cartesianCoordinate.y());
+        System.out.println("is the point in origin point:\t" + cartesianCoordinate.equals(new CartesianCoordinate(0, 0)));
     }
 }
