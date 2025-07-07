@@ -1,15 +1,13 @@
 package org.example;
 
+import java.util.function.Function;
+
 public class Main{
     public static void main(String [] args){
-        CartesianCoordinate cartesianCoordinate = new CartesianCoordinate(1, 2);
-        System.out.println("coordinate:\t" + cartesianCoordinate);
-        System.out.println("its distance from origin point:\t" + cartesianCoordinate.getDistanceFromOriginPoint());
-        System.out.println("its position:\t" + cartesianCoordinate.getPosition());
-        //cartesianCoordinate.x = 0; you cannot change a final field
-        //cartesianCoordinate.y() = 0;
-        System.out.println("its x value:\t" + cartesianCoordinate.x());
-        System.out.println("its y value:\t" + cartesianCoordinate.y());
-        System.out.println("is the point in origin point:\t" + cartesianCoordinate.equals(new CartesianCoordinate(0, 0)));
+        Function <String, Integer> stringToLength = words -> words.length();
+        Function <Integer, String> lengthToMessage = size -> "size:\t" + size;
+        Function <String, String> stringToMessage = stringToLength.andThen(lengthToMessage);
+        stringToMessage = stringToMessage.compose(words -> words.toUpperCase());
+        System.out.println(Function.identity().apply("Caesar") + "'s " + stringToMessage.apply("Caesar"));
     }
 }

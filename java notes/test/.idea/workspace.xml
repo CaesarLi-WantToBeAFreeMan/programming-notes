@@ -13,9 +13,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Record" />
+        <option value="Exception" />
         <option value="Class" />
         <option value="Interface" />
-        <option value="Record" />
       </list>
     </option>
   </component>
@@ -30,7 +31,6 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2yp2Czu5lrwbJM8FxAP5reRGlSI" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -80,6 +80,7 @@
       <workItem from="1751345534715" duration="2316000" />
       <workItem from="1751358646023" duration="1629000" />
       <workItem from="1751435046918" duration="17994000" />
+      <workItem from="1751848122609" duration="27397000" />
     </task>
     <servers />
   </component>
