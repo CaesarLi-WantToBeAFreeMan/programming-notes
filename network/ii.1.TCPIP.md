@@ -686,9 +686,438 @@ sequenceDiagram
 
 ##### `F`ile `T`ransfer `P`rotocol
 
+###### What It Is
+
+- the earliest and most widely used methods for transferring files over the internet
+- enable smooth files exchange between a client and server, even if both systems use different operating systems, file structures, or character sets
+- designed for **file handling** and make it **reliable** and **efficient** for moving files **regardless of their types**
+- provide a **consistent**, **dependable** way to upload, download or manage files
+- a foundational tool in world of data transferring
+
+###### Ports
+
+1. port `21`: where the command are issued
+2. port `22`: required for data connection where the actual transfer of file is made
+
+###### Modes
+
+1. `bloack mode`: separate data into blocks
+2. `stream mode`: manage information in a string of data without boundaries between them
+3. `compressed mode`: use `Lempei-Ziv` algorithm to compress data
+
+###### Types
+
+1. `anonymous FTP`: enabled on some sites whose files are available for **public access**. `username` is set to `anonymous` and `password` is set to `guest` by default.
+2. `password protected FTP`: similar to the above, but use `username` and `password` for security
+3. `FTP S`ecure aka `FTP S`ecure `S`ockets `L`ayer: a security version because enable `TLS` while connection was established
+4. `FTPES` (FTP over explicit SSL/TLS): upgrade `FTP` connection from port `21` to an encrypted connection
+5. `S`ecure `FTP`: not a part of `FTP`, but a subset of `SSH` as port `22`
+
+###### Channels
+
+1. `command channel`: used for conversation control
+2. `data channel`: used for file content
+
+###### Applications
+
+1. `transfer large files`: can transfer large files in **one shot**
+2. `remote file management`: can **upload**, **download**, **rename**, **delete** and **copy** remote files
+3. `automate file transfer`: can execute file transfers using **scripts** or **employments**
+4. `access public files`: everybody can access a `anonymous FTP` file without permissions
+
+###### Process
+
+```mermaid
+    ---
+    title: FTP Process
+    config:
+        theme: base
+        themeVariables:
+            primaryColor: "#282c34"
+            primaryTextColor: "#abb2bf"
+            primaryBorderColor: "#56b6c2"
+            lineColor: "#c678dd"
+            secondaryColor: "#21252b"
+            tertiaryColor: "#5c6370"
+    ---
+    flowchart TB
+        ld[[Local Dick]]
+
+        subgraph client[client]
+            direction TB
+            UI(User Interface<br>Command Line Interface) -- use username and password -->
+            cpc(Control Process)
+            UI --  or in anonymous FTP --> dfpc
+            dfpc(Data Transfer Process) -- download files --> ld
+        end
+
+        tcpip{TCP/IP}
+        cpc <-- control connection --> tcpip
+        dfpc <-- data connection --> tcpip
+
+        subgraph server[server]
+            direction TB
+            cps(Control Process)
+            dfps(Data Transfer Process)
+        end
+
+        rd[[remote disk]]
+        dfps -- upload files --> rd
+
+        cps <-- control connection --> tcpip
+        dfps <-- data connection --> tcpip
+```
+
+1. `control connection`:
+    - initiated on port `21`
+    - send control information, e.g. identification, commands
+2. `data connection`:
+    - initiated on port `20`
+    - send actual file
+    - send the control information out-of-band as it uses a separate control connection
+    - some protocols send request and response headers and data in the same connection to send control information in-band like `HTTP` and `SMTP`
+
+- client initiates a control connection with the server after an FTP session is started between client and server
+- server receives the control connection and sends a data connection with client
+- both client and server remain the user session, thus `TCP` is a stateful protocol unlike `HTTP` (stateless protocol)
+
+###### Some Common Replies
+
+- `200`: `command okey`
+- `530`: `not logged in`
+- `331`: `user name okay, need a password`
+- `221`: `service closing control connection`
+- `551`: `requested action aborted, page type unknown`
+- `502`: `command not implemented`
+- `503`: `bad sequence of commands`
+- `504`: `command not implemented for that computer`
+
+###### Pros
+
+1. `file sharing`: two machines files can be shared on the network
+2. `speed`: fast
+3. `efficient`: since we don't have to finish every operation to obtain the entire file
+4. `secure`: need username and password to log in
+5. `bidirection`: can move files back and forth
+6. `multiple files`: can send multiple files at once
+
+###### Cons
+
+1. `size limit`: less than `2 GB`
+2. `single receiver`: only support single on receiver
+3. `encryption`: doesn't support encryption of files
+4. `attackable`: a hacker can steal your username and password to log in
+
+###### Comparison between `FTP` and `SFTP`
+
+|      field       |               `FTP`               |            `SFTP`             |
+| :--------------: | :-------------------------------: | :---------------------------: |
+| `secure channel` |          doesn't support          |            support            |
+|      `port`      |       usually on `port 21`        |     usually on `port 22`      |
+|   `encryption`   |          doesn't support          | encrypted data before sending |
+|     `secure`     | file actions without any security |         use `SSH key`         |
+
 ##### `H`yper`T`ext `T`ransfer `P`rotocol
 
+###### What Is It
+
+- allow communication between **web browsers** and **websites**
+- when visiting a web, the browser sends an HTTP request to the server, and the server sends back an HTTP response that carries data that need to display
+
+###### Process
+
+```mermaid
+    ---
+    title: HTTP Process
+    config:
+        theme: base
+        themeVariables:
+            primaryColor: "#282c34"
+            primaryTextColor: "#abb2bf"
+            primaryBorderColor: "#56b6c2"
+            lineColor: "#c678dd"
+            secondaryColor: "#21252b"
+            tertiaryColor: "#5c6370"
+    ---
+    sequenceDiagram
+        actor u as user
+        participant b as browser
+        participant d as DNS
+        participant s as server
+        u->>b: 1. Enters URL
+        b->>d: 2. d Query
+        d->>b: 3. Returns IP Address
+        b--)s: 4. Establishes TCP/HTTP Connection
+        b->>s: 5. Sends HTTP Request
+        s->>b: 6. Sends HTTP Response
+        b--)s: 7. Terminates Connection
+```
+
+1. `visit a web`: open a browser to type an URL (e.g. `google.com`) or IP (e.g. `74.125.68.139` for `google.com`), and ignore step 2 if you type an IP by the way
+2. `DNS conversion`: `D`omain `N`ame `S`ystem server to find out the IP address associated with the URL
+3. `send request`: once browser has the IP, it sends an HTTP request to the server
+4. `send back response`: the server processes the request and send back an HTTP response
+5. `render the web`: the browser receives the data and displays the data on screen
+
+###### Requests
+
+- how a browser asks a server for something
+- include
+    1. `version`: version of HTTP
+    2. `URL`: URL of the web
+    3. `method`: type of action being requested
+        1. `GET`:
+            - used to **retrieve data** from a server and should **not contain a content**
+            - usage: read data
+            - frequency: **high**
+        2. `HEAD`:
+            - similar to `GET` but should **not include request body**
+            - usage: read metadata
+            - frequency: **rare**
+        3. `POST`
+            - used to **send data** to a server
+            - usage: create data
+            - frequency: **high**
+        4. `PUT`
+            - used to **modify the whole data** on a server
+            - usage: change entire data
+            - frequency: **high**
+        5. `DELETE`
+            - used to **delete** the data on server
+            - usage: delete data
+            - frequency: **high**
+        6. `CONNECT`
+            - used to **establish a tunnel** to a server identified by the target resource
+            - usage: immediately establish a secure connections through HTTP proxy(ies) with `TLS`
+            - frequency: **rare**
+        7. `OPTIONS`
+            - used to describe the communication options for the target resource
+            - usage: check the functionality of a server by requesting instead of a specific resource
+            - frequency: **rare**
+        8. `TRACE`
+            - used to perform a message loop-back test along the path to the target resource
+            - usage: in debug, a good way for a client to see what changes or additions have been made by intermediaries
+            - frequency: **rare**
+        9. `PATCH`
+            - used to **modify the partial data** on a server
+            - usage: change partial data
+            - frequency: **high**
+
+        |  method   | payload body of request | payload body of response | safe | idempotent | cacheable |
+        | :-------: | :---------------------: | :----------------------: | :--: | :--------: | :-------: |
+        |   `GET`   |       `optional`        |        `required`        |  ✔   |     ✔      |     ✔     |
+        |  `HEAD`   |       `optional`        |            ❌            |  ✔   |     ✔      |     ✔     |
+        |  `POST`   |       `required`        |        `required`        |  ❌  |     ❌     |     ✔     |
+        |   `PUT`   |        `requied`        |        `required`        |  ❌  |     ✔      |    ❌     |
+        | `DELETE`  |       `optional`        |        `required`        |  ❌  |     ✔      |    ❌     |
+        | `CONNECT` |       `optional`        |        `required`        |  ❌  |     ❌     |    ❌     |
+        | `OPTIONS` |       `optional`        |        `required`        |  ✔   |     ✔      |    ❌     |
+        |  `TRACE`  |           ❌            |        `required`        |  ✔   |     ✔      |    ❌     |
+        |  `PATCH`  |       `required`        |        `required`        |  ❌  |     ❌     |    ❌     |
+        - `safe methods` mean they never change on a server
+        - `idempotent methods` mean their results are the same regardless of acted times
+
+    4. `request headers`: information about the request
+    5. `request body`: content that the browser sends
+
+###### Responses
+
+- server's answer to the request
+- include
+    - `status code`: a number that tells you if the request was successful or not
+    - `response headers`: information about the response
+    - `response body`: content that the server sends back
+
+###### Status Codes
+
+- `3-digit` numbers that a server uses to tell a browser what happened with the request you sent
+- some common used status code
+    1. `200 OK`: request succeeded
+    2. `201 Created`: request succeeded and a new resource was created
+    3. `204 No Content`: no content to send for the request but headers are useful
+    4. `301 Moved Permanently`: the URL of the requested resource has been changed permanently
+    5. `302 Found`: the URI of requested resource has been changed temporarily
+    6. `304 Not Modified`: used in caching purposes that tells the client that the response has not been modified
+    7. `400 Bad Request`: the server cannot or won't process the request duo to something that is perceived to be a client error
+    8. `401 Unauthorized`: the client must authenticate itself to get the requested response
+    9. `403 Forbidden`: the client doesn't have access rights to the content but the client's identity is known to the server
+    10. `404 Not Found`: the server cannot find the requested resource
+    11. `405 Methods Not Allowed`: the request method is known by the server but is not supported by the target resource
+    12. `429 Too Many Requests`: the client has sent too many requests in a given amount of time
+    13. `500 Internal Server Error`: the server encountered a situation it doesn't know to to handle
+    14. `502 Bad Gateway`: the server cannot send response duo to a gateway
+    15. `503 Service Unavailable`: the server isn't ready to handle the request
+    16. `504 Gateway Timeout`: the server is acting as a gateway and cannot get a response in time
+
+###### Versions
+
+1. `HTTP/0.9`:
+    - released in 1991
+    - only support `GET` method and can only retrieve `HTML` documents from a server
+    - this version is **not active** for now
+2. `HTTP/1.0`:
+    - released in May 1996
+    - provide two new methods `POST` and `HEAD`
+    - provide `version` of HTTP like `HTTP/1.0`
+    - allow clients and servers to exchange metadata using headers
+    - provide two response status `200 OK` and `404 Not Found`
+    - support images, audio and other types
+    - responses can include caching information to accelerate response for the same requests
+    - each request need a new `TCP` connection
+    - this version is **not active** for now
+3. `HTTP/1.1`:
+    - released in January 1997
+    - support multiple request share a single `TCP` connection to reduce latency (delay)
+    - allow servers to host multiple domains on the same IP address
+    - provide more detailed cache-control headers to help reduce redundant requests
+    - allow clients to send multiple requests without waiting for response
+    - support all methods, status codes and more types (e.g. `JSON`, `XML`)
+4. `HTTP/2`:
+    - released in May 2015
+    - replace the human-readable text format with a binary structure to reduce parsing errors and make communication more efficient
+    - allow multiple requests and responses to be sent at the same time in a single connection
+    - reduced overhead by compressing repeated header information
+    - allow servers to send resources proactively before the client requested them
+    - clients can signal which resources were more important
+5. `HTTP/3`:
+    - released in June 2022
+    - use `UDP` instead of `TCP` to avoid `TCP`'s head of line blocking and enable faster recovery from packet loss
+    - integrate `TLS` to cut down connection setup to a single round trip
+    - connections can survive network changes like switching from `Wi-Fi` to mobile data
+    - use `TLS 1.3` to ensure secure communication
+
+- comparison
+
+|        feature        |        `0.9`         |         `1.0`         |         `1.1`          |                   `2`                    |                     `3`                      |
+| :-------------------: | :------------------: | :-------------------: | :--------------------: | :--------------------------------------: | :------------------------------------------: |
+|    `release year`     |         1991         |         1996          |          1999          |                   2015                   |                     2022                     |
+| `connection handling` | 1 request/connection | 1 requesr/connection  | persistent connections | persistent connections with multiplexing |     multiplexing with independer streams     |
+|    `HOL blocking`     |          ❌          |          ❌           |        present         |                 reduced                  |                  eliminated                  |
+|   `request methods`   |        `GET`         | `GET`, `POST`, `HEAD` |          full          |                   full                   |                     full                     |
+|       `headers`       |          ❌          |         basic         |        caching         |                 `HPACK`                  |                   `QPACK`                    |
+|       `caching`       |          ❌          |        limited        |        advanced        |                 advanced                 |                   advanced                   |
+|     `encryption`      |          ❌          |       external        |   `TLS` is optional    |            `TLS` is optional             |         required use built-in `QUIC`         |
+|     `ideal usage`     |   basic HTML pages   |      simple web       |  dynamic RESTful webs  |  data-heavy webs, SPAs, streaming webs   | mobile apps, AR/VR, real time communications |
+|       `status`        |    ❌ deprecated     |     ❌ deprecated     |       ✔ standard       |                ✔ standard                |                  ✔ standard                  |
+
+###### Cookies
+
+- a little piece of data that a server transmits to a user's web browser
+- when making subsequent queries, a browser may keep the cookie and transmit it back to the same server
+- used to maintain a user's login state to retain stateful information (`HTTP` is a stateless protocol)
+
+###### Pros
+
+1. `low memory and CPU usage`: because of fewer simultaneous connections
+2. `less network congestion`: since switching from `TCP` to `UDP`
+3. `reduce latency`: since handshaking is done at the initial connection stage
+4. `report errors`: without closing the connection
+5. `pipe-lining`: allow `HTTP pipe-lining` of requests or responses
+
+###### Cons
+
+1. `high power`: require high power to establish communication and transfer data
+2. `less sequre`: because it doesn't use any encryption method
+3. `bad for mobile devices`: isn't optimized for mobile devices and it's too gabby
+4. `lack of genuine exchange`: doesn't offer a genuine exchange of data because it's less secure
+5. `cannot terminate midway`: the server needs to wait for data completion and cannot be available for other clients during this time
+
 ##### `D`omain `N`ame `S`ystem
+
+###### What Is It
+
+- a hierarchical and distributed naming system that translates domain names into IP addresses
+- we have to remember numerical IP addresses to visit webs without `DNS`
+
+###### Process
+
+```mermaid
+    ---
+    title: DNS Process
+    config:
+        theme: base
+        themeVariables:
+            primaryColor: "#282c34"
+            primaryTextColor: "#abb2bf"
+            primaryBorderColor: "#56b6c2"
+            lineColor: "#c678dd"
+            secondaryColor: "#21252b"
+            tertiaryColor: "#5c6370"
+    ---
+    sequenceDiagram
+        autonumber
+        actor u as user
+        participant lc as local cache
+        participant hf as hosts file
+        participant r as LSP's recursive resolver
+        participant rs as root server
+        participant tld as TLD server
+        participant ans as authoritative server
+
+        u->>lc: check browser/OS cache for google.com
+        alt Ip in cache
+            lc-->>u: return cached IP
+        else cache miss
+            lc->>hf: check system hosts file
+            alt entry in hosts file
+                hf-->>u: return IP from hosts file
+            else entry miss
+                rect rgba(198, 120, 211, 0.12)
+                    hf->>r: send query for Ip of google.com
+                    alt in resolver cache
+                        r-->>u: return cached IP
+                    else resolver cache miss
+                        rect rgba(97, 175, 239, 0.12)
+                            r->>rs: ask "who handles .com"
+                            rs-->>r: return IP of TLD server
+                            r->>tld: ask "who handles google.com"
+                            tld-->>r: return IP of authoritative server
+                            r->>ans: ask "what is IP of google.com"
+                            ans-->>r: return actual IP of google.com
+                        end
+                        r-->>r: save to cache
+                        r-->>u: return actual IP
+                    end
+            end
+        end
+    end
+```
+
+###### Structures
+
+- use a hierarchical structure to ensure scalability and reliability across the global internet infrastructure
+
+1. `root servers`: the highest-level servers
+2. `T`op `L`evel `D`omain `servers`: manage domain extensions like `.com`, `.org`, `.net`, `.edu`, `.gov`, `.us`, `.tw`, etc
+3. `authoritative servers`: store the actual `DNS` records for domain names
+
+###### Types of Domains
+
+1. `generic domains`: widely used recognized **top-level** domains like `.com`, `.org`, `.net`, etc
+2. `country domains`: represent specific countries like `.us` for United States, `.cn` for CCP's China, `.tw` for Taiwan (Republic of China), etc
+3. `inverse domains`: used for reverse `DNS` lookups that means map `IP` to domain. There're useful for diagnostics and security purposes to ensure the source of network traffic is legitimate
+
+###### `DNS SEC`urity extensions
+
+- a protocol designed to address `DNS` security concerns e.g. a hacker injects harmful `DNS` records into caches to redirect users to fraudulent websites
+- add **encryption signatures** to `DNS` records to allow resolvers to verify the authenticity and integrity of `DNS` responses
+- ensure the information a user receives from `DNS` query has not tampered with
+
+###### Types of `DNS` Records
+
+- essential for defining how domain names are used and how services are configured
+
+1. `A recored`:
+    - map a domain name to an `IPv4` address
+    - the most common `DNS` record to point a domain to its IP address
+2. `CHAME recored`:
+    - `C`anonical `NAME` records allow you to alias one domain name to another
+3. `MX recored`:
+    - `M`ail e`X`change records define which mail servers are responsible for receiving emails for a domain
+    - crucial for setting up email services
+4. `TXT recored`:
+    - store text-based information
+    - commonly used to verify domain ownership and to implement email security protocols like `S`ender `P`olicy `F`ramework and `D`omain`K`eys `I`dentified `M`ail
 
 ##### `telnet`
 
