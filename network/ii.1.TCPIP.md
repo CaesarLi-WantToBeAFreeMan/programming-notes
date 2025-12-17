@@ -1119,17 +1119,214 @@ sequenceDiagram
     - store text-based information
     - commonly used to verify domain ownership and to implement email security protocols like `S`ender `P`olicy `F`ramework and `D`omain`K`eys `I`dentified `M`ail
 
-##### `telnet`
+##### `TEL`etype `NET`work
+
+###### What Is It
+
+- a client/server application protocol that provides access to virtual terminals of remote systems on `LAN` or the Internet
+- enable one computer to connect to the local computer
+
+###### Local Login Process
+
+1. type a command in the terminal driver
+2. the terminal passes the combination of keys to the operating system
+3. the OS validates the command and opens the required application
+
+###### Remote Login Process
+
+```mermaid
+    ---
+    title: TELNET Remote Login Process
+    ---
+    flowchart LR
+    terminal[[Terminal]]
+    style terminal fill:#282c34,stroke:#56b6c2,color:#abb2bf
+
+    subgraph ClientOS[Client Operating System]
+        direction LR
+
+        termDrv[Terminal Driver] --> telnetClient[TELNET Client]
+        style termDrv fill:#212528,stroke:#56b6c2,color:#abb2bf
+        style telnetClient fill:#212528,stroke:#56b6c2,color:#abb2bf
+
+        subgraph TCPIP_Client[TCP/IP Stack]
+            direction TB
+            TCPc[TCP] --> IPc[IP] --> DLCc[Data Link] --> PHYc[Physical]
+            style TCPc fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style IPc fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style DLCc fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style PHYc fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style TCPIP_Client fill:#212528,stroke:#56b6c2,color:#61afef
+        end
+
+        telnetClient --> TCPIP_Client
+        style ClientOS fill:#282c34,stroke:#56b6c2,color:#61afef
+    end
+
+    terminal --> termDrv
+
+    TCPIP_Client --> NVT((Network Virtual Terminal NVT)) --> networkCloud(((Network)))
+    style networkCloud fill:#282c34,stroke:#56b6c2,color:#abb2bf
+    style NVT fill:none,stroke:none,color:#abb2bf
+
+    subgraph ServerOS[Server Operating System]
+        direction LR
+
+        subgraph TCPIP_Server[TCP/IP Stack]
+            direction TB
+            TCPs[TCP] --> IPs[IP] --> DLCs[Data Link] --> PHYs[Physical]
+            style TCPs fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style IPs fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style DLCs fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style PHYs fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style TCPIP_Server fill:#212528,stroke:#56b6c2,color:#61afef
+        end
+
+        TCPIP_Server --> telnetServer[TELNET Server] --> pty[Pseudo Terminal Driver]
+        style telnetServer fill:#212528,stroke:#56b6c2,color:#abb2bf
+        style pty fill:#212528,stroke:#56b6c2,color:#abb2bf
+
+        pty -.-> app0[Application Program 0]
+        style app0 fill:#212528,stroke:#56b6c2,color:#abb2bf
+        pty -.-> app1[Application Program 1]
+        style app1 fill:#212528,stroke:#56b6c2,color:#abb2bf
+        pty -.-> app2[Application Program 2]
+        style app2 fill:#212528,stroke:#56b6c2,color:#abb2bf
+        style ServerOS fill:#282c34,stroke:#56b6c2,color:#61afef
+    end
+
+    networkCloud --> TCPIP_Server
+
+    linkStyle default stroke:#c678dd,color:#c678dd
+```
+
+###### `N`etwork `V`irtual `T`erminal
+
+- a virtual terminal that has a fundamental structure that is shared by many different types of real terminal
+- created to make communication viable (continue living) between different types of terminals with different operating systems
+
+```mermaid
+    ---
+    title: NVT process
+    ---
+    flowchart LR
+    subgraph process[process]
+        direction LR
+
+        subgraph local[local computer]
+            direction LR
+            terminal[[Terminal]] --> telnetClient[[TELNET Client]]
+
+            style terminal fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style telnetClient fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style local fill:#212528,stroke:#56b6c2,color:#61afef
+        end
+
+        subgraph remote[remote computer]
+            direction LR
+            telnetServer[[TELNET Server]] --> ptd[[Pseudoterminal Driver]]
+
+            style telnetServer fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style ptd fill:#282c34,stroke:#56b6c2,color:#abb2bf
+            style remote fill:#212528,stroke:#56b6c2,color:#61afef
+        end
+
+        telnetClient --> internet(((Internet))) --> telnetServer
+        style internet fill:#212528,stroke:#56b6c2,color:#abb2bf
+        style process fill:#282c34,stroke:#56b6c2,color:#61afef
+    end
+
+    subgraph charset[character sets]
+        direction LR
+        LocalCharset[Local Computer Character Set] -->
+        nvt[NVT Character Set] -->
+        RemoteCharset[Remote Computer Character Set]
+
+        style LocalCharset fill:#212528,stroke:#56b6c2,color:#abb2bf
+        style RemoteCharset fill:#212528,stroke:#56b6c2,color:#abb2bf
+        style nvt fill:#212528,stroke:#56b6c2,color:#abb2bf
+        style charset fill:#282c34,stroke:#56b6c2,color:#61afef
+    end
+
+    local -.-> LocalCharset
+    remote -.-> RemoteCharset
+    internet -.-> nvt
+
+    linkStyle default stroke:#c678dd,color:#c678dd
+```
+
+###### Pros
+
+1. provide remote access to another computer
+2. allow the user for more access with fewer problems in data transmission
+3. save a lot of time
+4. an oldest system can be connected to a newer system
+
+###### Cons
+
+1. too complex to become difficult to understand for beginners
+2. send plain text so that it's not secure
 
 ##### `S`ecure `SH`ell
 
-##### `S`imple `M`ail `T`ransfer `P`rotocol
+###### What Is It
 
-##### `S`imple `N`etwork `M`anagement `P`rotocol
+- developed in 1995
+- on port `22`
+- a better alternative to `TELNET`
+- a cryptographic network protocol to transfer encrypted data over the network
+- enable secure communication with another computer over an unsecured network
+- ensure remote access, file transfers and administrative tasks remain protected from attackers
+- allow users to connect with server without having to remember or enter password for each system
+- have `public` and `private` keys to connect to the server
 
-##### `N`etwork `F`ile `S`ystem
+###### Keys
 
-##### `V`oice `o`ver `I`nternet `P`rotocol
+1. `public key`
+    - everybody can access it
+    - used to encrypt
+2. `private key`
+    - stay in your computer
+    - used to decrypt
+3. `user key`
+    - user to store those public and private keys
+4. `host key`
+    - host to store those keys
+5. `session key`
+    - used to transmit a large mount of data
+
+###### Process
+
+```mermaid
+    ---
+    title: SSH Protocol
+    ---
+    sequenceDiagram
+        autonumber
+        participant c as client
+        participant s as server
+        c ->> s: initiate the connection
+        s -->> c: send server public key
+        s -->> c: negotiate parameters and open secure channel
+        c ->> s: use client private key to decrypt and send login request using client private key to endrypt
+        s -->> c: use server private key to decrypt and authenticate
+        c ->> s: request a file
+        s -->> c: use server public key to encrypt and send
+        c ->> c: use client private key to decrypt and store
+```
+
+###### Techniques
+
+1. `symmetric cryptography`
+    - use the **same** key to both encrypt and decrypt a message
+    - share the same unique single key between the sender/client and receiver/server
+    - examples: `D`ata `E`ncryption `S`tandard, `A`dvanced `E`ncryption `S`tandard
+2. `asymmetric cryptography`
+    - use **different** key to encrypt and decrypt
+    - examples: `R`ivest-`S`hamir-`A`dleman and `Digital Signature` algorithm
+3. `hashing`
+    - use a `hash function` to convert **variable length** string to a **fixed length** string
+    - the fixed length value is called `hash value`
 
 ##### `S`ecure `S`ockets `L`ayer
 
