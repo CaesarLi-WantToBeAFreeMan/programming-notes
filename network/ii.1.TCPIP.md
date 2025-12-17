@@ -1330,4 +1330,117 @@ sequenceDiagram
 
 ##### `S`ecure `S`ockets `L`ayer
 
+###### What Is It
+
+- an internet security protocol to encrypt data to ensure secure communication between devices over a network
+- developed in 1995 by netscape
+- provide privacy, authentication and data integrity for online communications
+- the predecessor of `T`ransport `L`ayer `S`ecruity, which is now the standard protocol for secure communications on the Internet
+
+###### Importance
+
+1. `encryption`: before this, data was transmitted in **plain text** without any security. `SSL` encrypts sensitive information such as login credentials, financial transactions and personal data
+2. `authentication`: authenticate servers to prevent users from connecting to fraudulent websites
+3. `data integrity`: integrate data so that transmitted information cannot be modified during transit
+
+###### Protocols
+
+1. `SSL Record Protocl`
+
+    ![./ii_photos/SSL_record_protocol.png]
+    - provide confidentiality and message integrity
+
+2. `Handshake Protocol`
+
+    ![./ii_photos/SSL_handshake_protocol.png]
+    - establish SSL session and authenticate clients and servers
+    - after both client and server made handshakes, they activate secure communication
+
+3. `Change-Cipher Spec Protocol`
+    - consist of a `1 byte` message
+    - signal that pending cryptographic parameters from the handshake should now become active
+4. `Alert Protocol`
+    - contain `1 byte` level and `1 byte` alter messages
+    - communicate `SSL`-related warnings or errors
+    - `warning alert` (level 1): non-critical issues such as expired or unsupported certificates
+    - `fatal alerts` (level 2): critical errors, such as handshake failures, bad record MAC or illegal parameters, which terminate the connection
+
+###### Certificates
+
+- digital certificates issued by trusted `C`ertificate `A`uthorities to secure and verify websites
+- types
+    1. `single-domain`: secure one domain
+    2. `wildcard`: secure one domain and all its subdomains
+    3. `multi-domain` secure multiple unrelated domains
+- levels
+    1. `D`omain `V`alidation: confirm domain ownership
+    2. `O`rganization `V`alidation: confirm the organization's identify
+    3. `E`xtended `V`alidation: rigorous verification, highest trust level, often indicated by a green address bar
+
+###### Versions
+
+1. `SSL 1`: never released
+2. `SSL 2`: released in 1995
+3. `SSL 3`: released in 1996
+
 ##### `T`ransport `L`ayer `S`ecurity
+
+###### What Is It
+
+- to improve some weaknesses of `SSL`
+- ensure that data is encrypted (`confidentiality`), data cannot be tampered with (`integrity`) and `authentication`
+
+###### Comparison Between `SSL` and `TLS`
+
+|         `aspect`         |            `SSL`             |              `TLS`               |
+| :----------------------: | :--------------------------: | :------------------------------: |
+|        `designer`        |          `netscape`          |              `IETF`              |
+|      `cryptography`      |  **weak** and **outdated**   |    **string** and **modern**     |
+|    `handshake design`    | **older** and **vulnerable** |  **improved** and **hardened**   |
+| `message authentication` |       MAC then encrypt       |      encrypt then MAC/AEAD       |
+|       `supported`        |        ❌ decrecated         |           ✔️ standard            |
+|         `usage`          |     historical projects      | `HTTPS`, `email`, `VPN`s, `API`s |
+
+###### Differences of Process From `SSL`
+
+```mermaid
+---
+    title: TLS Process
+    ---
+    sequenceDiagram
+        autonumber
+        participant c as client
+        participant s as server
+        c ->>s: client hello<br>(TLS version, cipher suites, random)
+        s -->> c: server hello<br>(chosen version, cipher suite, random)
+        s -->> c: certificate<br>(server public key)
+        s -->> c: server key exchange(ECDHE)
+        s -->>c: server hello done
+        c ->> s: client key exchange<br>(key share)
+        c ->> s: change cipher spec
+        s -->> c: change cipher spec
+        c ->> s: encrypted application data
+        s -->> c: encrypted application data
+```
+
+1. handshake improvements
+    - remove `insecure cipher negotiation`
+    - prevent downgrade attacks
+    - handshake messages are better authenticated
+2. cryptographic design changes
+    - encrypt data first and then add `MAC`
+    - later `AEAD` ciphers
+3. key exchange improvements
+    - use `DHE`/`ECDHE` to forward secrecy
+    - session keys are **not recoverable** even if the server key leaks
+4. removed `SSL` features in `TLS 1.3`
+    - remove renegotiation
+    - remove insecure ciphers
+    - fewer handshake round trips
+
+###### Versions
+
+- `TLS 1.0` (deprecated): based on `SSL 3.0`
+- `TLS 1.1` (deprecated): minor fixes
+- `TLS 1.2`: widely used
+- `TLS 1.3`: faster, simpler and safer
