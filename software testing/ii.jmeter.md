@@ -1,5 +1,7 @@
 # II. JMeter Note
 
+# Author: Caesar James LEE
+
 ## What Is `Apache JMeter`
 
 - `Apache JMeter` is an **open-source testing tool** mainly used for:
