@@ -53,7 +53,7 @@
         afterEach2(["@AfterEach"])
     end
 
-    afterAll(["AfterAll"])
+    afterAll(["@AfterAll"])
 
     beforeAll --> test1 --> test2 --> afterAll
 ```
