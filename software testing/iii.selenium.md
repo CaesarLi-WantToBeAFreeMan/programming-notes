@@ -883,6 +883,7 @@
 ### Assertions
 
 - use `Python` built-in keyword `assert` to assert a statement
+- `pytest` **rewrites** `assert` statement to show detailed error info
 
 #### Example
 
@@ -892,16 +893,377 @@
     import pytest
     import time
 
-    def is_caesar_fucking_python():
-        tm_structure = time.localtime()
-        return tm_structure.tm_hour <= 2 or (tm_structure.tm_hour >= 9 and tm_structure.tm_hour)
+    def is_caesar_fucking_python(tm = None):
+        if tm is None:
+            tm = time.localtime()
+        return tm.tm_hour <= 2 or tm.tm_hour >= 9
 
-    def test_is_caesar_fucking_python():
+    def test_is_caesar_fucking_python0():
         assert is_caesar_fucking_python()
+
+    def test_is_caesar_fucking_python1():
+        assert is_caesar_fucking_python(time.struct_time((1989, 6, 4, 6, 4, 0, 0, 0, -1)))
 ```
 
 - command
 
-```bash
-    pytest test.py
+|     command      |                    description                    |
+| :--------------: | :-----------------------------------------------: |
+|  `pytest file`   |          run assertions inside the file           |
+| `pytest -v file` | display function names, skipped reasons and so on |
+| `pytest -s file` |       display output inside test functions        |
+
+### Exception Assertion
+
+- `pytest` can test exceptions
+
+#### Example
+
+```python
+    import pytest
+
+    def divide(a, b):
+        return a / b
+
+    def test_devide_zero():
+        with pytest.raises(ZeroDivisionError):      #passed if throws ZeroDivisionError
+            divide(1, 0)
 ```
+
+### Parametrized Testing
+
+- used to run the same test with different inputs
+- avoid duplicated test functions
+
+#### Example
+
+```python
+    import pytest
+
+    def add(a, b):
+        return a + b
+
+    @pytest.mark.parametrize(
+        "a, b, expected", [
+            (1, 2, 3),
+            (1, -1, 0),
+            (-12, -21, -33)
+        ]
+    )
+    def test_add(a, b, expected):
+        assert add(a, b) == expected
+```
+
+### Parametrized Testing Using `.csv`
+
+- use `Python`'s built-in `csv` module to read `.csv` file
+- write a function to process data
+
+#### Example
+
+- `data.csv`
+
+    ```csv
+        a,b,expected
+        1,2,3
+        -1,1,0
+        12,21,33
+        -12,-21,-33
+        12,-21,-9
+    ```
+
+- `test.py`
+
+    ```python
+        import pytest
+        import csv
+
+        def add(a, b):
+            return a + b
+
+        def load_csv_data(path):
+            data = []
+            with open(path, newline = "") as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    data.append(
+                        (
+                            int(row ["a"]),
+                            int(row ["b"]),
+                            int(row ["expected"])
+                        )
+                    )
+            return data
+
+        @pytest.mark.parametrize(
+            "a, b, expected",
+            load_csv_data("data.csv")
+        )
+        def test_add_from_csv_data(a, b, expected):
+            assert add(a, b) == expected
+    ```
+
+### Fixture
+
+- used to **prepare test data or environment**
+- automatically injected into test functions
+
+#### Scope
+
+- used to control how often a fixture runs
+
+|   scope    |         description         |
+| :--------: | :-------------------------: |
+| `function` | once per **test** (default) |
+|  `class`   |   once per **test class**   |
+|  `module`  |      once per **file**      |
+| `session`  |   once per **pytest run**   |
+| `package`  |    once per **package**     |
+
+#### Example
+
+```python
+    import pytest
+
+    def add(a, b):
+        return a + b
+
+    def minus(a, b):
+        return a - b
+
+    @pytest.fixture(scope = "session")
+    def data():
+        return [
+            (1, 2),
+            (-1, 1),
+            (12, -21),
+            (-21, 12)
+        ]
+
+    def test_add(data):
+        for d in data:
+            assert add(d [0], d [1]) == d [0] + d [1]
+
+    def test_minus(data):
+        for d in data:
+            assert minus(d [0], d [1]) == d [0] - d [1]
+```
+
+### Skip Tests
+
+- `@pytest.mark.skip` annotation is used to skip a test function
+- `@pytest.mark.skipif` annotation is used to skip a test function conditionally
+
+#### Example
+
+```python
+    import pytest
+    import time
+
+    def add(a, b):
+        return a + b
+
+    def minus(a, b):
+        return a - b
+
+    @pytest.fixture(scope = "session")
+    def data():
+        return [
+            (1, 2),
+            (-1, 1),
+            (12, -21),
+            (-21, 12)
+        ]
+
+    @pytest.mark.skip(reason = "tested add function")
+    def test_add(data):
+        for d in data:
+            assert add(d [0], d [1]) == d [0] + d [1]
+
+
+    @pytest.mark.skipif(time.localtime().tm_min % 2 == 0, reason = "odd minute only")
+    def test_minus(data):
+        for d in data:
+            assert minus(d [0], d [1]) == d [0] - d [1]
+```
+
+## `pytest` Report with `allure`
+
+### Installation
+
+```bash
+    pip install allure-pytest
+```
+
+### Verification
+
+```bash
+    pytest --help | grep allure
+```
+
+### Annotations
+
+|      annotation       |       description       |
+| :-------------------: | :---------------------: |
+|    `@allure.title`    |        test name        |
+| `@allure.description` |    test description     |
+|  `@allure.severity`   | importance of test case |
+|    `@allure.epic`     |      system label       |
+|   `@allure.feature`   |      feature label      |
+|    `@allure.story`    |     function label      |
+|    `@allure.step`     |       step label        |
+
+### `severity` Levels
+
+|   level    |       meaning        |
+| :--------: | :------------------: |
+| `blocker`  |   system unusable    |
+| `critical` | core feature broken  |
+|  `normal`  | major business logic |
+|  `minor`   |     minor issue      |
+| `trivial`  |    UI or cosmetic    |
+
+### Example
+
+- `mathematics.py`:
+
+    ```python
+        class Mathematics:
+            def _validate_args(self, args):
+                if args is None:
+                    raise ValueError("args cannot be None")
+                if not args:
+                    raise ValueError("args cannot be empty")
+
+            def add(self, args):
+                self._validate_args(args)
+                result = 0
+                for arg in args:
+                    result += arg
+                return result
+
+            def minus(self, args):
+                self._validate_args(args)
+                result = args [0]
+                for arg in args [1:]:
+                    result -= arg
+                return result
+
+            def times(self, args):
+                self._validate_args(args)
+                result = args [0]
+                for arg in args [1:]:
+                    result *= arg
+                return result
+
+            def divide(self, args):
+                self._validate_args(args)
+                result = args [0]
+                for arg in args [1:]:
+                    if arg == 0:
+                        raise ZeroDivisionError("division by zero")
+                    result /= arg
+                return result
+
+            def modulo(self, args):
+                self._validate_args(args)
+                result = args [0]
+                for arg in args [1:]:
+                    if arg == 0:
+                        raise ZeroDivisionError("modulo by zero")
+                    result %= arg
+                return result
+    ```
+
+- `web.py`:
+
+    ```python
+        import allure
+        from selenium import webdriver
+        from selenium.webdriver.common.by import By
+
+        @allure.epic("web")
+        @allure.title("login")
+        @allure.description("verify UI features")
+        class Web:
+            def __init__(self):
+                self.driver = webdriver.Chrome()
+                self.driver.get("http://172.17.89.63:8916/")
+                self.driver.maximize_window()
+                self.driver.implicitly_wait(3)
+
+            @allure.step("login {username}")
+            def login(self, username, password):
+                self.driver.find_element(By.XPATH, '//*[@id="app"]/div/form/div[1]/div/div/input').clear()
+                self.driver.find_element(By.XPATH, '//*[@id="app"]/div/form/div[1]/div/div/input').send_keys(username)
+                self.driver.find_element(By.XPATH, '//*[@id="app"]/div/form/div[2]/div/div/input').clear()
+                self.driver.find_element(By.XPATH, '//*[@id="app"]/div/form/div[2]/div/div/input').send_keys(password)
+                screenshot = self.driver.get_screenshot_as_png()
+                allure.attach(
+                    screenshot,
+                    name = "login screenshot",
+                    attachment_type = allure.attachment_type.PNG
+                )
+
+            def quit(self):
+                self.driver.quit()
+    ```
+
+- `test.py`:
+
+    ```python
+        import pytest
+        import allure
+        from mathematics import Mathematics
+        from web import Web
+
+        @allure.epic("mathematics")
+        @allure.feature("calculation")
+        class TestMathematics:
+            @pytest.fixture(scope = "class")
+            def math(self):
+                return Mathematics()
+
+            def test_add(self, math):
+                assert math.add([1, 2, 3]) == 6
+
+            def test_minus(self, math):
+                assert math.minus([8, 9]) == -1
+
+            def test_times(self, math):
+                assert math.times([6, 4]) == 24
+
+            def test_divide(self, math):
+                assert math.divide([1, 8, 4]) == 0.03125
+
+            def test_modulus(self, math):
+                assert math.modulo([7, 3, 2]) == 1
+
+        @allure.epic("web")
+        @allure.feature("ui test")
+        class TestWeb:
+            @pytest.fixture(scope = "class")
+            def web(self):
+                w = Web()
+                yield w
+                w.quit()
+
+            @pytest.mark.parametrize(
+                "username, password",
+                [
+                    ("admin", "123456"),
+                    ("Caesar", "8964"),
+                    ("James", "8964"),
+                    ("LEE", "8964"),
+                    ("Voldmort", "Harry Poter")
+                ]
+            )
+            def test_login(self, web, username, password):
+                web.login(username, password)
+    ```
+
+- command
+
+    ```bash
+        rm allure-results/*;pytest --alluredir=allure-results test.py;allure serve allure-results
+    ```
