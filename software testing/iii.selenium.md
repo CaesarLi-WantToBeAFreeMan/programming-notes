@@ -13,7 +13,7 @@
 
 #### Difference Table (`Python` vs `C++`)
 
-1. Statements & Operators
+1.  Statements & Operators
 
     |       feature        |                                C++                                 |                      Python                       |
     | :------------------: | :----------------------------------------------------------------: | :-----------------------------------------------: |
@@ -27,14 +27,14 @@
     |     **bitwise**      |                  `&`, `\|`, `^`, `~`, `<<`, `>>`                   |                       same                        |
     |     **ternary**      |                        `condition ? a : b`                         |              `a if condition else b`              |
 
-2. Comments
+2.  Comments
 
     |        type        |  C++   |       Python       |
     | :----------------: | :----: | :----------------: |
     |  **single line**   |  `//`  |        `#`         |
     | **multiple lines** | `/**/` | `''''''`, `""""""` |
 
-3. Input/Output
+3.  Input/Output
 
     |        feature        |                    C++                    |              Python               |
     | :-------------------: | :---------------------------------------: | :-------------------------------: |
@@ -42,7 +42,7 @@
     |      **output**       | `std::cout << "Hello World" << std::endl` |      `print("Hello World")`       |
     | **formatting output** |       `printf("name: %s\n", name)`        |     `print(f"name: {name}")`      |
 
-4. Variables
+4.  Variables
 
     |       feature       |                                                              C++                                                              |                        Java                        |
     | :-----------------: | :---------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
@@ -55,7 +55,7 @@
     |    **reference**    |                                                              `&`                                                              | implicit(variables hold **references to objects**) |
     |    **structure**    |                                                       `struct`/`class`                                                        |                      `class`                       |
 
-5. Conditional Statements
+5.  Conditional Statements
 
     |   feature   |          C++           |          Java           |
     | :---------: | :--------------------: | :---------------------: |
@@ -102,7 +102,7 @@
                         print("Good Luck")
             ```
 
-6. Loop Statements
+6.  Loop Statements
 
     |  feature   |              C++              |         Python          |
     | :--------: | :---------------------------: | :---------------------: |
@@ -113,7 +113,7 @@
     |  `break`   |            support            |          same           |
     | `continue` |            support            |          same           |
 
-7. Functions
+7.  Functions
 
     |        feature        |                 C++                 |        Python         |
     | :-------------------: | :---------------------------------: | :-------------------: |
@@ -124,7 +124,7 @@
     |      **lambda**       | `auto f = [](int x){return x + 1;}` | `f = lambda x: x + 1` |
     |       `return`        |           **fixed** type            |     **any** type      |
 
-8. Libraries
+8.  Libraries
 
     |   feature   |              C++              |       Python       |
     | :---------: | :---------------------------: | :----------------: |
@@ -132,7 +132,7 @@
     |   install   | manual/system/`vcpkg`/`conan` | `pip install name` |
     | **linking** |        often required         |   **automatic**    |
 
-9. Classes & `OOP`
+9.  Classes & `OOP`
 
     |        concept        |                   C++                   |              Python              |
     | :-------------------: | :-------------------------------------: | :------------------------------: |
@@ -606,20 +606,22 @@
 
 10. Containers/Types
 
-    |     container     |                     C++                      |           Python            |
-    | :---------------: | :------------------------------------------: | :-------------------------: |
-    | **static array**  |              `type name [size]`              |       doesn't support       |
-    |      `array`      |        `std::array <type, size> name`        |       doesn't support       |
-    | **dynamic array** |        `std::vector <type>name(args)`        |      list (`[values]`)      |
-    |       `set`       |            `std::set <type>name`             |       doesn't support       |
-    |  `unordered_set`  |       `std::unordered_set <type>name`        |      set (`{values}`)       |
-    |       `map`       |      `std::map <keyType, valueKey>name`      |       doesn't support       |
-    |  `unordered_map`  | `std::unordered_map <keyType, valueKey>name` | dictionary (`{key: value}`) |
-    |      `list`       |            `std::list <type>name`            |       doesn't support       |
-    |  `forward_list`   |        `std::forward_list <type>name`        |       doesn't support       |
-    |      `stack`      |           `std::stack <type>name`            |       doesn't support       |
-    |      `queue`      |           `std::queue <type>name`            |       doesn't support       |
-    |      `deque`      |           `std::deque <type>name`            |           `deque`           |
+    |       container        |            C++             |            Python             |                      explanation                      |
+    | :--------------------: | :------------------------: | :---------------------------: | :---------------------------------------------------: |
+    |    **static array**    |        `T arr [N]`         |              ❌               |        Python has no built-in fixed-size array        |
+    |  **fixed-size array**  |    `std::array <T, N>`     |     `tuple` (`(values)`)      |        tuple has fixed length but is immutable        |
+    |   **dynamic array**    |     `std::vector <T>`      |      `list` (`[values]`)      |          both are dynamic contiguous arrays           |
+    | **immutable sequence** |             ❌             |      `tuple`(`(values)`)      |    Python explicitly supports immutable sequences     |
+    |      **hash set**      |  `std::unordered_set <T>`  |       `set`(`{values}`)       |          both implemented using hash tables           |
+    |      **hash map**      | `std::unordered_map <K,V>` | `dicttionary`(`{key: value}`) |          both implemented using hash tables           |
+    | **ordered set (tree)** |       `std::set <T>`       |              ❌               | C++ uses red-black tree; Python has no tree-based set |
+    | **ordered map (tree)** |      `std::map <K,V>`      |              ❌               | C++ uses red-black tree; Python has no tree-based map |
+    | **doubly linked list** |      `std::list <T>`       |      `collections.deque`      |             closest behavioral equivalent             |
+    | **singly linked list** |  `std::forward_list <T>`   |              ❌               |             not provided in Python stdlib             |
+    |       **deque**        |      `std::deque <T>`      |      `collections.deque`      |            same concept in both languages             |
+    |   **stack adapter**    |      `std::stack <T>`      |  `list`/`collections.deque`   |          implemented via container adapters           |
+    |   **queue adapter**    |      `std::queue <T>`      |      `collections.deque`      |                     FIFO behavior                     |
+    |   **priority queue**   | `std::priority_queue <T>`  |            `heapq`            |              binary heap implementation               |
 
 ## What Is `Selenium`
 
