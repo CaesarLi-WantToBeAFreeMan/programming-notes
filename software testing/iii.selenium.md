@@ -252,11 +252,11 @@
                         height = h;
                     }
 
-                    double Rectangle::getArea() const{
+                    double Rectangle::getArea() const override{
                         return width * height;
                     }
 
-                    double Rectangle::getPerimeter() const{
+                    double Rectangle::getPerimeter() const override{
                         return 2 * (width + height);
                     }
 
@@ -268,7 +268,7 @@
                         return width == height;
                     }
 
-                    std::string Rectangle::getType() const{
+                    std::string Rectangle::getType() const override{
                         return "Rectangle";
                     }
                 ```
@@ -320,15 +320,15 @@
                         return radius;
                     }
 
-                    double Circle::getArea() const{
+                    double Circle::getArea() const override{
                         return PI * radius * radius;
                     }
 
-                    double Circle::getPerimeter() const{
+                    double Circle::getPerimeter() const override{
                         return 2 * PI * radius;
                     }
 
-                    std::string Circle::getType() const{
+                    std::string Circle::getType() const override{
                         return "Circle";
                     }
                 ```
@@ -365,72 +365,160 @@
 
                 ```python
                     from abc import ABC, abstractmethod
-                    import math
+                    #abc = Abstract Base Class system
+                    #python uses `ABC` + `@abstractmethod` instead of `virtual`/`override` like C++
 
-                    class Shape(ABC):                               #inheritance
-                        def __int__(self, nodes: int, edges: int):  #constructor
+                    class Shape(ABC):
+
+                        """
+                            Abstract Base Class
+                            equivalent C++ concept:
+                                class Shape{
+                                    public:
+                                        virtual double getArea() const = 0;
+                                };
+                        """
+
+                        def __init__(self, nodes: int, edges: int):
+
+                            """
+                                constructor
+                                self = implicit object reference (similar to `this` pointer in C++)
+
+                                python methods are just **`functions`** stored inside a class
+                                python doesn't have an implicit class environment
+
+                                    r = Rectangle()
+                                    r.get_area()
+                                python will actually execute these lines of code as
+                                    Shape.get_area(r)
+
+                                `self` must be passed explicitly
+                            """
+
                             self._nodes = nodes
                             self._edges = edges
 
-                        def __del__(self):                          #destructor
-                            pass                                    #null statement
+                            """
+                                python objects are **dynamic** and **`dictionary`-based**
 
-                        def get_nodes(self) -> int:
+                                every object has
+                                    self.__dict__
+                                for instance
+                                    {
+                                        "_nodes": 4,
+                                        "_edges": 4
+                                    }
+
+                                attributes are **created at runtime** when assigned
+                                so you can create new attributes at runtime FUUUUUUUUUUUUUUUUUUUCKING!!!!!!!!!!!!!!
+                            """
+
+                        def __del__(self):
+
+                            """
+                                destructor
+
+                                unlike C++, Python destructor are:
+                                    - not deterministic
+                                    - not guaranteed to run immediately
+
+                                memory is managed by Garbage Collection (G C)
+
+                                __del__ should almost **never** be used in real python code
+                            """
+
+                            pass                                    #null statement means do nothing
+
+                        def get_nodes(self):
+
+                            """
+                                getter
+                                type hint (-> int) is optional and has **not** runtime effect
+                            """
+
                             return self._nodes
 
-                        def get_edges(self) -> int:
+                        def get_edges(self)
                             return self._edges
 
-                        @abstractmethod
-                        def get_area(self) -> float:
-                            pass
+                        @abstractmethod                             #pure virtual function
+                                                                    #must be implemented by child class
+                        def get_area(self):
+                            raise NotImplementedError               #throw NotImplementedError when you haven't implemented in any child class
 
                         @abstractmethod
-                        def get_perimeter(self) -> float:
-                            pass
+                        def get_perimeter(self):
+                            raise NotImplementedError
 
                         @abstractmethod
-                        def get_type(self) -> str:
-                            pass
+                        def get_type(self)
+                            raise NotImplementedError
                 ```
 
             - `rectangle.py`
 
                 ```python
                     import math
-                    from shape import Shape
+                    from shape import Shape                             #import parent (base) class
 
                     class Rectangle(Shape):
-                        def __int__(self, width: float, height: float):
-                            super().__int__(nodes = 4, edges = 4)
+
+                        """
+                            inheritance
+
+                            equivalent to C++:
+                                class Rectangle : public Shape
+                        """
+                                                                        #equivalent to Class Rectangle : public Shape
+                        def __init__(self, width: float, height: float):
+
+                            """
+                                `super` isn't an object - a **built-in `function`**
+                                `super()` returns a `proxy object` that represents
+                                the next class in Method Resolution Order (MRO)
+
+                                python uses
+                                    runtime constructor chaining (MRO-safe)
+                                instead of same class name constructor
+                                    Shape::Shape(...)
+                            """
+
+                            super().__init__(nodes = 4, edges = 4)
                             self._width = width
                             self._height = height
 
-                        def get_width(self) -> float:
+                        def get_width(self):
                             return self._width
 
-                        def get_height(self) -> float:
+                        def get_height(self):
                             return self._height
 
-                        def get_area(self) -> float:
+                        def get_area(self):
+
+                            """
+                                override abstract method
+                                python automatically performs virtual dispatch
+                            """
+
                             return self._width * self._height
 
-                        def get_perimeter(self) -> float:
+                        def get_perimeter(self):
                             return 2 * (self._width + self._height)
 
-                        def get_type(self) -> str:
+                        def get_type(self):
                             return "Rectangle"
 
-                        def get_diagonal(self) -> float:
+                        def get_diagonal(self):
                             return math.sqrt(self._width ** 2 + self._height ** 2)
 
-                        def set_width(self, width: float):
+                        def set_width(self, width):
                             self._width = width
 
-                        def set_height(self, height: float):
+                        def set_height(self, height):
                             self._height = height
 
-                        def is_square(self) -> bool:
+                        def is_square(self):
                             return self._width == self._height
                 ```
 
@@ -441,23 +529,23 @@
                     from shape import Shape
 
                     class Circle(Shape):
-                        def __int__(self, radius: float):
-                            super().__int__(nodes = 0, edges = 0)
+                        def __init__(self, radius: float):
+                            super().__init__(nodes = 0, edges = 0)
                             self._radius = radius
 
-                        def get_radius(self) -> float:
+                        def get_radius(self):
                             return self._radius
 
-                        def get_area(self) -> float:
+                        def get_area(self):
                             return math.pi * self._radius ** 2
 
-                        def get_perimeter(self) -> float:
+                        def get_perimeter(self):
                             return 2 * math.pi * self._radius
 
-                        def get_type(self) -> str:
+                        def get_type(self):
                             return "Circle"
 
-                        def set_radius(self, radius: float):
+                        def set_radius(self, radius):
                             self._radius = radius
                 ```
 
@@ -469,17 +557,48 @@
                     from shape import Shape
 
                     def main():
-                        shapes: list [Shape] = []
 
-                        shapes.append(Rectangle(3, 4))
+                        """
+                            python doesn't require an entry function (int main())
+                            code runs **top-to-bottom** (procedural)
+                        """
+
+                        shapes: list [Shape] = []               #type hint (list [Shape])
+                                                                #equivalent to shapes = []
+
+                        """
+                            variables in python behave like `safe pointers`
+
+                                shape = Rectangle(...)
+                            equivalent to C++
+                                Shape * shape = new Rectangle(...)
+
+                            no delete, no memory leaks
+                            GC manages lifetime
+                        """
+
+                        shapes.append(Rectangle(3, 4)
                         shapes.append(Circle(5))
 
                         for shape in shapes:
+                            #runtime polymorphism
+                            # same as virtual function dispatch in C++
                             print("Type: ", shape.get_type())
                             print("Area: ", shape.get_area())
                             print("Permimeter: ", shape.get_perimeter())
                             print()
                             print("=" * 3)
+
+                    """
+                        python files have two identities: `program` and `library`
+
+                        when executed directly:
+                            __name__ = "__main__"
+                        when imported:
+                            __name__ = "main"
+
+                        without the condition, importing this file would run the code
+                    """
 
                     if __name__ == "__main__":
                         main()
